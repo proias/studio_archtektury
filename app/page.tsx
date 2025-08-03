@@ -1,48 +1,53 @@
-import { Button } from "@/components/ui/button"
+"use client"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Mail, MapPin, Phone } from "lucide-react"
 
-export default function Page() {
+export default function HomePage() {
   const portfolioProjects = [
     {
       title: "Modern Villa Residence",
       location: "Warsaw, Poland",
       year: "2023",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Modern+Villa",
     },
     {
       title: "Urban Loft Renovation",
       location: "Krakow, Poland",
       year: "2023",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Urban+Loft",
     },
     {
       title: "Sustainable Family Home",
       location: "Gdansk, Poland",
       year: "2022",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Family+Home",
     },
     {
       title: "Commercial Office Space",
       location: "Wroclaw, Poland",
       year: "2022",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Office+Space",
     },
     {
       title: "Boutique Hotel Design",
       location: "Poznan, Poland",
       year: "2021",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Hotel+Design",
     },
     {
       title: "Residential Complex",
       location: "Lodz, Poland",
       year: "2021",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Residential+Complex",
     },
   ]
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -52,58 +57,49 @@ export default function Page() {
           <div className="flex justify-between items-center h-16">
             <div className="font-light text-lg tracking-wide">Studio Architektury</div>
             <div className="hidden md:flex space-x-8">
-              <Link href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <button
+                onClick={() => scrollToSection("about")}
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
                 About
-              </Link>
-              <Link href="#portfolio" className="text-gray-600 hover:text-gray-900 transition-colors">
+              </button>
+              <button
+                onClick={() => scrollToSection("portfolio")}
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
                 Portfolio
-              </Link>
-              <Link href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
                 Contact
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section className="min-h-screen relative flex items-center justify-center">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/placeholder.svg?height=1080&width=1920"
-            alt="Modern architectural house design"
-            fill
-            className="object-cover"
-            priority
+        <div className="absolute inset-0">
+          <img
+            src="/placeholder.svg?height=1080&width=1920&text=Modern+Minimalist+Architecture"
+            alt="Modern architectural design"
+            className="w-full h-full object-cover"
           />
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/50"></div>
         </div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6">
-              Studio Architektury
-              <span className="block text-2xl md:text-3xl lg:text-4xl mt-2 text-white/90">Paulina Cywińska</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 font-light leading-relaxed">
-              Creating spaces that inspire, function beautifully, and stand the test of time
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-gray-900 hover:bg-white/90">
-                <Link href="#portfolio">View Portfolio</Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
-              >
-                <Link href="#contact">Get In Touch</Link>
-              </Button>
-            </div>
-          </div>
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">Studio Architektury</h1>
+          <h2 className="text-2xl md:text-3xl font-light mb-8 opacity-90">Paulina Cywińska</h2>
+          <p className="text-xl md:text-2xl font-light leading-relaxed opacity-90 max-w-3xl mx-auto">
+            Creating exceptional architectural spaces that blend innovative design with timeless elegance. Every project
+            is a unique journey of transforming visions into reality.
+          </p>
         </div>
       </section>
 
@@ -145,12 +141,10 @@ export default function Page() {
               </div>
             </div>
             <div className="relative">
-              <Image
-                src="/placeholder.svg?height=600&width=500"
+              <img
+                src="/placeholder.svg?height=600&width=500&text=Paulina+at+Work"
                 alt="Paulina Cywińska at work"
-                width={500}
-                height={600}
-                className="rounded-lg shadow-lg"
+                className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>
           </div>
@@ -175,11 +169,9 @@ export default function Page() {
                 className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative overflow-hidden">
-                  <Image
+                  <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    width={600}
-                    height={400}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -196,116 +188,41 @@ export default function Page() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-4">Let's Create Together</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Ready to bring your architectural vision to life? We'd love to hear about your project and explore how we
-              can work together.
-            </p>
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h3 className="text-3xl md:text-4xl font-light text-gray-900 mb-12">
+            Let's Create Something Beautiful Together
+          </h3>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="flex flex-col items-center">
+              <MapPin className="w-8 h-8 text-gray-600 mb-4" />
+              <h4 className="font-medium text-gray-900 mb-2">Studio</h4>
+              <p className="text-gray-600 text-center">
+                ul. Krakowskie Przedmieście 15
+                <br />
+                00-071 Warsaw, Poland
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Phone className="w-8 h-8 text-gray-600 mb-4" />
+              <h4 className="font-medium text-gray-900 mb-2">Phone</h4>
+              <a href="tel:+48123456789" className="text-gray-600 hover:text-gray-900">
+                +48 123 456 789
+              </a>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Mail className="w-8 h-8 text-gray-600 mb-4" />
+              <h4 className="font-medium text-gray-900 mb-2">Email</h4>
+              <a href="mailto:hello@studiocywinska.pl" className="text-gray-600 hover:text-gray-900">
+                hello@studiocywinska.pl
+              </a>
+            </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-light text-gray-900 mb-8">Get In Touch</h3>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-gray-600 mt-1" />
-                  <div>
-                    <div className="font-medium text-gray-900">Studio Address</div>
-                    <div className="text-gray-600">
-                      ul. Krakowskie Przedmieście 15
-                      <br />
-                      00-071 Warsaw, Poland
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <Phone className="w-6 h-6 text-gray-600" />
-                  <div>
-                    <div className="font-medium text-gray-900">Phone</div>
-                    <Link href="tel:+48123456789" className="text-gray-600 hover:text-gray-900">
-                      +48 123 456 789
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <Mail className="w-6 h-6 text-gray-600" />
-                  <div>
-                    <div className="font-medium text-gray-900">Email</div>
-                    <Link href="mailto:hello@studiocywinska.pl" className="text-gray-600 hover:text-gray-900">
-                      hello@studiocywinska.pl
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <h4 className="font-medium text-gray-900 mb-4">Follow Our Work</h4>
-                <div className="flex space-x-4">
-                  <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    <Instagram className="w-6 h-6" />
-                  </Link>
-                  <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    <Linkedin className="w-6 h-6" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-light text-gray-900 mb-6">Project Inquiry</h3>
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent">
-                    <option>Residential</option>
-                    <option>Commercial</option>
-                    <option>Renovation</option>
-                    <option>Interior Design</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Project Description</label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    placeholder="Tell us about your project..."
-                  ></textarea>
-                </div>
-
-                <Button className="w-full bg-gray-900 hover:bg-gray-800">Send Message</Button>
-              </form>
-            </div>
+          <div className="border-t border-gray-200 pt-8">
+            <p className="text-gray-500 text-sm">© 2024 Studio Architektury Paulina Cywińska. All rights reserved.</p>
           </div>
         </div>
       </section>
@@ -316,9 +233,7 @@ export default function Page() {
           <div className="text-center">
             <div className="text-2xl font-light mb-4">Studio Architektury Paulina Cywińska</div>
             <p className="text-gray-400 mb-4">Creating exceptional spaces through thoughtful design</p>
-            <p className="text-sm text-gray-500">
-              © {new Date().getFullYear()} Studio Architektury Paulina Cywińska. All rights reserved.
-            </p>
+            <p className="text-sm text-gray-500">© 2024 Studio Architektury Paulina Cywińska. All rights reserved.</p>
           </div>
         </div>
       </footer>
