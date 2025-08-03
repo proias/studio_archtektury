@@ -84,21 +84,21 @@ export default function HomePage() {
       <section className="min-h-screen relative flex items-center justify-center">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src="/placeholder.svg?height=1080&width=1920&text=Modern+Minimalist+Architecture"
-            alt="Modern architectural design"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50"></div>
+	<img
+  		src="/landing_1.png"
+  		alt="Modern architectural design"
+  		className="w-full h-full object-cover"
+		style={{ opacity: 0.8 }}
+	/>
+          <div className="absolute inset-0 bg-black/10"></div>
         </div>
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">Studio Architektury</h1>
-          <h2 className="text-2xl md:text-3xl font-light mb-8 opacity-90">Paulina Cywińska</h2>
-          <p className="text-xl md:text-2xl font-light leading-relaxed opacity-90 max-w-3xl mx-auto">
-            Creating exceptional architectural spaces that blend innovative design with timeless elegance. Every project
-            is a unique journey of transforming visions into reality.
+        <div className="relative z-10 text-left text-grey px-4 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-grey mb-6 tracking-tight">Studio Architektury</h1>
+          <h2 className="text-2xl md:text-3xl font-grey mb-8 opacity-90">Paulina Cywińska</h2>
+          <p className="text-xl md:text-2xl font-grey leading-relaxed opacity-90 max-w-4x1">
+            Projektujemy, słuchamy i tworzymy.<br /> Nasze przestrzenie opowiadają historię, służą użytkownikom i odzwierciedlają ich potrzeby.<br /><br /> Znajdź w nas partnera, który przekształci Twoją wizję w rzeczywistość.
           </p>
         </div>
       </section>
