@@ -195,47 +195,53 @@ export default function HomePage() {
 
           {/* Filters */}
           <motion.div
-            className="flex flex-wrap gap-4 justify-center mb-12"
+            className="mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Kategoria:</span>
-              {categories.map((category) => (
-                <Badge
-                  key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
-                  className={`cursor-pointer transition-colors ${
-                    selectedCategory === category
-                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                      : "bg-[#F8F8F6] text-[#2B2B2B] hover:bg-accent/10 border-border"
-                  }`}
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </Badge>
-              ))}
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Lokalizacja:</span>
-              {locations.map((location) => (
-                <Badge
-                  key={location}
-                  variant={selectedLocation === location ? "default" : "outline"}
-                  className={`cursor-pointer transition-colors ${
-                    selectedLocation === location
-                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                      : "bg-[#F8F8F6] text-[#2B2B2B] hover:bg-accent/10 border-border"
-                  }`}
-                  onClick={() => setSelectedLocation(location)}
-                >
-                  {location}
-                </Badge>
-              ))}
+            <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:justify-center">
+              <div className="flex flex-wrap items-center gap-2">
+                <Filter className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Kategoria:</span>
+                <div className="flex flex-wrap gap-2">
+                  {categories.map((category) => (
+                    <Badge
+                      key={category}
+                      variant={selectedCategory === category ? "default" : "outline"}
+                      className={`cursor-pointer transition-colors ${
+                        selectedCategory === category
+                          ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                          : "bg-[#F8F8F6] text-[#2B2B2B] hover:bg-accent/10 border-border"
+                      }`}
+                      onClick={() => setSelectedCategory(category)}
+                    >
+                      {category}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Lokalizacja:</span>
+                <div className="flex flex-wrap gap-2">
+                  {locations.map((location) => (
+                    <Badge
+                      key={location}
+                      variant={selectedLocation === location ? "default" : "outline"}
+                      className={`cursor-pointer transition-colors ${
+                        selectedLocation === location
+                          ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                          : "bg-[#F8F8F6] text-[#2B2B2B] hover:bg-accent/10 border-border"
+                      }`}
+                      onClick={() => setSelectedLocation(location)}
+                    >
+                      {location}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
