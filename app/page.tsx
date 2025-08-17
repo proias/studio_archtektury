@@ -14,74 +14,41 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 const projects = [
   {
     id: 1,
-    title: "Nowoczesna Willa Warszawa",
-    location: "Warszawa, Polska",
+    title: "Nowoczesna Willa, Łódź",
+    location: "Łódź, Polska",
     year: "2024",
     category: "Mieszkaniowe",
     type: "Nowa Budowa",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/pr1.jpg?height=600&width=800",
     description: "Współczesna rezydencja rodzinna, która płynnie łączy przestrzenie wewnętrzne z zewnętrznymi.",
     scope: "Architektura, Projektowanie Wnętrz, Krajobraz",
   },
   {
     id: 2,
-    title: "Apartament nad Morzem",
-    location: "Sopot, Polska",
+    title: "Apartamentowiec, Łódź",
+    location: "Grodzisk Maz., Polska",
     year: "2023",
     category: "Mieszkaniowe",
     type: "Remont",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/pr2.jpg?height=400&width=600",
     description: "Nadmorskie życie na nowo zdefiniowane dzięki naturalnym materiałom i panoramicznym widokom na morze.",
     scope: "Projektowanie Wnętrz, Planowanie Przestrzeni",
   },
   {
     id: 3,
-    title: "Siedziba Korporacyjna",
-    location: "Warszawa, Polska",
+    title: "Dom jednorodzinny, Łódź",
+    location: "Łódź Polska",
     year: "2024",
     category: "Komercyjne",
     type: "Nowa Budowa",
-    image: "/placeholder.svg?height=500&width=700",
+    image: "/pr3.jpg?height=500&width=700",
     description: "Zrównoważony projekt biurowy promujący współpracę i dobre samopoczucie.",
     scope: "Architektura, Projektowanie Wnętrz, Doradztwo w Zakresie Zrównoważoności",
-  },
-  {
-    id: 4,
-    title: "Zabytkowa Kamienica",
-    location: "Kraków, Polska",
-    year: "2023",
-    category: "Mieszkaniowe",
-    type: "Remont",
-    image: "/placeholder.svg?height=700&width=500",
-    description: "Staranna renowacja zachowująca dziedzictwo przy wprowadzeniu współczesnego komfortu.",
-    scope: "Renowacja, Projektowanie Wnętrz, Doradztwo Konserwatorskie",
-  },
-  {
-    id: 5,
-    title: "Butikowy Hotel",
-    location: "Gdańsk, Polska",
-    year: "2024",
-    category: "Komercyjne",
-    type: "Projektowanie Wnętrz",
-    image: "/placeholder.svg?height=600&width=900",
-    description: "Intymne doświadczenie hotelowe z elementami projektowymi inspirowanymi lokalną kulturą.",
-    scope: "Projektowanie Wnętrz, Projektowanie Oświetlenia, Kuratorstwo Sztuki",
-  },
-  {
-    id: 6,
-    title: "Pawilon Ogrodowy",
-    location: "Sopot, Polska",
-    year: "2023",
-    category: "Mieszkaniowe",
-    type: "Nowa Budowa",
-    image: "/placeholder.svg?height=400&width=800",
-    description: "Przezroczyste schronienie łączące mieszkańców z naturą przez cały rok.",
-    scope: "Architektura, Projektowanie Krajobrazu",
   },
 ]
 
 const categories = ["Wszystkie", "Mieszkaniowe", "Komercyjne", "Wnętrza"]
-const locations = ["Wszystkie", "Warszawa", "Sopot", "Kraków", "Gdańsk", "Międzynarodowe"]
+const locations = ["Wszystkie", "Łódź", "Grodzisk Maz."]
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("Wszystkie")
@@ -126,7 +93,7 @@ export default function HomePage() {
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-8 h-8 bg-accent rounded-sm flex items-center justify-center">
-              <span className="text-accent-foreground font-bold text-sm">SA</span>
+              <img   src="/logo_1.png" className="w-10 h-10 object-contain"/>
             </div>
             Studio Architektury P. Cywińska
           </motion.a>
@@ -161,10 +128,10 @@ export default function HomePage() {
       >
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY, opacity: heroOpacity }}>
           <Image
-            src="/placeholder.svg?height=1080&width=1920"
+            src="/lp1.png?height=1080&width=1920"
             alt="Studio Architecture Hero"
             fill
-            className="object-cover opacity-20"
+            className="object-cover opacity-35"
             priority
           />
         </motion.div>
@@ -191,7 +158,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
           >
-            Przekształcamy przestrzenie z elegancją, dbałością o szczegóły i narracją
+            Projektujemy domy jednorodzinne, a także obiekty usługowe i publiczne, dopasowane do potrzeb użytkowników.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -222,7 +189,7 @@ export default function HomePage() {
           >
             <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">Wybrane Realizacje</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Każdy projekt opowiada unikalną historię przestrzeni, światła i ludzkiego doświadczenia
+              Każdy budynek tworzymy z myślą o komforcie, funkcji i przyjemności z codziennego użytkowania.
             </p>
           </motion.div>
 
@@ -376,7 +343,7 @@ export default function HomePage() {
               className="relative"
             >
               <Image
-                src="/placeholder.svg?height=600&width=500"
+                src="/about2.png?height=600&width=500"
                 alt="Paulina Cywińska"
                 width={500}
                 height={600}
@@ -397,10 +364,10 @@ export default function HomePage() {
           viewport={{ once: true }}
         >
           <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-            Gotowy na Przekształcenie Swojej Przestrzeni?
+            Masz pomysł na dom lub budynek?
           </h2>
           <p className="text-xl mb-8 text-white/90">
-            Porozmawiajmy o tym, jak możemy wcielić Twoją architektoniczną wizję w życie
+            Porozmawiajmy o nim i wspólnie znajdźmy rozwiązania, które przełożą Twoją wizję na przestrzeń przyjazną i funkcjonalną.
           </p>
           <Button
             size="lg"
@@ -420,9 +387,9 @@ export default function HomePage() {
             <div>
               <h3 className="font-serif text-2xl font-bold mb-4">Studio Architektury</h3>
               <p className="text-white/80 mb-4">
-                Przekształcamy przestrzenie z elegancją, dbałością o szczegóły i narracją.
+                Projektujemy z dbałością o szczegóły, łącząc funkcję z ponadczasową estetyką.
               </p>
-              <p className="text-sm text-white/60">Warszawa • Sopot • Międzynarodowe</p>
+              <p className="text-sm text-white/60">Łódź • Warszawa • Grodzisk Mazowiecki • Sochaczew • Skierniewice</p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Usługi</h4>
@@ -439,14 +406,14 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4">Kontakt</h4>
               <div className="space-y-2 text-white/80">
-                <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">hello@studiocywinska.pl</p>
-                <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">+48 123 456 789</p>
-                <p>Warszawa, Polska</p>
+                <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">pcywinska.arch@gmail.com</p>
+                <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">+48 662-47-79-59</p>
+                <p>Łódź, ul. Łagiewnicka 287z, Polska</p>
               </div>
             </div>
           </div>
           <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/60">
-            <p>&copy; 2024 Studio Architektury Paulina Cywińska. Wszelkie prawa zastrzeżone.</p>
+            <p>&copy; 2025 Studio Architektury Paulina Cywińska. Wszelkie prawa zastrzeżone.</p>
           </div>
         </div>
       </footer>
@@ -558,8 +525,7 @@ export default function HomePage() {
                       <div>
                         <h4 className="font-semibold text-foreground mb-2">Konsultacja Wstępna</h4>
                         <p className="text-muted-foreground text-sm">
-                          Bezpłatne spotkanie w celu omówienia Twojej wizji, potrzeb i budżetu. Analiza lokalizacji i
-                          wstępne ustalenia projektowe.
+                          Bezpłatne spotkanie, podczas którego poznajemy Twoje oczekiwania, potrzeby i budżet. Analizujemy działkę lub lokalizację oraz omawiamy możliwe kierunki projektu.
                         </p>
                       </div>
                     </div>
@@ -569,10 +535,9 @@ export default function HomePage() {
                         2
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground mb-2">Koncepcja i Projekt Wstępny</h4>
+                        <h4 className="font-semibold text-foreground mb-2">Koncepcja</h4>
                         <p className="text-muted-foreground text-sm">
-                          Opracowanie koncepcji architektonicznej, szkiców i wizualizacji 3D. Prezentacja pomysłów i
-                          wprowadzanie poprawek.
+                          Przygotowujemy pierwsze pomysły, szkice i wizualizacje 3D. To etap rozmów i poprawek, aż wspólnie znajdziemy najlepsze rozwiązanie.
                         </p>
                       </div>
                     </div>
@@ -582,9 +547,9 @@ export default function HomePage() {
                         3
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground mb-2">Projekt Wykonawczy</h4>
+                        <h4 className="font-semibold text-foreground mb-2">Projekt szczegółowy</h4>
                         <p className="text-muted-foreground text-sm">
-                          Szczegółowa dokumentacja techniczna, rysunki wykonawcze, specyfikacje materiałów i kosztorys.
+                          Tworzymy kompletną dokumentację techniczną z rysunkami, materiałami i kosztorysem, która pozwala bezpiecznie rozpocząć budowę.
                         </p>
                       </div>
                     </div>
@@ -596,8 +561,7 @@ export default function HomePage() {
                       <div>
                         <h4 className="font-semibold text-foreground mb-2">Nadzór Autorski</h4>
                         <p className="text-muted-foreground text-sm">
-                          Współpraca z wykonawcami, nadzór nad realizacją projektu, kontrola jakości i zgodności z
-                          dokumentacją.
+                          Towarzyszymy w trakcie realizacji — współpracujemy z wykonawcami, sprawdzamy zgodność prac z projektem i dbamy o jakość wykonania.
                         </p>
                       </div>
                     </div>
@@ -609,7 +573,7 @@ export default function HomePage() {
                       <div>
                         <h4 className="font-semibold text-foreground mb-2">Finalizacja</h4>
                         <p className="text-muted-foreground text-sm">
-                          Odbiór końcowy, wprowadzenie ostatnich detali, przekazanie dokumentacji powykonawczej.
+                          Odbiór końcowy, dopracowanie detali i przekazanie pełnej dokumentacji powykonawczej.
                         </p>
                       </div>
                     </div>
@@ -621,10 +585,10 @@ export default function HomePage() {
                       Czas Realizacji
                     </h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Konsultacja: 1-2 tygodnie</li>
+                      <li>• Konsultacja: 1–2 tygodnie</li>
                       <li>• Projekt koncepcyjny: 2-4 tygodnie</li>
-                      <li>• Projekt wykonawczy: 4-8 tygodni</li>
-                      <li>• Realizacja: 3-12 miesięcy (w zależności od skali)</li>
+                      <li>• Projekt wykonawczy: 6-10 tygodni</li>
+                      <li>• Realizacja: 3-12 miesięcy (w zależności od skali inwestycji)</li>
                     </ul>
                   </div>
                 </div>
