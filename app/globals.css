@@ -11,20 +11,20 @@
   --card-foreground: #2b2b2b;
   --popover: #f8f8f6;
   --popover-foreground: #2b2b2b;
-  --primary: #c08457; /* Terracotta Clay for primary actions */
+  --primary: #007070; /* Terracotta Clay for primary actions */
   --primary-foreground: #fafafa;
   --secondary: #e3dcc8; /* Sand Beige for secondary elements */
   --secondary-foreground: #2b2b2b;
   --muted: #e3dcc8; /* Sand Beige for muted backgrounds */
   --muted-foreground: #6c6c6c; /* Muted Gray for secondary text */
-  --accent: #c08457; /* Terracotta Clay for CTAs and highlights */
+  --accent: #007070; /* Terracotta Clay for CTAs and highlights */
   --accent-foreground: #fafafa;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
   --border: #e3dcc8; /* Sand Beige for subtle borders */
   --input: #f8f8f6;
-  --ring: #c08457;
-  --chart-1: #c08457;
+  --ring: #007070;
+  --chart-1: #007070;
   --chart-2: #8a6e4b; /* Deep Bronze alternative */
   --chart-3: #6c6c6c;
   --chart-4: #e3dcc8;
@@ -32,12 +32,12 @@
   --radius: 0.5rem;
   --sidebar: #f8f8f6;
   --sidebar-foreground: #2b2b2b;
-  --sidebar-primary: #c08457;
+  --sidebar-primary: #007070;
   --sidebar-primary-foreground: #fafafa;
   --sidebar-accent: #e3dcc8;
   --sidebar-accent-foreground: #2b2b2b;
   --sidebar-border: #e3dcc8;
-  --sidebar-ring: #c08457;
+  --sidebar-ring: #007070;
 }
 
 .dark {
@@ -48,32 +48,32 @@
   --card-foreground: #f8f8f6;
   --popover: #1a1a1a;
   --popover-foreground: #f8f8f6;
-  --primary: #c08457;
+  --primary: #007070;
   --primary-foreground: #1a1a1a;
   --secondary: #2b2b2b;
   --secondary-foreground: #f8f8f6;
   --muted: #2b2b2b;
   --muted-foreground: #6c6c6c;
-  --accent: #c08457;
+  --accent: #007070;
   --accent-foreground: #1a1a1a;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: #f8f8f6;
   --border: #2b2b2b;
   --input: #2b2b2b;
-  --ring: #c08457;
-  --chart-1: #c08457;
+  --ring: #007070;
+  --chart-1: #007070;
   --chart-2: #8a6e4b;
   --chart-3: #6c6c6c;
   --chart-4: #e3dcc8;
   --chart-5: #f8f8f6;
   --sidebar: #1a1a1a;
   --sidebar-foreground: #f8f8f6;
-  --sidebar-primary: #c08457;
+  --sidebar-primary: #007070;
   --sidebar-primary-foreground: #1a1a1a;
   --sidebar-accent: #2b2b2b;
   --sidebar-accent-foreground: #f8f8f6;
   --sidebar-border: #2b2b2b;
-  --sidebar-ring: #c08457;
+  --sidebar-ring: #007070;
 }
 
 @theme inline {
@@ -117,6 +117,10 @@
   /* Added custom font variables for architecture-focused typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-helvetica: "Helvetica Neue", Arial, sans-serif;
+  --font-osans: "Open Sans", Arial, sans-serif;
+  --font-mont: "Montserrat", Arial, sans-serif;
+  --font-lato: "Lato", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 

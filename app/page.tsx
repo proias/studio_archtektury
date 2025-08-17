@@ -89,11 +89,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <motion.a
             href="#"
-            className="flex items-center gap-3 font-serif text-xl font-bold text-foreground hover:text-accent transition-colors"
+            className="flex items-center gap-3 font-mont text-xl font-bold text-foreground hover:text-accent transition-colors"
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-8 h-8 bg-accent rounded-sm flex items-center justify-center">
-              <img   src="/logo_1.png" className="w-10 h-10 object-contain"/>
+              <img   src="/wh_logo_1.png" className="w-10 h-10 object-contain"/>
             </div>
             Studio Architektury P. Cywińska
           </motion.a>
@@ -143,7 +143,7 @@ export default function HomePage() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <motion.h1
-            className="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight text-foreground"
+            className="font-lato text-5xl md:text-7xl font-bold mb-6 leading-tight text-foreground"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -187,7 +187,7 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-foreground">Wybrane Realizacje</h2>
+            <h2 className="font-lato text-4xl md:text-5xl font-bold mb-6 text-foreground">Wybrane Realizacje</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Każdy budynek tworzymy z myślą o komforcie, funkcji i przyjemności z codziennego użytkowania.
             </p>
@@ -266,7 +266,7 @@ export default function HomePage() {
                       transition={{ duration: 0.2 }}
                     >
                       <div className="text-center text-white p-6">
-                        <h3 className="font-serif text-2xl font-bold mb-2">{project.title}</h3>
+                        <h3 className="font-mont text-2xl font-bold mb-2">{project.title}</h3>
                         <p className="text-white/90 mb-4">{project.description}</p>
                         <div className="flex items-center justify-center gap-4 text-sm">
                           <span className="flex items-center gap-1">
@@ -283,7 +283,7 @@ export default function HomePage() {
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-serif text-xl font-semibold text-foreground">{project.title}</h3>
+                      <h3 className="font-mont text-xl font-semibold text-foreground">{project.title}</h3>
                       <Badge variant="outline" className="border-border text-muted-foreground">
                         {project.category}
                       </Badge>
@@ -311,7 +311,7 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-8 text-foreground">
+              <h2 className="font-lato text-4xl md:text-5xl font-bold mb-8 text-foreground">
                 Architektura jako
                 <br />
                 <span className="text-accent">Opowieść</span>
@@ -363,7 +363,7 @@ export default function HomePage() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="font-lato text-4xl md:text-5xl font-bold mb-6">
             Masz pomysł na dom lub budynek?
           </h2>
           <p className="text-xl mb-8 text-white/90">
@@ -385,14 +385,14 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-              <h3 className="font-serif text-2xl font-bold mb-4">Studio Architektury</h3>
+              <h3 className="font-lato text-2xl font-bold mb-4">Studio Architektury</h3>
               <p className="text-white/80 mb-4">
                 Projektujemy z dbałością o szczegóły, łącząc funkcję z ponadczasową estetyką.
               </p>
               <p className="text-sm text-white/60">Łódź • Warszawa • Grodzisk Mazowiecki • Sochaczew • Skierniewice</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Usługi</h4>
+              <h4 className="font-lato mb-4">Usługi</h4>
               <ul className="space-y-2 text-white/80">
                 <li className="hover:text-[#8A6E4B] transition-colors cursor-pointer">Architektura Mieszkaniowa</li>
                 <li className="hover:text-[#8A6E4B] transition-colors cursor-pointer">Projektowanie Komercyjne</li>
@@ -404,7 +404,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
+              <h4 className="font-lato mb-4">Kontakt</h4>
               <div className="space-y-2 text-white/80">
                 <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">pcywinska.arch@gmail.com</p>
                 <p className="hover:text-[#8A6E4B] transition-colors cursor-pointer">+48 662-47-79-59</p>
@@ -434,7 +434,7 @@ export default function HomePage() {
           >
             <div className="p-8">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="font-serif text-3xl font-bold text-foreground">Skontaktuj się z Nami</h2>
+                <h2 className="font-lato text-3xl font-bold text-foreground">Skontaktuj się z Nami</h2>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -448,7 +448,7 @@ export default function HomePage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Contact Form */}
                 <div>
-                  <h3 className="font-serif text-xl font-semibold mb-6 text-foreground">Formularz Kontaktowy</h3>
+                  <h3 className="font-lato text-xl font-semibold mb-6 text-foreground">Formularz Kontaktowy</h3>
                   <form className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -516,7 +516,7 @@ export default function HomePage() {
 
                 {/* Project Process */}
                 <div>
-                  <h3 className="font-serif text-xl font-semibold mb-6 text-foreground">Proces Realizacji Projektu</h3>
+                  <h3 className="font-lato text-xl font-semibold mb-6 text-foreground">Proces Realizacji Projektu</h3>
                   <div className="space-y-6">
                     <div className="flex gap-4">
                       <div className="flex-shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-semibold text-sm">
