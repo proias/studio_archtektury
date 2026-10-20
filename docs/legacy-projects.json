@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Nowoczesna Willa, Łódź",
+    "location": "Łódź, Polska",
+    "year": "2024",
+    "category": "Dom",
+    "type": "Przebudowa",
+    "image": "/dom_kostka.png?height=600&width=800",
+    "description": "Współczesna rezydencja rodzinna, która płynnie łączy przestrzenie wewnętrzne z zewnętrznymi.",
+    "scope": "Architektura, Projektowanie Wnętrz, Krajobraz"
+  },
+  {
+    "id": 2,
+    "title": "SPA",
+    "location": "Łódź, Polska",
+    "year": "2025",
+    "category": "Usługowe",
+    "type": "Przebudowa",
+    "image": "/2.png?height=400&width=600",
+    "description": "",
+    "scope": "Architektura"
+  },
+  {
+    "id": 3,
+    "title": "Dom jednorodzinny, Łódź",
+    "location": "Łódź Polska",
+    "year": "2024",
+    "category": "Mieszkaniowe",
+    "type": "Nowa Budowa",
+    "image": "/1.png?height=500&width=700",
+    "description": "Zrównoważony projekt biurowy promujący współpracę i dobre samopoczucie.",
+    "scope": "Architektura, Projektowanie Wnętrz, Doradztwo w Zakresie Zrównoważoności"
+  }
+]

@@ -1,0 +1,193 @@
+[
+  {
+    "slug": "dom-lodzkie-3",
+    "title": "Dom w Łódzkiem III",
+    "category": "Domy",
+    "sourceFolder": "DOM ŁODZKIE 3",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-lodzkie-3/01.webp",
+      "/images/projects/dom-lodzkie-3/02.webp",
+      "/images/projects/dom-lodzkie-3/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "featuredOrder": 1,
+    "coverFit": "cover"
+  },
+  {
+    "slug": "dom-mazowieckie",
+    "title": "Dom na Mazowszu",
+    "category": "Domy",
+    "sourceFolder": "DOM MAZOWIECKIE",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-mazowieckie/01.webp",
+      "/images/projects/dom-mazowieckie/02.webp",
+      "/images/projects/dom-mazowieckie/03.webp",
+      "/images/projects/dom-mazowieckie/04.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "featuredOrder": 2,
+    "coverFit": "contain"
+  },
+  {
+    "slug": "agroturystyka-lodzkie",
+    "title": "Agroturystyka w Łódzkiem",
+    "category": "Obiekty usługowe",
+    "sourceFolder": "AGROTURYSTKA ŁODZKIE",
+    "description": "",
+    "imageSources": [
+      "/images/projects/agroturystyka-lodzkie/01.webp",
+      "/images/projects/agroturystyka-lodzkie/02.webp",
+      "/images/projects/agroturystyka-lodzkie/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "featuredOrder": 3,
+    "coverFit": "cover"
+  },
+  {
+    "slug": "dom-lodzkie",
+    "title": "Dom w Łódzkiem",
+    "category": "Domy",
+    "sourceFolder": "DOM ŁODZKIE",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-lodzkie/01.webp",
+      "/images/projects/dom-lodzkie/02.webp",
+      "/images/projects/dom-lodzkie/03.webp",
+      "/images/projects/dom-lodzkie/04.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "featuredOrder": 4,
+    "coverFit": "cover"
+  },
+  {
+    "slug": "kuchnia-1",
+    "title": "Kuchnia",
+    "category": "Wnętrza",
+    "sourceFolder": "KUCHNIA1",
+    "description": "",
+    "imageSources": [
+      "/images/projects/kuchnia-1/01.webp",
+      "/images/projects/kuchnia-1/02.webp",
+      "/images/projects/kuchnia-1/03.webp",
+      "/images/projects/kuchnia-1/04.webp"
+    ],
+    "coverPosition": "50% 35%",
+    "publicationStatus": "draft",
+    "featuredOrder": 5,
+    "coverFit": "cover"
+  },
+  {
+    "slug": "lazienka",
+    "title": "Łazienka",
+    "category": "Wnętrza",
+    "sourceFolder": "ŁAZIENKA",
+    "description": "",
+    "imageSources": [
+      "/images/projects/lazienka/01.webp",
+      "/images/projects/lazienka/02.webp",
+      "/images/projects/lazienka/03.webp"
+    ],
+    "coverPosition": "50% 62%",
+    "publicationStatus": "draft",
+    "featuredOrder": 6,
+    "coverFit": "cover"
+  },
+  {
+    "slug": "dom-lodzkie-2",
+    "title": "Dom w Łódzkiem II",
+    "category": "Domy",
+    "sourceFolder": "DOM ŁODZKIE 2",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-lodzkie-2/01.webp",
+      "/images/projects/dom-lodzkie-2/02.webp",
+      "/images/projects/dom-lodzkie-2/03.webp",
+      "/images/projects/dom-lodzkie-2/04.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "coverFit": "cover"
+  },
+  {
+    "slug": "dom-lowicz",
+    "title": "Dom w Łowiczu",
+    "category": "Domy",
+    "sourceFolder": "DOM ŁOWICZ",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-lowicz/01.webp",
+      "/images/projects/dom-lowicz/02.webp",
+      "/images/projects/dom-lowicz/03.webp",
+      "/images/projects/dom-lowicz/04.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "coverFit": "cover"
+  },
+  {
+    "slug": "przebudowa-budynku",
+    "title": "Przebudowa budynku pod opieką konserwatora",
+    "category": "Przebudowy",
+    "sourceFolder": "PRZEBUDOWA BUDYNKU POD KONSERWATOREM",
+    "description": "",
+    "imageSources": [
+      "/images/projects/przebudowa-budynku/01.webp",
+      "/images/projects/przebudowa-budynku/02.webp",
+      "/images/projects/przebudowa-budynku/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "coverFit": "cover"
+  },
+  {
+    "slug": "przestrzen-publiczna",
+    "title": "Przestrzeń publiczna",
+    "category": "Przestrzenie publiczne",
+    "sourceFolder": "PRZESTREZŃ PUBLICZNA",
+    "description": "",
+    "imageSources": [
+      "/images/projects/przestrzen-publiczna/01.webp",
+      "/images/projects/przestrzen-publiczna/02.webp",
+      "/images/projects/przestrzen-publiczna/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "coverFit": "cover"
+  },
+  {
+    "slug": "salon",
+    "title": "Salon",
+    "category": "Wnętrza",
+    "sourceFolder": "SALON",
+    "description": "",
+    "imageSources": [
+      "/images/projects/salon/01.webp",
+      "/images/projects/salon/02.webp",
+      "/images/projects/salon/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "draft",
+    "coverFit": "cover"
+  },
+  {
+    "slug": "dom-kostka-przebudowa",
+    "title": "Przebudowa domu typu kostka",
+    "category": "Domy",
+    "sourceFolder": "DOM KOSTKA PRZEBUDOWA",
+    "description": "",
+    "imageSources": [
+      "/images/projects/dom-kostka-przebudowa/01.webp",
+      "/images/projects/dom-kostka-przebudowa/02.webp",
+      "/images/projects/dom-kostka-przebudowa/03.webp"
+    ],
+    "coverPosition": "50% 50%",
+    "publicationStatus": "pending-confirmation",
+    "coverFit": "cover"
+  }
+]

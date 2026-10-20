@@ -1,0 +1,57 @@
+{
+  "pairs": [
+    {
+      "label": "tekst",
+      "fg": "#5d605b",
+      "bg": "#f7f7f5",
+      "contrast": 5.95
+    },
+    {
+      "label": "tekst pomocniczy",
+      "fg": "#70736d",
+      "bg": "#f7f7f5",
+      "contrast": 4.49
+    },
+    {
+      "label": "tekst na ciemnym",
+      "fg": "#c7c9c0",
+      "bg": "#222420",
+      "contrast": 9.35
+    },
+    {
+      "label": "opis formularza",
+      "fg": "#b4b7ac",
+      "bg": "#222420",
+      "contrast": 7.69
+    },
+    {
+      "label": "błąd formularza",
+      "fg": "#f4ada5",
+      "bg": "#222420",
+      "contrast": 8.48
+    }
+  ],
+  "colors": {
+    "#f7f7f5": 5,
+    "#292a27": 17,
+    "#fff": 4,
+    "#eeefea": 4,
+    "#70736d": 7,
+    "#e3e4df": 12,
+    "#ad2929": 1,
+    "#5d605b": 4,
+    "#f2f1ec": 13,
+    "#dadbd3": 1,
+    "#222420": 4,
+    "#a6a89e": 1,
+    "#c7c9c0": 2,
+    "#b4b7ac": 4,
+    "#71766a": 1,
+    "#f4ada5": 2,
+    "#141512": 2,
+    "#a9ada1": 1,
+    "#34362f": 1,
+    "#141512b8": 1,
+    "#53584c": 1
+  }
+}

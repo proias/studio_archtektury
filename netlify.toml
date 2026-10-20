@@ -1,0 +1,27 @@
+# Przygotowanie istniejącego projektu cywinska-studio. Ten plik nie publikuje zmian.
+[build]
+  command = "pnpm run build:netlify"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.14.0"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[dev]
+  command = "pnpm dev --hostname 127.0.0.1"
+  targetPort = 3000
+  port = 8888
+  framework = "#custom"
+
+# Adapter OpenNext jest wykrywany automatycznie.
+# Nagłówki odpowiedzi Next/API są również ustawiane w kodzie aplikacji.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Brak catch-all SPA i funkcji dublujących adapter Next.js.
+

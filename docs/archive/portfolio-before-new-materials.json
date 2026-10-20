@@ -1,0 +1,194 @@
+{
+  "projects": "import manifest from \"./image-manifest.json\";\nexport const categories = [\"Domy\", \"Obiekty usługowe\", \"Wnętrza\"] as const;\nexport type ProjectImage = {\n  src: string;\n  alt: string;\n  width: number;\n  height: number;\n  objectPosition?: string;\n};\nexport type Project = {\n  slug: string;\n  title: string;\n  category: (typeof categories)[number];\n  location?: string;\n  year?: number;\n  description: string;\n  cover: ProjectImage;\n  images: ProjectImage[];\n  credits: { authorship: \"pending-confirmation\"; note: string };\n  publicationStatus: \"draft\" | \"pending-confirmation\";\n  featuredOrder?: number;\n};\nconst images = (slug: string): ProjectImage[] =>\n  manifest\n    .filter((image) => image.src.startsWith(`/images/projects/${slug}/`))\n    .map(({ src, alt, width, height }) => ({ src, alt, width, height }));\nconst entries: Omit<\n  Project,\n  \"images\" | \"cover\" | \"credits\" | \"publicationStatus\"\n>[] = [\n  {\n    slug: \"dom-w-lodzi\",\n    title: \"Dom w Łodzi\",\n    category: \"Domy\",\n    description:\n      \"Jasna, piętrowa bryła otwarta na ogród. Zadaszony taras łączy strefę dzienną z zielenią.\",\n    featuredOrder: 1,\n  },\n  {\n    slug: \"dom-z-ciemna-elewacja\",\n    title: \"Dom z ciemną elewacją\",\n    category: \"Domy\",\n    description:\n      \"Ciemna elewacja podkreśla horyzontalny układ domu. Duże przeszklenia i taras otwierają wnętrze na ogród.\",\n    featuredOrder: 2,\n  },\n  {\n    slug: \"spa-ze-stajnia\",\n    title: \"SPA ze stajnią\",\n    category: \"Obiekty usługowe\",\n    location: \"Łódź\",\n    year: 2025,\n    description:\n      \"Wydłużona bryła, rytm przeszkleń i stonowane materiały. Projekt przestrzeni usługowej łączącej funkcję SPA ze stajnią.\",\n    featuredOrder: 3,\n  },\n  {\n    slug: \"dom-jednorodzinny-lodz\",\n    title: \"Dom jednorodzinny w Łodzi\",\n    category: \"Domy\",\n    location: \"Łódź\",\n    year: 2024,\n    description:\n      \"Dom jednorodzinny z dwuspadowym dachem i garażem w niższej części bryły. Jasna elewacja kontrastuje z ciemną stolarką i pokryciem dachu.\",\n    featuredOrder: 4,\n  },\n  {\n    slug: \"kuchnia-drewno-kamien\",\n    title: \"Kuchnia w drewnie i kamieniu\",\n    category: \"Wnętrza\",\n    description:\n      \"Naturalne drewno i wyrazisty kamień wyznaczają charakter kuchni. Wyspa porządkuje przestrzeń pracy i spotkań.\",\n    featuredOrder: 5,\n  },\n  {\n    slug: \"lazienka-naturalne-odcienie\",\n    title: \"Łazienka w naturalnych odcieniach\",\n    category: \"Wnętrza\",\n    description:\n      \"Spokojna paleta, miękkie światło i naturalne faktury. Strefa umywalki i prysznic tworzą spójną przestrzeń.\",\n    featuredOrder: 6,\n  },\n  {\n    slug: \"kuchnia-ciemna-zabudowa\",\n    title: \"Kuchnia w ciemnej zabudowie\",\n    category: \"Wnętrza\",\n    description:\n      \"Głęboki odcień zabudowy zestawiony z jasną wyspą. Pionowe kadry pokazują proporcje wnętrza i detale materiałów.\",\n  },\n  {\n    slug: \"dom-kostka\",\n    title: \"Przebudowa domu typu kostka\",\n    category: \"Domy\",\n    description:\n      \"Studium bryły domu typu kostka oraz jego połączenia z tarasem i ogrodem.\",\n  },\n];\nexport const projects: Project[] = entries.map((entry) => {\n  const gallery = images(entry.slug);\n  return {\n    ...entry,\n    images: gallery,\n    cover: {\n      ...gallery[0],\n      objectPosition:\n        entry.slug === \"lazienka-naturalne-odcienie\"\n          ? \"50% 62%\"\n          : entry.slug === \"kuchnia-drewno-kamien\"\n            ? \"50% 35%\"\n            : \"50% 50%\",\n    },\n    credits: {\n      authorship: \"pending-confirmation\",\n      note: \"Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną — patrz docs/DO-POTWIERDZENIA-Z-PAULINA.md.\",\n    },\n    publicationStatus:\n      entry.slug === \"dom-kostka\" ? \"pending-confirmation\" : \"draft\",\n  };\n});\nexport const portfolioProjects = projects.filter(\n  (p) => p.publicationStatus !== \"pending-confirmation\",\n);\nexport const featuredProjects = portfolioProjects\n  .filter((p) => p.featuredOrder)\n  .sort((a, b) => a.featuredOrder! - b.featuredOrder!);\nexport const getProject = (slug: string) =>\n  projects.find((project) => project.slug === slug);\n",
+  "manifest": [
+    {
+      "source": "DOM W ŁODZI/3.png",
+      "src": "/images/projects/dom-w-lodzi/ogrod.webp",
+      "alt": "Wizualizacja domu w Łodzi od strony ogrodu, z jasną piętrową bryłą i tarasem",
+      "width": 1280,
+      "height": 720,
+      "sourceBytes": 1793327,
+      "bytes": 80082
+    },
+    {
+      "source": "DOM W ŁODZI/2.png",
+      "src": "/images/projects/dom-w-lodzi/front-perspektywa.webp",
+      "alt": "Wizualizacja domu w Łodzi z ulicy, z garażem i ogrodzeniem",
+      "width": 1248,
+      "height": 702,
+      "sourceBytes": 1740570,
+      "bytes": 100348
+    },
+    {
+      "source": "DOM W ŁODZI/dom w łodzi.png",
+      "src": "/images/projects/dom-w-lodzi/front.webp",
+      "alt": "Wizualizacja frontowej elewacji domu w Łodzi",
+      "width": 1148,
+      "height": 646,
+      "sourceBytes": 1495624,
+      "bytes": 71196
+    },
+    {
+      "source": "dom 3/1.png",
+      "src": "/images/projects/dom-z-ciemna-elewacja/ogrod.webp",
+      "alt": "Wizualizacja domu z ciemną elewacją, z tarasem i ogrodem",
+      "width": 1396,
+      "height": 625,
+      "sourceBytes": 2231170,
+      "bytes": 198628
+    },
+    {
+      "source": "dom 3/dom z ciemną elewacją.png",
+      "src": "/images/projects/dom-z-ciemna-elewacja/front.webp",
+      "alt": "Wizualizacja frontu domu z ciemną elewacją",
+      "width": 1504,
+      "height": 551,
+      "sourceBytes": 2032583,
+      "bytes": 180314
+    },
+    {
+      "source": "dom 3/3.png",
+      "src": "/images/projects/dom-z-ciemna-elewacja/bok.webp",
+      "alt": "Boczny widok domu z ciemną elewacją i garażem",
+      "width": 1389,
+      "height": 583,
+      "sourceBytes": 1912533,
+      "bytes": 152886
+    },
+    {
+      "source": "dom 3/4.png",
+      "src": "/images/projects/dom-z-ciemna-elewacja/z-gory.webp",
+      "alt": "Wizualizacja domu z ciemną elewacją z góry",
+      "width": 1504,
+      "height": 688,
+      "sourceBytes": 1979447,
+      "bytes": 212802
+    },
+    {
+      "source": "SPA ZE STAJNIA/2.png",
+      "src": "/images/projects/spa-ze-stajnia/wejscie.webp",
+      "alt": "Wizualizacja wejścia do SPA ze stajnią",
+      "width": 1248,
+      "height": 832,
+      "sourceBytes": 1671843,
+      "bytes": 183016
+    },
+    {
+      "source": "SPA ZE STAJNIA/3.png",
+      "src": "/images/projects/spa-ze-stajnia/perspektywa.webp",
+      "alt": "Perspektywa wydłużonej bryły SPA ze stajnią",
+      "width": 1248,
+      "height": 832,
+      "sourceBytes": 1380892,
+      "bytes": 116080
+    },
+    {
+      "source": "SPA ZE STAJNIA/stajnia ze spa.png",
+      "src": "/images/projects/spa-ze-stajnia/elewacja.webp",
+      "alt": "Wizualizacja elewacji SPA ze stajnią, z koniem na pierwszym planie",
+      "width": 1248,
+      "height": 832,
+      "sourceBytes": 2026798,
+      "bytes": 270786
+    },
+    {
+      "source": "DOM 2/1.png",
+      "src": "/images/projects/dom-jednorodzinny-lodz/front.webp",
+      "alt": "Wizualizacja jasnego domu z dwuspadowym dachem i niższym garażem",
+      "width": 1392,
+      "height": 752,
+      "sourceBytes": 1891615,
+      "bytes": 224230
+    },
+    {
+      "source": "DOM 2/2.png",
+      "src": "/images/projects/dom-jednorodzinny-lodz/ogrod.webp",
+      "alt": "Wizualizacja domu jednorodzinnego w Łodzi od strony ogrodu",
+      "width": 1392,
+      "height": 752,
+      "sourceBytes": 1837776,
+      "bytes": 218698
+    },
+    {
+      "source": "kuchnia/2.png",
+      "src": "/images/projects/kuchnia-drewno-kamien/perspektywa.webp",
+      "alt": "Wizualizacja kuchni z drewnianą zabudową, kamienną wyspą i lampami",
+      "width": 1024,
+      "height": 1024,
+      "sourceBytes": 1740050,
+      "bytes": 102924
+    },
+    {
+      "source": "kuchnia/kuchnia w drewnie i kamieniu.png",
+      "src": "/images/projects/kuchnia-drewno-kamien/front.webp",
+      "alt": "Frontowy widok kuchni w drewnie i kamieniu",
+      "width": 1024,
+      "height": 1024,
+      "sourceBytes": 1401321,
+      "bytes": 55496
+    },
+    {
+      "source": "ŁAZIENKA 1/1.png",
+      "src": "/images/projects/lazienka-naturalne-odcienie/umywalka.webp",
+      "alt": "Wizualizacja łazienki w naturalnych odcieniach, z umywalką i lustrem",
+      "width": 880,
+      "height": 1184,
+      "sourceBytes": 1204343,
+      "bytes": 79870
+    },
+    {
+      "source": "ŁAZIENKA 1/3.png",
+      "src": "/images/projects/lazienka-naturalne-odcienie/prysznic.webp",
+      "alt": "Wizualizacja strefy prysznica w łazience w naturalnych odcieniach",
+      "width": 880,
+      "height": 1184,
+      "sourceBytes": 1268229,
+      "bytes": 79070
+    },
+    {
+      "source": "KUCHNIA 3/1.png",
+      "src": "/images/projects/kuchnia-ciemna-zabudowa/wyspa.webp",
+      "alt": "Pionowa wizualizacja kuchni z ciemną zabudową i wyspą",
+      "width": 752,
+      "height": 1392,
+      "sourceBytes": 1039453,
+      "bytes": 50474
+    },
+    {
+      "source": "KUCHNIA 3/2.png",
+      "src": "/images/projects/kuchnia-ciemna-zabudowa/detal.webp",
+      "alt": "Pionowa wizualizacja detali kuchni w ciemnej zabudowie",
+      "width": 752,
+      "height": 1392,
+      "sourceBytes": 1093683,
+      "bytes": 51536
+    },
+    {
+      "source": "przebudowa domu kostka/przebudowa domu kostka.png",
+      "src": "/images/projects/dom-kostka/taras.webp",
+      "alt": "Wizualizacja przebudowy domu typu kostka, z tarasem",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 2839591,
+      "bytes": 230546
+    },
+    {
+      "source": "przebudowa domu kostka/dom_kostka.png",
+      "src": "/images/projects/dom-kostka/ogrod.webp",
+      "alt": "Wizualizacja ogrodu przy domu typu kostka",
+      "width": 1248,
+      "height": 832,
+      "sourceBytes": 1973018,
+      "bytes": 202358
+    },
+    {
+      "source": "przebudowa domu kostka/generation-b4f31156-098f-43a7-ac4d-d3890fa7b983.png",
+      "src": "/images/projects/dom-kostka/front.webp",
+      "alt": "Wizualizacja frontu domu typu kostka i garażu",
+      "width": 1248,
+      "height": 832,
+      "sourceBytes": 1881348,
+      "bytes": 214990
+    }
+  ]
+}

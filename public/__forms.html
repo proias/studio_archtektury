@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Kontakt — definicja formularza</title>
+  </head>
+  <body>
+    <!-- Definicja do wykrycia przy przyszłym wdrożeniu. Strona nadal otwiera program pocztowy. -->
+    <form
+      name="kontakt-pracownia"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="kontakt-pracownia" />
+      <input name="name" type="text" required />
+      <input name="email" type="email" required />
+      <input name="phone" type="tel" />
+      <input name="projectType" type="text" required />
+      <textarea name="message" required></textarea>
+      <input name="bot-field" type="text" />
+    </form>
+  </body>
+</html>

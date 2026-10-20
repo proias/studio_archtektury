@@ -1,0 +1,412 @@
+[
+  {
+    "source": "DOM ŁODZKIE 3/B.png",
+    "src": "/images/projects/dom-lodzkie-3/01.webp",
+    "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+    "width": 1671,
+    "height": 941,
+    "sourceBytes": 3314984,
+    "bytes": 384256,
+    "sha256": "c3eeac5c785ade7e2e04cbf9f276ded37202f41499b9c346af7e107a41e5b3bb"
+  },
+  {
+    "source": "DOM ŁODZKIE 3/A.png",
+    "src": "/images/projects/dom-lodzkie-3/02.webp",
+    "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
+    "width": 1670,
+    "height": 942,
+    "sourceBytes": 2970369,
+    "bytes": 303624,
+    "sha256": "3fde2c71262a4160efa58be07fa5a8ebf2155970ddb51000eaaec87ff6a8f7a8"
+  },
+  {
+    "source": "DOM ŁODZKIE 3/C.png",
+    "src": "/images/projects/dom-lodzkie-3/03.webp",
+    "alt": "Widok piętrowego domu z ulicy, z garażem i ogrodzeniem",
+    "width": 1672,
+    "height": 941,
+    "sourceBytes": 3018798,
+    "bytes": 291284,
+    "sha256": "3bc6da971ecab9590f26dae1c7b7231acf56249cc6bb6de7ea46316da0e3490b"
+  },
+  {
+    "source": "DOM MAZOWIECKIE/A.png",
+    "src": "/images/projects/dom-mazowieckie/01.webp",
+    "alt": "Wizualizacja domu z ciemną elewacją i dwuspadowym dachem od strony tarasu",
+    "width": 1875,
+    "height": 848,
+    "sourceBytes": 4555533,
+    "bytes": 401656,
+    "sha256": "82aaf3407d8ac2e374ba0a0a1039475e84ead34088867854e673b5d35bd6c526"
+  },
+  {
+    "source": "DOM MAZOWIECKIE/B.png",
+    "src": "/images/projects/dom-mazowieckie/02.webp",
+    "alt": "Boczny widok domu z ciemną elewacją i niższą bryłą garażu",
+    "width": 1935,
+    "height": 813,
+    "sourceBytes": 3396672,
+    "bytes": 355336,
+    "sha256": "2a2a42375ec03f611ee024157ecdbd19208d7d1facb379fc1579eee0aeefb568"
+  },
+  {
+    "source": "DOM MAZOWIECKIE/C.png",
+    "src": "/images/projects/dom-mazowieckie/03.webp",
+    "alt": "Front domu z ciemną elewacją, garażem i podjazdem",
+    "width": 2067,
+    "height": 761,
+    "sourceBytes": 3237296,
+    "bytes": 318602,
+    "sha256": "31411b3b17ae1f95be5b358527295a62dd3ccca03a243245c55b6de84b7a9bd0"
+  },
+  {
+    "source": "DOM MAZOWIECKIE/D.png",
+    "src": "/images/projects/dom-mazowieckie/04.webp",
+    "alt": "Widok domu na Mazowszu od strony ulicy i ogrodzenia",
+    "width": 1852,
+    "height": 848,
+    "sourceBytes": 3232087,
+    "bytes": 331170,
+    "sha256": "109f00a77ba3479e9ea381dd271d99a4060ac4862892a945df5aef025e478e73"
+  },
+  {
+    "source": "AGROTURYSTKA ŁODZKIE/1.png",
+    "src": "/images/projects/agroturystyka-lodzkie/01.webp",
+    "alt": "Wizualizacja drewnianego budynku agroturystyki z koniem przy ogrodzeniu",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 3385649,
+    "bytes": 390574,
+    "sha256": "4b55b508cf2bf5451ea430836f96945ceba2982c3293d4f6560526948f23eae6"
+  },
+  {
+    "source": "AGROTURYSTKA ŁODZKIE/2.png",
+    "src": "/images/projects/agroturystyka-lodzkie/02.webp",
+    "alt": "Drewniana bryła agroturystyki z balią i strefą wypoczynku",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 2833209,
+    "bytes": 239612,
+    "sha256": "ed4507e8e07a66f38063c9a6b137c4e2fa477637e90baacf8563ea39f0d34deb"
+  },
+  {
+    "source": "AGROTURYSTKA ŁODZKIE/3.png",
+    "src": "/images/projects/agroturystyka-lodzkie/03.webp",
+    "alt": "Widok drewnianego budynku agroturystyki z dużym przeszkleniem",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 2905242,
+    "bytes": 270408,
+    "sha256": "732191c7f0296a84078a5053a4baa9c4398d1cd09956266b0c4edcb802d66a2e"
+  },
+  {
+    "source": "DOM ŁODZKIE/B.png",
+    "src": "/images/projects/dom-lodzkie/01.webp",
+    "alt": "Wizualizacja jasnego domu z dwuspadowym dachem od strony tarasu i ogrodu",
+    "width": 1642,
+    "height": 958,
+    "sourceBytes": 3332253,
+    "bytes": 358844,
+    "sha256": "33e8269a43dddffc3f969db4ea7f7f9d7b948fe817a3395c032900e252ecb493"
+  },
+  {
+    "source": "DOM ŁODZKIE/A.png",
+    "src": "/images/projects/dom-lodzkie/02.webp",
+    "alt": "Front jasnego domu z ciemnym dachem i niższym garażem",
+    "width": 1640,
+    "height": 958,
+    "sourceBytes": 3966018,
+    "bytes": 332784,
+    "sha256": "af375143cf3fb5572bf9a948b37168666648843b611f158068706b43197d27da"
+  },
+  {
+    "source": "DOM ŁODZKIE/C.png",
+    "src": "/images/projects/dom-lodzkie/03.webp",
+    "alt": "Boczny widok jasnego domu, z zadaszonym tarasem",
+    "width": 1642,
+    "height": 958,
+    "sourceBytes": 4441747,
+    "bytes": 342898,
+    "sha256": "f45de6ac933e3146046b703c22675ce6ddac1b04ecf5c8bb472bea393f263212"
+  },
+  {
+    "source": "DOM ŁODZKIE/D.png",
+    "src": "/images/projects/dom-lodzkie/04.webp",
+    "alt": "Perspektywa frontu domu z podjazdem i garażem",
+    "width": 1642,
+    "height": 958,
+    "sourceBytes": 2882878,
+    "bytes": 242238,
+    "sha256": "377a24f9b36dad98b5613914df2d676d29de5470c604a536b613a048cf480cc8"
+  },
+  {
+    "source": "KUCHNIA1/2.png",
+    "src": "/images/projects/kuchnia-1/01.webp",
+    "alt": "Wizualizacja kuchni z kamienną wyspą, drewnianą zabudową i dwiema lampami",
+    "width": 1254,
+    "height": 1254,
+    "sourceBytes": 2452623,
+    "bytes": 140718,
+    "sha256": "15b41e823d0deb21ddef446bd22a886825a0209b06025249e1fba1e9d56035de"
+  },
+  {
+    "source": "KUCHNIA1/1.png",
+    "src": "/images/projects/kuchnia-1/02.webp",
+    "alt": "Symetryczny widok kuchni z wyspą i drewnianymi stołkami",
+    "width": 1254,
+    "height": 1254,
+    "sourceBytes": 3144701,
+    "bytes": 102006,
+    "sha256": "1c212fb74f07d8d31e405046a503e6db896405585e95f646ceaf8e98829ce9fe"
+  },
+  {
+    "source": "KUCHNIA1/3.png",
+    "src": "/images/projects/kuchnia-1/03.webp",
+    "alt": "Detal kamiennej wyspy, baterii i zabudowy kuchennej",
+    "width": 1254,
+    "height": 1254,
+    "sourceBytes": 2340862,
+    "bytes": 128226,
+    "sha256": "2e68715a0c988a60b948ce0d30a38332e6fa1c961561d78868dc525200269cb2"
+  },
+  {
+    "source": "KUCHNIA1/4.png",
+    "src": "/images/projects/kuchnia-1/04.webp",
+    "alt": "Pionowy widok wyspy kuchennej i strefy z drewnianymi stołkami",
+    "width": 1254,
+    "height": 1254,
+    "sourceBytes": 2238475,
+    "bytes": 111206,
+    "sha256": "6b5e740d7a2a3d37d57be69fc2b04b20b5d30efb551c7e1260c8f5472c22bf53"
+  },
+  {
+    "source": "ŁAZIENKA/1.png",
+    "src": "/images/projects/lazienka/01.webp",
+    "alt": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką",
+    "width": 1081,
+    "height": 1379,
+    "sourceBytes": 2138432,
+    "bytes": 94584,
+    "sha256": "af17085bd9848dccced4ab3e72ed5acff96207c8c7ba283bcda5593ce4b9b61a"
+  },
+  {
+    "source": "ŁAZIENKA/2.png",
+    "src": "/images/projects/lazienka/02.webp",
+    "alt": "Ukośny widok kamiennej umywalki i podświetlanego lustra w łazience",
+    "width": 1081,
+    "height": 1455,
+    "sourceBytes": 2412257,
+    "bytes": 130396,
+    "sha256": "ddf760ba166872a16e7a33a2306c04f7939a20344cb867727774bd6946ffce14"
+  },
+  {
+    "source": "ŁAZIENKA/3.png",
+    "src": "/images/projects/lazienka/03.webp",
+    "alt": "Pionowy widok strefy prysznica i toalety w jasnej kamiennej łazience",
+    "width": 1081,
+    "height": 1455,
+    "sourceBytes": 2323785,
+    "bytes": 96242,
+    "sha256": "aef1a84fd5032bb646f9914f7dae348e45c01b8cde75380ae94e003de42e4def"
+  },
+  {
+    "source": "DOM ŁODZKIE 2/1.png",
+    "src": "/images/projects/dom-lodzkie-2/01.webp",
+    "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
+    "width": 1779,
+    "height": 884,
+    "sourceBytes": 3476841,
+    "bytes": 270772,
+    "sha256": "bab1680df1ba5626c8ea4930bae453cd4457c9be4a31c97e83cb13a1e6b341a3"
+  },
+  {
+    "source": "DOM ŁODZKIE 2/2.png",
+    "src": "/images/projects/dom-lodzkie-2/02.webp",
+    "alt": "Widok tarasu i przeszklonej elewacji domu wśród zieleni",
+    "width": 1780,
+    "height": 884,
+    "sourceBytes": 3188456,
+    "bytes": 319160,
+    "sha256": "dcbbb41362710d36b1a28315c67a9f979c5486b2a23767a0785951803498298c"
+  },
+  {
+    "source": "DOM ŁODZKIE 2/3.png",
+    "src": "/images/projects/dom-lodzkie-2/03.webp",
+    "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
+    "width": 1781,
+    "height": 884,
+    "sourceBytes": 2957735,
+    "bytes": 266090,
+    "sha256": "91dcad0c29a4bb56d37c97f45b35007ae30ed05f899d412fb47506729e3068ac"
+  },
+  {
+    "source": "DOM ŁODZKIE 2/4.png",
+    "src": "/images/projects/dom-lodzkie-2/04.webp",
+    "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
+    "width": 1781,
+    "height": 884,
+    "sourceBytes": 2651356,
+    "bytes": 192588,
+    "sha256": "482eb1f96f14b568c2442301d795100d0df75dcc0fc5048dfb5ad40d5bdc72ba"
+  },
+  {
+    "source": "DOM ŁOWICZ/2.jpg",
+    "src": "/images/projects/dom-lowicz/01.webp",
+    "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
+    "width": 1747,
+    "height": 900,
+    "sourceBytes": 2729030,
+    "bytes": 279546,
+    "sha256": "a1573990c4f0d4e5c0a2f047daf7bcf63a3be94a2c1804e0e479897db5f77e6f"
+  },
+  {
+    "source": "DOM ŁOWICZ/1.jpg",
+    "src": "/images/projects/dom-lowicz/02.webp",
+    "alt": "Widok frontu parterowego domu z garażem i podjazdem",
+    "width": 1747,
+    "height": 900,
+    "sourceBytes": 2821587,
+    "bytes": 301998,
+    "sha256": "911c358173d4e92f5f94d8db1b790957fc2f20e6c1a08010a39559e15174dd10"
+  },
+  {
+    "source": "DOM ŁOWICZ/3.jpg",
+    "src": "/images/projects/dom-lowicz/03.webp",
+    "alt": "Perspektywa tarasu parterowego domu z szerokimi przeszkleniami",
+    "width": 1746,
+    "height": 901,
+    "sourceBytes": 2650826,
+    "bytes": 276370,
+    "sha256": "c20bedc347e36302a7b57997dbb972ee81ecac3f73c2a97f4724760a2bea0fe5"
+  },
+  {
+    "source": "DOM ŁOWICZ/4.jpg",
+    "src": "/images/projects/dom-lowicz/04.webp",
+    "alt": "Widok przeszklonej elewacji domu z ogrodu",
+    "width": 1748,
+    "height": 900,
+    "sourceBytes": 3069283,
+    "bytes": 353728,
+    "sha256": "105584ee3566c88d310e911d67a25d2bcaf0d4962857e32e06414b4b72f37465"
+  },
+  {
+    "source": "PRZEBUDOWA BUDYNKU POD KONSERWATOREM/A.png",
+    "src": "/images/projects/przebudowa-budynku/01.webp",
+    "alt": "Wizualizacja ceglanego budynku przy narożniku ulicy po przebudowie",
+    "width": 1534,
+    "height": 1024,
+    "sourceBytes": 4203809,
+    "bytes": 269800,
+    "sha256": "09eb0dcfd0033eb3910cd7298b43a839a51de542688abefdbb24b92e785c9531"
+  },
+  {
+    "source": "PRZEBUDOWA BUDYNKU POD KONSERWATOREM/B.png",
+    "src": "/images/projects/przebudowa-budynku/02.webp",
+    "alt": "Perspektywa frontowych elewacji ceglanego budynku",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 3106495,
+    "bytes": 281884,
+    "sha256": "2f46755f1127190ddb79b22292d0d5e2025a6bfa5fc79607f7237de0287beb93"
+  },
+  {
+    "source": "PRZEBUDOWA BUDYNKU POD KONSERWATOREM/C.png",
+    "src": "/images/projects/przebudowa-budynku/03.webp",
+    "alt": "Boczna elewacja ceglanego budynku z dwuspadowym dachem",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 3096799,
+    "bytes": 289988,
+    "sha256": "74500318b099717af8f0f9be9da9c8bbdc2e13273a5a8e240a8704b6cd26069e"
+  },
+  {
+    "source": "PRZESTREZŃ PUBLICZNA/1.png",
+    "src": "/images/projects/przestrzen-publiczna/01.webp",
+    "alt": "Wizualizacja plenerowej strefy rekreacji z urządzeniami do ćwiczeń i ścieżkami",
+    "width": 1862,
+    "height": 845,
+    "sourceBytes": 3339931,
+    "bytes": 352132,
+    "sha256": "df6aa5db5e3271d6f1f49e03554aa637c18bfb57ddce6840ad08106bd6155a85"
+  },
+  {
+    "source": "PRZESTREZŃ PUBLICZNA/2.png",
+    "src": "/images/projects/przestrzen-publiczna/02.webp",
+    "alt": "Widok urządzeń rekreacyjnych i miejsc odpoczynku w przestrzeni publicznej",
+    "width": 1862,
+    "height": 845,
+    "sourceBytes": 3060827,
+    "bytes": 296640,
+    "sha256": "ca340690ab6a488a5b175f621f5dcbf60d388b9ff7ec7e677de0969f7d266f45"
+  },
+  {
+    "source": "PRZESTREZŃ PUBLICZNA/3.png",
+    "src": "/images/projects/przestrzen-publiczna/03.webp",
+    "alt": "Szeroki widok plenerowej strefy rekreacji z zielenią",
+    "width": 1862,
+    "height": 845,
+    "sourceBytes": 3048437,
+    "bytes": 305592,
+    "sha256": "ca2c2ad754dc7ef036e587bb66efd5ac8f0fb777470e49f30ce713ede330989e"
+  },
+  {
+    "source": "SALON/A.png",
+    "src": "/images/projects/salon/01.webp",
+    "alt": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową",
+    "width": 1870,
+    "height": 841,
+    "sourceBytes": 2453130,
+    "bytes": 134162,
+    "sha256": "432d66dcabe13442227e451d0d444e3c16706aa8ec435c078a88e580757d9c74"
+  },
+  {
+    "source": "SALON/B.png",
+    "src": "/images/projects/salon/02.webp",
+    "alt": "Perspektywa salonu z jadalnią i jasnymi tekstyliami",
+    "width": 1870,
+    "height": 840,
+    "sourceBytes": 2713905,
+    "bytes": 171032,
+    "sha256": "50794c06db2e380715ef3270db4a88bfc320dfa4757c488e96d36d084875dc9b"
+  },
+  {
+    "source": "SALON/C.png",
+    "src": "/images/projects/salon/03.webp",
+    "alt": "Widok stołu, krzeseł i części wypoczynkowej salonu",
+    "width": 1870,
+    "height": 841,
+    "sourceBytes": 2599221,
+    "bytes": 155044,
+    "sha256": "1da6fce44e7176f1ecbae1a5e45408c72f620daf8931489ed4ef30907dc28334"
+  },
+  {
+    "source": "DOM KOSTKA PRZEBUDOWA/C.png",
+    "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+    "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 3153572,
+    "bytes": 310996,
+    "sha256": "5719eb179bca35092dbbc70704d3128d65b7fc5c248ea62438e176c93188f766"
+  },
+  {
+    "source": "DOM KOSTKA PRZEBUDOWA/A.png",
+    "src": "/images/projects/dom-kostka-przebudowa/02.webp",
+    "alt": "Front domu typu kostka z garażem w dolnej kondygnacji",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 4120906,
+    "bytes": 308412,
+    "sha256": "fa2ae25710d35966106431aec9c9c3be4ee19b4b9611319e960c468c267a6ab6"
+  },
+  {
+    "source": "DOM KOSTKA PRZEBUDOWA/B.png",
+    "src": "/images/projects/dom-kostka-przebudowa/03.webp",
+    "alt": "Widok ogrodu przy przebudowanym domu typu kostka",
+    "width": 1536,
+    "height": 1024,
+    "sourceBytes": 4203957,
+    "bytes": 321684,
+    "sha256": "38626916756c88af68f8212bb42c4007222bc74e7ad24d6a283db24ded48bf48"
+  }
+]

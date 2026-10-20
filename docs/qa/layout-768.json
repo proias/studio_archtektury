@@ -1,0 +1,42 @@
+{
+  "width": 768,
+  "scroll": 753,
+  "h1": 1,
+  "cards": [
+    {
+      "href": "/projekty/dom-w-lodzi",
+      "src": "/images/projects/dom-w-lodzi/ogrod.webp"
+    },
+    {
+      "href": "/projekty/dom-z-ciemna-elewacja",
+      "src": "/images/projects/dom-z-ciemna-elewacja/ogrod.webp"
+    },
+    {
+      "href": "/projekty/spa-ze-stajnia",
+      "src": "/images/projects/spa-ze-stajnia/wejscie.webp"
+    },
+    {
+      "href": "/projekty/dom-jednorodzinny-lodz",
+      "src": "/images/projects/dom-jednorodzinny-lodz/front.webp"
+    },
+    {
+      "href": "/projekty/kuchnia-drewno-kamien",
+      "src": "/images/projects/kuchnia-drewno-kamien/perspektywa.webp"
+    },
+    {
+      "href": "/projekty/lazienka-naturalne-odcienie",
+      "src": "/images/projects/lazienka-naturalne-odcienie/umywalka.webp"
+    }
+  ],
+  "hero": {
+    "width": 753,
+    "height": 424,
+    "naturalWidth": 1280,
+    "naturalHeight": 720,
+    "objectFit": "contain"
+  },
+  "headFont": "montserrat, \"montserrat Fallback\", Arial, sans-serif",
+  "bodyFont": "ptSans, \"ptSans Fallback\", Arial, sans-serif",
+  "images": true,
+  "reduced": "auto"
+}

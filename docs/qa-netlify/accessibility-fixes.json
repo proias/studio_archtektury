@@ -1,0 +1,14 @@
+{
+  "secondaryTextBefore": {
+    "foreground": "#70736d",
+    "background": "#f7f7f5",
+    "contrast": 4.488158496704517
+  },
+  "secondaryTextAfter": {
+    "foreground": "#6f726c",
+    "background": "#f7f7f5",
+    "contrast": 4.553610532733976
+  },
+  "literalColorCount": 35,
+  "wordmarkMinimumHeight": 44
+}
