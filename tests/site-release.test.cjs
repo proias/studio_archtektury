@@ -35,7 +35,9 @@ test("sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje wła
       [
         "https://cywinska-studio.pl/",
         "https://cywinska-studio.pl/projekty",
-        "https://cywinska-studio.pl/projekty/dom-lodzkie-3",
+        ...(await require("../lib/cms/reader.ts").getProjectSlugs()).map(
+          (slug) => "https://cywinska-studio.pl/projekty/" + slug,
+        ),
       ],
     );
     process.env.CONTEXT = "deploy-preview";
@@ -75,7 +77,13 @@ test("przekierowania odrzucają pętle, łańcuchy, aktywne źródła, szkice i 
     [{ source: "/keystatic/x", destination: "/api/x" }],
   ])
     assert.throws(() => validateRedirects(entries, paths));
-  assert.deepEqual(loadRedirects(), []);
+  assert.deepEqual(
+    loadRedirects(),
+    require("../content/redirects.json").entries.map((entry) => ({
+      ...entry,
+      permanent: true,
+    })),
+  );
 });
 test("nowe singletony są czytelne dla Keystatic i zachowują teksty startowe", async () => {
   const { reader } = require("../lib/cms/reader.ts");

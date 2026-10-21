@@ -5,6 +5,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import {
   checkBrowserMemory,
+  chromeExecutable,
   closeTestChrome,
   monitorBrowserMemory,
 } from "./chrome-qa-process.mjs";
@@ -52,9 +53,10 @@ let socket,
   savedToDisk = false;
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), "cms-qa-"));
 const chrome = spawn(
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  chromeExecutable(),
   [
     "--headless=new",
+    ...(process.env.CI ? ["--no-sandbox"] : []),
     "--disable-gpu",
     "--disable-background-networking",
     "--no-first-run",

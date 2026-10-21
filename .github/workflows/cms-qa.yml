@@ -1,0 +1,65 @@
+name: CMS QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/cms-qa.yml"
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "scripts/**"
+      - "tests/**"
+      - "keystatic.config.ts"
+      - "next.config.mjs"
+      - "tsconfig.json"
+      - "package.json"
+      - "pnpm-lock.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cms-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cms:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+      NEXT_TELEMETRY_DISABLED: "1"
+      NODE_OPTIONS: --max-old-space-size=1536
+      RAYON_NUM_THREADS: "1"
+      UV_THREADPOOL_SIZE: "2"
+      CHROME_PATH: /usr/bin/google-chrome
+      QA_URL: http://127.0.0.1:3001
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          package-manager-cache: false
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - name: Static checks and integration tests
+        run: |
+          pnpm exec tsc --noEmit
+          pnpm lint
+          pnpm format:check
+          pnpm test
+          node scripts/cms-api-qa.cjs
+      - name: Local CMS browser integration
+        shell: bash
+        run: |
+          node node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port 3001 > "$RUNNER_TEMP/cms-dev.log" 2>&1 &
+          CMS_PID=$!
+          trap 'kill "$CMS_PID" 2>/dev/null || true; cat "$RUNNER_TEMP/cms-dev.log"' EXIT
+          node -e 'async function wait(){for(let i=0;i<90;i++){try{if((await fetch("http://127.0.0.1:3001/",{signal:AbortSignal.timeout(15000)})).ok)return}catch{}await new Promise(r=>setTimeout(r,1000))}throw new Error("CMS server did not start")}wait().catch(e=>{console.error(e);process.exitCode=1})'
+          node scripts/cms-browser-qa.mjs

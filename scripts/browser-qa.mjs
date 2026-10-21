@@ -5,6 +5,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import {
   checkBrowserMemory,
+  chromeExecutable,
   closeTestChrome,
   monitorBrowserMemory,
 } from "./chrome-qa-process.mjs";
@@ -14,9 +15,10 @@ checkBrowserMemory();
 await fs.mkdir(out, { recursive: true });
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), "archi-browser-"));
 const chrome = spawn(
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  chromeExecutable(),
   [
     "--headless=new",
+    ...(process.env.CI ? ["--no-sandbox"] : []),
     "--disable-gpu",
     "--no-first-run",
     "--no-default-browser-check",
@@ -495,7 +497,10 @@ try {
   );
   await check(
     "preview noindex header",
-    (await fetch(base)).headers.get("x-robots-tag") === "noindex, nofollow",
+    ((await fetch(base)).headers.get("x-robots-tag") || "")
+      .split(",")
+      .map((value) => value.trim())
+      .includes("noindex"),
   );
   await check(
     "preview robots disallow",

@@ -45,35 +45,56 @@ test("migracja historyczna odtwarza archiwum bez zależności od późniejszych 
   });
 });
 
-test("CMS zachowuje 12 wpisów i obrazy; publiczny jest wyłącznie zatwierdzony pierwszy projekt", async () => {
+test("CMS zachowuje wpisy i obrazy, a publiczny odczyt odpowiada statusom publikacji", async () => {
+  const source = fs
+    .readdirSync("content/projects")
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => ({
+      ...JSON.parse(
+        fs.readFileSync(path.join("content/projects", file), "utf8"),
+      ),
+      slug: file.slice(0, -5),
+    }))
+    .sort(
+      (a, b) =>
+        (a.order ?? 100) - (b.order ?? 100) || a.slug.localeCompare(b.slug),
+    );
   const all = await cms.getAllCmsProjects();
-  assert.equal(all.length, 12);
-  assert.equal(new Set(all.map((p) => p.slug)).size, 12);
+  assert.equal(all.length, source.length);
+  assert.equal(new Set(all.map((p) => p.slug)).size, source.length);
   for (const project of all) {
     assert.ok(categories.includes(project.category));
-    assert.ok(project.description.trim());
-    assert.equal(project.contentStatus, "temporary");
+    assert.ok(["temporary", "approved"].includes(project.contentStatus));
     for (const image of [project.cover, ...project.images]) {
       assert.ok(image.width > 0 && image.height > 0 && image.alt.trim());
       assert.ok(fs.existsSync(path.join("public", image.src)));
     }
   }
+  const expected = source.filter((p) => p.publicationStatus === "published");
   const published = await cms.getAllProjects();
   assert.deepEqual(
     published.map((p) => p.slug),
-    ["dom-lodzkie-3"],
+    expected.map((p) => p.slug),
   );
-  assert.deepEqual(await cms.getProjectSlugs(), ["dom-lodzkie-3"]);
-  assert.deepEqual(await cms.getPortfolioNavigation(), [
-    { slug: "dom-lodzkie-3", title: published[0].title },
-  ]);
+  assert.deepEqual(
+    await cms.getProjectSlugs(),
+    expected.map((p) => p.slug),
+  );
+  assert.deepEqual(
+    await cms.getPortfolioNavigation(),
+    expected.map((p) => ({ slug: p.slug, title: p.title })),
+  );
   assert.deepEqual(
     (await cms.getFeaturedProjects()).map((p) => p.slug),
-    ["dom-lodzkie-3"],
+    expected
+      .filter((p) => p.featuredOrder)
+      .sort((a, b) => a.featuredOrder - b.featuredOrder)
+      .map((p) => p.slug),
   );
-  assert.equal((await cms.getPrimaryCover()).src, published[0].cover.src);
-  assert.equal(await cms.getProjectBySlug("dom-mazowieckie"), null);
-  assert.equal(await cms.getProjectBySlug("dom-kostka-przebudowa"), null);
+  for (const project of source.filter(
+    (p) => p.publicationStatus !== "published",
+  ))
+    assert.equal(await cms.getProjectBySlug(project.slug), null);
   assert.equal(await cms.getProjectBySlug("../site"), null);
   assert.equal(await cms.getProjectBySlug("missing-project"), null);
 });

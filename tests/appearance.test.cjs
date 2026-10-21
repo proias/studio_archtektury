@@ -29,6 +29,9 @@ test("CMS: osobne zdjęcie główne, rzeczywiste wymiary i powrót do okładki p
         ),
       );
     };
+    content.logo.src = null;
+    content.hero.src = null;
+    fs.writeFileSync(contentPath, JSON.stringify(content));
     assert.ok(renderLogo().includes(content.logo.title));
     assert.deepEqual(await reader.singletons.appearance.read(), content);
     assert.deepEqual(await getHomeHero(), await getPrimaryCover());
