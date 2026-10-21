@@ -5,6 +5,7 @@
 
 # next.js
 /.next/
+/.next-dev/
 /out/
 
 # production
@@ -33,3 +34,6 @@ next-env.d.ts
 /docs/qa*/**/*.png
 # Generated QA images are not CMS content. Existing tracked artifacts stay tracked.
 /docs/qa*/**/*.png
+/docs/qa-release/
+/docs/qa-cms/appearance-public/
+/docs/qa-cms/cms-browser-failure.json

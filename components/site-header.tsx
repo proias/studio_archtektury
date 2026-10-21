@@ -4,6 +4,8 @@ import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import { navigation } from "@/lib/site-content";
+import { SiteWordmark } from "./site-wordmark";
+import { pageCopy } from "@/lib/page-content";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
@@ -12,10 +14,9 @@ export function SiteHeader() {
         <Link
           href="/"
           className="wordmark"
-          aria-label="Paulina Cywińska — strona główna"
+          aria-label={pageCopy.navigation.homeLabel}
         >
-          <span>PAULINA CYWIŃSKA</span>
-          <small>STUDIO ARCHITEKTURY</small>
+          <SiteWordmark />
         </Link>
         <nav className="desktop-nav" aria-label="Nawigacja główna">
           {navigation.map((item) => (
@@ -58,9 +59,9 @@ export function SiteHeader() {
                 ))}
               </nav>
               <p>
-                Paulina Cywińska
+                {pageCopy.navigation.mobileName}
                 <br />
-                Studio Architektury · Łódź
+                {pageCopy.navigation.mobileSubtitle}
               </p>
             </Dialog.Content>
           </Dialog.Portal>

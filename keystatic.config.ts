@@ -10,6 +10,32 @@ if (github && !repo?.match(/^[\w.-]+\/[\w.-]+$/)) {
 const text = (label: string) => fields.text({ label });
 const required = (label: string) =>
   fields.text({ label, validation: { isRequired: true } });
+const copyGroup = (label: string, labels: Record<string, string>) =>
+  fields.object(
+    Object.fromEntries(
+      Object.entries(labels).map(([key, fieldLabel]) => [
+        key,
+        fields.text({
+          label: fieldLabel,
+          multiline: true,
+          validation: { isRequired: true },
+        }),
+      ]),
+    ),
+    { label },
+  );
+const localPath = (label: string) =>
+  fields.text({
+    label,
+    validation: {
+      isRequired: true,
+      pattern: {
+        regex: /^\/(?!\/)[^?#\s]*$/,
+        message:
+          "Podaj ścieżkę zaczynającą się od /, bez domeny, parametrów i fragmentu.",
+      },
+    },
+  });
 const image = (label: string) =>
   fields.object({
     src: fields.image({
@@ -61,6 +87,34 @@ export default config({
           validation: { min: 1900, max: 2200 },
         }),
         description: fields.text({ label: "Opis", multiline: true }),
+        contentStatus: fields.select({
+          label: "Status opisu",
+          options: [
+            { label: "Opis tymczasowy — do redakcji", value: "temporary" },
+            { label: "Opis zatwierdzony", value: "approved" },
+          ],
+          defaultValue: "temporary",
+        }),
+        editorialNotes: fields.text({
+          label: "Notatki redakcyjne (niepubliczne)",
+          multiline: true,
+        }),
+        seo: fields.object(
+          {
+            title: text("Tytuł SEO (puste = tytuł projektu)"),
+            description: fields.text({
+              label: "Opis SEO (puste = opis projektu)",
+              multiline: true,
+            }),
+            image: fields.image({
+              label: "Obraz udostępniania (opcjonalnie)",
+              directory: "public/images/site",
+              publicPath: "/images/site/",
+            }),
+            imageAlt: text("Opis obrazu udostępniania"),
+          },
+          { label: "SEO i udostępnianie" },
+        ),
         images: fields.array(image("Zdjęcie"), {
           label: "Galeria",
           itemLabel: (props) => props.fields.alt.value || "Zdjęcie",
@@ -87,9 +141,9 @@ export default config({
         publicationStatus: fields.select({
           label: "Status",
           description:
-            "Zachowane zasady podglądu: szkic i opublikowany są w katalogu; do potwierdzenia tylko pod bezpośrednim adresem.",
+            "Publicznie dostępne są tylko projekty opublikowane. Szkice i wpisy do potwierdzenia nie mają publicznej podstrony. Zmiana adresu wymaga wpisu w sekcji Przekierowania.",
           options: [
-            { label: "Szkic (widoczny w podglądzie)", value: "draft" },
+            { label: "Szkic (niepubliczny)", value: "draft" },
             { label: "Do potwierdzenia", value: "pending-confirmation" },
             { label: "Opublikowany", value: "published" },
           ],
@@ -122,6 +176,143 @@ export default config({
     }),
   },
   singletons: {
+    pages: singleton({
+      label: "Teksty strony głównej i katalogu",
+      path: "content/pages",
+      format: { data: "json" },
+      schema: {
+        intro: copyGroup("Wprowadzenie", {
+          eyebrow: "Podpis pracowni",
+          headingFirst: "Nagłówek — pierwszy wiersz",
+          headingSecond: "Nagłówek — drugi wiersz",
+          description: "Wprowadzenie",
+          projectsLink: "Przycisk projektów",
+        }),
+        portfolio: copyGroup("Portfolio", {
+          eyebrow: "Podpis sekcji",
+          heading: "Nagłówek",
+          allProjectsLink: "Link do katalogu",
+        }),
+        about: copyGroup("O pracowni", {
+          eyebrow: "Podpis sekcji",
+          heading: "Nagłówek",
+          lead: "Tekst wyróżniony (Enter = nowy wiersz)",
+        }),
+        process: copyGroup("Współpraca", {
+          eyebrow: "Podpis sekcji",
+          heading: "Nagłówek",
+          description: "Wprowadzenie",
+        }),
+        reviews: copyGroup("Opinie", {
+          description: "Tekst",
+          link: "Etykieta linku do Google",
+        }),
+        contact: copyGroup("Kontakt", {
+          eyebrow: "Podpis sekcji",
+          heading: "Nagłówek",
+          description: "Wprowadzenie",
+          mapsLink: "Link do mapy",
+          serviceArea: "Podpis obszaru działania",
+          formHeading: "Nagłówek formularza",
+          formDescription: "Opis formularza",
+          submitLabel: "Przycisk wysyłania",
+        }),
+        footer: copyGroup("Stopka", {
+          tagline: "Podpis pracowni",
+          contactLink: "Link kontaktowy",
+          copyrightName: "Nazwa przy prawach autorskich",
+          privacyLink: "Link prywatności",
+        }),
+        catalog: copyGroup("Katalog projektów", {
+          eyebrow: "Podpis sekcji",
+          heading: "Nagłówek",
+          description: "Wprowadzenie",
+          seoDescription: "Opis SEO katalogu",
+        }),
+        navigation: copyGroup("Nawigacja", {
+          homeLabel: "Opis linku strony głównej",
+          mobileName: "Nazwa w menu mobilnym",
+          mobileSubtitle: "Podpis w menu mobilnym",
+        }),
+      },
+    }),
+    redirects: singleton({
+      label: "Przekierowania starych adresów",
+      path: "content/redirects",
+      format: { data: "json" },
+      schema: {
+        entries: fields.array(
+          fields.object({
+            source: localPath("Stary adres, np. /stary-projekt"),
+            destination: localPath("Nowy adres, np. /projekty/dom-lodzkie-3"),
+          }),
+          {
+            label: "Przekierowania trwałe",
+            itemLabel: (props) =>
+              props.fields.source.value || "Nowe przekierowanie",
+          },
+        ),
+      },
+    }),
+    appearance: singleton({
+      label: "Logo i zdjęcie główne",
+      path: "content/appearance",
+      format: { data: "json" },
+      schema: {
+        logo: fields.object(
+          {
+            title: required("Główny napis logo"),
+            subtitle: text("Drugi wiersz logo"),
+            src: fields.image({
+              label: "Plik logo (opcjonalnie)",
+              description:
+                "Zastępuje napisy w nagłówku i stopce. Usuń plik, aby przywrócić logo tekstowe. Najlepiej PNG lub WebP z przezroczystym tłem.",
+              directory: "public/images/site",
+              publicPath: "/images/site/",
+            }),
+            alt: required("Opis logo"),
+          },
+          { label: "Logo" },
+        ),
+        hero: fields.object(
+          {
+            src: fields.image({
+              label: "Zdjęcie główne strony",
+              description:
+                "Niezależne od zdjęć projektów. Puste pole zachowuje okładkę pierwszego wyróżnionego projektu.",
+              directory: "public/images/site",
+              publicPath: "/images/site/",
+            }),
+            alt: fields.text({
+              label: "Opis zdjęcia głównego",
+              description:
+                "Opisz zawartość wybranego zdjęcia dla osób, które go nie widzą.",
+              validation: { isRequired: true },
+            }),
+            objectFit: fields.select({
+              label: "Kadrowanie zdjęcia głównego",
+              options: [
+                { label: "Cały obraz", value: "contain" },
+                { label: "Wypełnij kadr", value: "cover" },
+              ],
+              defaultValue: "contain",
+            }),
+            objectPosition: fields.select({
+              label: "Pozycja kadru",
+              options: [
+                { label: "Środek", value: "50% 50%" },
+                { label: "Góra", value: "50% 0%" },
+                { label: "Dół", value: "50% 100%" },
+                { label: "Lewa strona", value: "0% 50%" },
+                { label: "Prawa strona", value: "100% 50%" },
+              ],
+              defaultValue: "50% 50%",
+            }),
+          },
+          { label: "Zdjęcie główne" },
+        ),
+      },
+    }),
     site: singleton({
       label: "Pracownia, kontakt i SEO",
       path: "content/site",

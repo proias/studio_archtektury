@@ -7,6 +7,8 @@ import {
   getProjectSlugs,
   getPortfolioNavigation,
 } from "@/lib/cms/reader";
+import { canonicalUrl } from "@/lib/deployment";
+import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 export async function generateStaticParams() {
@@ -15,23 +17,30 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug((await params).slug);
   if (!project) return { title: "Nie znaleziono projektu" };
+  const description =
+    project.seo?.description ||
+    project.description ||
+    `Galeria wizualizacji: ${project.title}.`;
+  const image = project.seo?.image || project.cover;
+  const url = canonicalUrl(`/projekty/${project.slug}`);
   return {
-    title: project.title,
-    description:
-      project.description || `Galeria wizualizacji: ${project.title}.`,
+    title: project.seo?.title || project.title,
+    description,
+    alternates: { canonical: url },
     openGraph: {
-      title: project.title,
-      description: project.description,
+      title: project.seo?.title || project.title,
+      description,
+      url,
       images: [
         {
-          url: project.cover.src,
-          width: project.cover.width,
-          height: project.cover.height,
-          alt: project.cover.alt,
+          url: image.src,
+          width: image.width,
+          height: image.height,
+          alt: image.alt,
         },
       ],
     },
-    robots: { index: false, follow: false },
+    robots: { index: indexingEnabled(), follow: indexingEnabled() },
   };
 }
 export default async function ProjectPage({ params }: Props) {
@@ -52,6 +61,11 @@ export default async function ProjectPage({ params }: Props) {
         <div className="project-details">
           <p className="eyebrow">{project.category}</p>
           <h1>{project.title}</h1>
+          {project.contentStatus === "temporary" && (
+            <p className="project-content-notice">
+              Opis tymczasowy — w przygotowaniu redakcyjnym.
+            </p>
+          )}
           {project.description && <p>{project.description}</p>}
           <dl>
             <div>

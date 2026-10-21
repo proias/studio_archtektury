@@ -3,11 +3,16 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { ProjectGrid } from "@/components/project-grid";
 import { ContactSection } from "@/components/contact-section";
-import { getFeaturedProjects, getPrimaryCover } from "@/lib/cms/reader";
+import { getFeaturedProjects, getHomeHero } from "@/lib/cms/reader";
 import { processSteps, site } from "@/lib/site-content";
+import { pageCopy } from "@/lib/page-content";
+import { TextLines } from "@/components/text-lines";
+import { canonicalUrl } from "@/lib/deployment";
+import { projectCard } from "@/lib/projects";
+export const metadata = { alternates: { canonical: canonicalUrl("/") } };
 export default async function HomePage() {
   const featuredProjects = await getFeaturedProjects();
-  const hero = featuredProjects[0]?.cover || (await getPrimaryCover());
+  const hero = await getHomeHero();
   return (
     <main id="main-content">
       <div className="hero">
@@ -17,25 +22,30 @@ export default async function HomePage() {
             alt={hero.alt}
             width={hero.width}
             height={hero.height}
+            style={
+              hero.objectFit
+                ? {
+                    objectFit: hero.objectFit,
+                    objectPosition: hero.objectPosition,
+                  }
+                : undefined
+            }
             sizes="(min-width: 1440px) 1280px, 100vw"
             priority
           />
         )}
       </div>
       <section className="intro container">
-        <p className="eyebrow">Paulina Cywińska · Studio Architektury</p>
+        <p className="eyebrow">{pageCopy.intro.eyebrow}</p>
         <div className="intro-columns">
           <h1>
-            Architektura
-            <br className="desktop-break" /> dopasowana do życia.
+            {pageCopy.intro.headingFirst}
+            <br className="desktop-break" /> {pageCopy.intro.headingSecond}
           </h1>
           <div>
-            <p>
-              Projekty domów, wnętrz i przestrzeni usługowych. Indywidualne
-              podejście do miejsca, funkcji i potrzeb inwestora.
-            </p>
+            <p>{pageCopy.intro.description}</p>
             <a className="text-link" href="#portfolio">
-              Zobacz projekty <ArrowRight size={18} />
+              {pageCopy.intro.projectsLink} <ArrowRight size={18} />
             </a>
           </div>
         </div>
@@ -44,25 +54,23 @@ export default async function HomePage() {
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Portfolio</p>
-              <h2>Wybrane projekty</h2>
+              <p className="eyebrow">{pageCopy.portfolio.eyebrow}</p>
+              <h2>{pageCopy.portfolio.heading}</h2>
             </div>
             <Link className="text-link" href="/projekty">
-              Wszystkie projekty <ArrowUpRight size={18} />
+              {pageCopy.portfolio.allProjectsLink} <ArrowUpRight size={18} />
             </Link>
           </div>
-          <ProjectGrid projects={featuredProjects} />
+          <ProjectGrid projects={featuredProjects.map(projectCard)} />
         </div>
       </section>
       <section id="about" className="section dark-section">
         <div className="container about-columns">
           <div>
-            <p className="eyebrow">O pracowni</p>
-            <h2>Paulina Cywińska</h2>
+            <p className="eyebrow">{pageCopy.about.eyebrow}</p>
+            <h2>{pageCopy.about.heading}</h2>
             <p className="about-lead">
-              Uważność na miejsce.
-              <br />
-              Przestrzeń dla Ciebie.
+              <TextLines text={pageCopy.about.lead} />
             </p>
           </div>
           <div className="about-copy">
@@ -75,16 +83,12 @@ export default async function HomePage() {
       <section id="wspolpraca" className="section">
         <div className="container process-columns">
           <div>
-            <p className="eyebrow">Współpraca</p>
+            <p className="eyebrow">{pageCopy.process.eyebrow}</p>
             <h2>
-              Od rozmowy
-              <br />
-              do przestrzeni.
+              <TextLines text={pageCopy.process.heading} />
             </h2>
             <p className="process-intro">
-              Przejrzysty proces i wspólne decyzje.
-              <br />
-              Zakres dopasowany do Twojego projektu.
+              <TextLines text={pageCopy.process.description} />
             </p>
           </div>
           <ol className="process-list">
@@ -102,14 +106,14 @@ export default async function HomePage() {
       </section>
       <section className="reviews-section">
         <div className="container reviews-inner">
-          <p>Poznaj doświadczenia osób, które zaufały pracowni.</p>
+          <p>{pageCopy.reviews.description}</p>
           <a
             className="text-link"
             href={site.maps}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Zobacz opinie w Google <ArrowUpRight size={18} />
+            {pageCopy.reviews.link} <ArrowUpRight size={18} />
           </a>
         </div>
       </section>

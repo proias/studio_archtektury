@@ -1,7 +1,8 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 require("./register.cjs");
-const { contactSchema, buildMailto } = require("../lib/contact-validation.ts");
+const { contactSchema } = require("../lib/contact-validation.ts");
+const { contactBody, sendContact } = require("../lib/contact-form.ts");
 const valid = {
   name: "Anna Kowalska",
   email: "anna@example.test",
@@ -9,37 +10,57 @@ const valid = {
   projectType: "Dom",
   message: "Planuję dom w Łodzi. Proszę o kontakt w sprawie koncepcji.",
 };
-test("accepts complete valid data with optional phone", () => {
+test("formularz akceptuje poprawne dane i odrzuca puste, nieprawidłowe i zbyt długie", () => {
   assert.ok(contactSchema.safeParse(valid).success);
   assert.ok(
     contactSchema.safeParse({ ...valid, phone: "+48 600 000 000" }).success,
   );
-});
-test("rejects blank or invalid required fields and excessive content", () => {
   for (const data of [
     {},
     { ...valid, name: " " },
     { ...valid, email: "bledny" },
-    { ...valid, projectType: "nieznany" },
-    { ...valid, message: "krótko" },
     { ...valid, message: "x".repeat(5001) },
+    { ...valid, message: "krótko" },
     { ...valid, phone: "abc" },
-    { ...valid, name: "Anna\nBcc: example" },
+    { ...valid, projectType: "inny" },
+    { ...valid, name: "Anna\nBcc: test" },
   ])
     assert.equal(contactSchema.safeParse(data).success, false);
 });
-test("mail draft encodes Polish characters and user input safely", () => {
-  const result = buildMailto(
-    contactSchema.parse({
-      ...valid,
-      message: valid.message + " & drugi pokój? #1",
-    }),
-    "pcywinska.arch@gmail.com",
+test("Netlify payload zachowuje polskie znaki, znaki specjalne, identyfikator i honeypot", () => {
+  const data = { ...valid, message: valid.message + " & pokój? #1" };
+  const body = new URLSearchParams(contactBody(data, "bot").toString());
+  assert.equal(body.get("message"), data.message);
+  assert.equal(body.get("form-name"), "kontakt-pracownia");
+  assert.equal(body.get("bot-field"), "bot");
+});
+test("wysyłka wymaga potwierdzenia Netlify i propaguje błędy HTTP oraz sieci", async () => {
+  let calls = 0;
+  await sendContact(valid, "", async (url, options) => {
+    calls++;
+    assert.equal(url, "/__forms.html");
+    assert.equal(options.method, "POST");
+    assert.equal(
+      options.headers["Content-Type"],
+      "application/x-www-form-urlencoded",
+    );
+    assert.equal(new URLSearchParams(options.body).get("email"), valid.email);
+    return new Response("", { headers: { "x-nf-request-id": "qa" } });
+  });
+  assert.equal(calls, 1);
+  await assert.rejects(
+    sendContact(valid, "", async () => new Response("", { status: 503 })),
   );
-  const url = new URL(result);
-  assert.equal(url.pathname, "pcywinska.arch@gmail.com");
-  assert.equal(url.searchParams.get("subject"), "Zapytanie o projekt: Dom");
-  assert.ok(url.searchParams.get("body").includes("Łodzi"));
-  assert.ok(url.searchParams.get("body").includes("& drugi pokój? #1"));
-  assert.ok(!result.includes("Wiadomość wysłana"));
+  await assert.rejects(
+    sendContact(
+      valid,
+      "",
+      async () => new Response("<html>static file</html>"),
+    ),
+  );
+  await assert.rejects(
+    sendContact(valid, "", async () => {
+      throw new TypeError("Network unavailable");
+    }),
+  );
 });
