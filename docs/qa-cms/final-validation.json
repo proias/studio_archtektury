@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-21",
+  "next": "15.5.28",
+  "nodeTests": 12,
+  "apiTests": 9,
+  "publicBrowserTests": 85,
+  "cmsBrowserTests": 10,
+  "projectStaticPages": 12,
+  "screenshotMatches": 7,
+  "apiBundledImages": 0,
+  "siteRestored": true
+}

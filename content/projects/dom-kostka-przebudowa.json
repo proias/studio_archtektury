@@ -1,0 +1,40 @@
+{
+  "title": "Przebudowa domu typu kostka",
+  "category": "Domy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+      "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/dom-kostka-przebudowa/02.webp",
+      "alt": "Front domu typu kostka z garażem w dolnej kondygnacji",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/dom-kostka-przebudowa/03.webp",
+      "alt": "Widok ogrodu przy przebudowanym domu typu kostka",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+    "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
+    "width": 1536,
+    "height": 1024,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "pending-confirmation",
+  "order": 12,
+  "sourceFolder": "DOM KOSTKA PRZEBUDOWA"
+}

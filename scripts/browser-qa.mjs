@@ -3,8 +3,14 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import assert from "node:assert/strict";
+import {
+  checkBrowserMemory,
+  closeTestChrome,
+  monitorBrowserMemory,
+} from "./chrome-qa-process.mjs";
 const base = process.env.QA_URL || "http://127.0.0.1:3000";
-const out = path.resolve("docs/qa-netlify");
+const out = path.resolve(process.env.QA_OUT || "docs/qa-netlify");
+checkBrowserMemory();
 await fs.mkdir(out, { recursive: true });
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), "archi-browser-"));
 const chrome = spawn(
@@ -23,6 +29,7 @@ const chrome = spawn(
   { stdio: "ignore", windowsHide: true },
 );
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+const stopMemoryMonitor = monitorBrowserMemory(chrome);
 let socket;
 let id = 0;
 const pending = new Map();
@@ -273,8 +280,15 @@ try {
     mobile: false,
   });
   await goto("/projekty");
-  const catalog = JSON.parse(
-    await fs.readFile("lib/project-catalog.json", "utf8"),
+  const catalog = await Promise.all(
+    (await fs.readdir("content/projects"))
+      .filter((file) => file.endsWith(".json"))
+      .map(async (file) => ({
+        ...JSON.parse(
+          await fs.readFile(path.join("content/projects", file), "utf8"),
+        ),
+        slug: file.slice(0, -5),
+      })),
   );
   const visible = catalog.filter(
     (p) => p.publicationStatus !== "pending-confirmation",
@@ -434,6 +448,7 @@ try {
   console.error(error);
   process.exitCode = 1;
 } finally {
+  stopMemoryMonitor();
   socket?.close();
-  chrome.kill();
+  await closeTestChrome(chrome, profile);
 }

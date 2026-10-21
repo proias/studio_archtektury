@@ -1,6 +1,6 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
-const { spawnSync } = require("node:child_process");
+const vm = require("node:vm");
 const fs = require("node:fs");
 require("./register.cjs");
 const { getPreviewOrigin } = require("../lib/deployment.ts");
@@ -19,13 +19,36 @@ test("adres udostępniania używa adresu podglądu Netlify bez ścieżki", () =>
     getPreviewOrigin({ URL: "https://user:password@example.test" }),
   );
 });
-test("build Netlify nie pozwala na przypadkową publikację produkcyjną", () => {
-  const result = spawnSync(process.execPath, ["scripts/netlify-build.mjs"], {
-    encoding: "utf8",
-    env: { ...process.env, CONTEXT: "production" },
-  });
-  assert.equal(result.status, 1);
-  assert.match(result.stderr, /Publikacja produkcyjna jest zablokowana/);
+test("build Netlify uruchamia Next i przekazuje kod zakończenia dla każdego kontekstu", () => {
+  const source = fs
+    .readFileSync("scripts/netlify-build.mjs", "utf8")
+    .replace(/^import .*;\r?\n/, "");
+  for (const context of ["production", "deploy-preview"]) {
+    for (const status of [0, 1, null]) {
+      let exit;
+      const env = { CONTEXT: context };
+      vm.runInNewContext(source, {
+        process: {
+          execPath: "node",
+          env,
+          exit: (code) => {
+            exit = code;
+          },
+        },
+        spawnSync(executable, args, options) {
+          assert.equal(executable, "node");
+          assert.deepEqual(Array.from(args), [
+            "node_modules/next/dist/bin/next",
+            "build",
+          ]);
+          assert.equal(options.env, env);
+          assert.equal(options.stdio, "inherit");
+          return { status };
+        },
+      });
+      assert.equal(exit, status ?? 1);
+    }
+  }
 });
 test("definicja Netlify Forms zawiera wszystkie pola i pułapkę na spam", () => {
   const form = fs.readFileSync("public/__forms.html", "utf8");

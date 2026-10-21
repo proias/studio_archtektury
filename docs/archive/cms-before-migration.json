@@ -1,0 +1,570 @@
+{
+  "site": {
+    "name": "PAULINA CYWIŃSKA STUDIO ARCHITEKTURY",
+    "title": "Paulina Cywińska — Studio Architektury w Łodzi",
+    "description": "Projekty domów, wnętrz i przestrzeni usługowych. Studio Architektury Paulina Cywińska w Łodzi. Poznaj projekty i porozmawiaj o swojej inwestycji.",
+    "phone": "+48 662 477 959",
+    "phoneHref": "tel:+48662477959",
+    "email": "pcywinska.arch@gmail.com",
+    "address": "ul. Łagiewnicka 287Z, 91-509 Łódź",
+    "nip": "8341845004",
+    "maps": "https://maps.app.goo.gl/YPg6NKZmTWbV9Lct9",
+    "serviceArea": [
+      "Łódź",
+      "Warszawa",
+      "Grodzisk Mazowiecki",
+      "Sochaczew",
+      "Skierniewice"
+    ],
+    "about": [
+      "Pracownię prowadzi Paulina Cywińska — architektka z ponad 10-letnim doświadczeniem zawodowym. Projektuje domy, wnętrza i przestrzenie usługowe, łącząc funkcjonalność z uważnością na proporcje, materiały i otoczenie.",
+      "Każdy projekt zaczyna się od rozmowy o potrzebach inwestora i możliwościach miejsca. Celem jest spójna przestrzeń, która dobrze służy swoim użytkownikom."
+    ]
+  },
+  "navigation": [
+    {
+      "label": "Projekty",
+      "href": "/#portfolio"
+    },
+    {
+      "label": "O pracowni",
+      "href": "/#about"
+    },
+    {
+      "label": "Współpraca",
+      "href": "/#wspolpraca"
+    },
+    {
+      "label": "Kontakt",
+      "href": "/#kontakt"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "Konsultacja wstępna",
+      "description": "Rozmawiamy o potrzebach, miejscu i możliwościach inwestycji. Ustalamy zakres współpracy."
+    },
+    {
+      "title": "Koncepcja",
+      "description": "Szukamy układu funkcjonalnego i kierunku estetycznego. Omawiamy propozycje i wspólnie je dopracowujemy."
+    },
+    {
+      "title": "Projekt szczegółowy",
+      "description": "Rozwijamy wybraną koncepcję. Przygotowujemy rysunki i dobór materiałów w uzgodnionym zakresie."
+    },
+    {
+      "title": "Nadzór autorski",
+      "description": "Jeśli obejmuje go współpraca, konsultujemy rozwiązania z wykonawcami i sprawdzamy zgodność prac z projektem."
+    },
+    {
+      "title": "Finalizacja",
+      "description": "Podsumowujemy uzgodniony zakres prac i przekazujemy opracowane materiały. Omawiamy dalsze kroki."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "dom-lodzkie-3",
+      "title": "Dom w Łódzkiem III",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-lodzkie-3/01.webp",
+          "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+          "width": 1671,
+          "height": 941
+        },
+        {
+          "src": "/images/projects/dom-lodzkie-3/02.webp",
+          "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
+          "width": 1670,
+          "height": 942
+        },
+        {
+          "src": "/images/projects/dom-lodzkie-3/03.webp",
+          "alt": "Widok piętrowego domu z ulicy, z garażem i ogrodzeniem",
+          "width": 1672,
+          "height": 941
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-lodzkie-3/01.webp",
+        "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+        "width": 1671,
+        "height": 941,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 1
+    },
+    {
+      "slug": "dom-mazowieckie",
+      "title": "Dom na Mazowszu",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-mazowieckie/01.webp",
+          "alt": "Wizualizacja domu z ciemną elewacją i dwuspadowym dachem od strony tarasu",
+          "width": 1875,
+          "height": 848
+        },
+        {
+          "src": "/images/projects/dom-mazowieckie/02.webp",
+          "alt": "Boczny widok domu z ciemną elewacją i niższą bryłą garażu",
+          "width": 1935,
+          "height": 813
+        },
+        {
+          "src": "/images/projects/dom-mazowieckie/03.webp",
+          "alt": "Front domu z ciemną elewacją, garażem i podjazdem",
+          "width": 2067,
+          "height": 761
+        },
+        {
+          "src": "/images/projects/dom-mazowieckie/04.webp",
+          "alt": "Widok domu na Mazowszu od strony ulicy i ogrodzenia",
+          "width": 1852,
+          "height": 848
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-mazowieckie/01.webp",
+        "alt": "Wizualizacja domu z ciemną elewacją i dwuspadowym dachem od strony tarasu",
+        "width": 1875,
+        "height": 848,
+        "objectPosition": "50% 50%",
+        "objectFit": "contain"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 2
+    },
+    {
+      "slug": "agroturystyka-lodzkie",
+      "title": "Agroturystyka w Łódzkiem",
+      "category": "Obiekty usługowe",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/agroturystyka-lodzkie/01.webp",
+          "alt": "Wizualizacja drewnianego budynku agroturystyki z koniem przy ogrodzeniu",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/agroturystyka-lodzkie/02.webp",
+          "alt": "Drewniana bryła agroturystyki z balią i strefą wypoczynku",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/agroturystyka-lodzkie/03.webp",
+          "alt": "Widok drewnianego budynku agroturystyki z dużym przeszkleniem",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/agroturystyka-lodzkie/01.webp",
+        "alt": "Wizualizacja drewnianego budynku agroturystyki z koniem przy ogrodzeniu",
+        "width": 1536,
+        "height": 1024,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 3
+    },
+    {
+      "slug": "dom-lodzkie",
+      "title": "Dom w Łódzkiem",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-lodzkie/01.webp",
+          "alt": "Wizualizacja jasnego domu z dwuspadowym dachem od strony tarasu i ogrodu",
+          "width": 1642,
+          "height": 958
+        },
+        {
+          "src": "/images/projects/dom-lodzkie/02.webp",
+          "alt": "Front jasnego domu z ciemnym dachem i niższym garażem",
+          "width": 1640,
+          "height": 958
+        },
+        {
+          "src": "/images/projects/dom-lodzkie/03.webp",
+          "alt": "Boczny widok jasnego domu, z zadaszonym tarasem",
+          "width": 1642,
+          "height": 958
+        },
+        {
+          "src": "/images/projects/dom-lodzkie/04.webp",
+          "alt": "Perspektywa frontu domu z podjazdem i garażem",
+          "width": 1642,
+          "height": 958
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-lodzkie/01.webp",
+        "alt": "Wizualizacja jasnego domu z dwuspadowym dachem od strony tarasu i ogrodu",
+        "width": 1642,
+        "height": 958,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 4
+    },
+    {
+      "slug": "kuchnia-1",
+      "title": "Kuchnia",
+      "category": "Wnętrza",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/kuchnia-1/01.webp",
+          "alt": "Wizualizacja kuchni z kamienną wyspą, drewnianą zabudową i dwiema lampami",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "src": "/images/projects/kuchnia-1/02.webp",
+          "alt": "Symetryczny widok kuchni z wyspą i drewnianymi stołkami",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "src": "/images/projects/kuchnia-1/03.webp",
+          "alt": "Detal kamiennej wyspy, baterii i zabudowy kuchennej",
+          "width": 1254,
+          "height": 1254
+        },
+        {
+          "src": "/images/projects/kuchnia-1/04.webp",
+          "alt": "Pionowy widok wyspy kuchennej i strefy z drewnianymi stołkami",
+          "width": 1254,
+          "height": 1254
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/kuchnia-1/01.webp",
+        "alt": "Wizualizacja kuchni z kamienną wyspą, drewnianą zabudową i dwiema lampami",
+        "width": 1254,
+        "height": 1254,
+        "objectPosition": "50% 35%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 5
+    },
+    {
+      "slug": "lazienka",
+      "title": "Łazienka",
+      "category": "Wnętrza",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/lazienka/01.webp",
+          "alt": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką",
+          "width": 1081,
+          "height": 1379
+        },
+        {
+          "src": "/images/projects/lazienka/02.webp",
+          "alt": "Ukośny widok kamiennej umywalki i podświetlanego lustra w łazience",
+          "width": 1081,
+          "height": 1455
+        },
+        {
+          "src": "/images/projects/lazienka/03.webp",
+          "alt": "Pionowy widok strefy prysznica i toalety w jasnej kamiennej łazience",
+          "width": 1081,
+          "height": 1455
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/lazienka/01.webp",
+        "alt": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką",
+        "width": 1081,
+        "height": 1379,
+        "objectPosition": "50% 62%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft",
+      "featuredOrder": 6
+    },
+    {
+      "slug": "dom-lodzkie-2",
+      "title": "Dom w Łódzkiem II",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-lodzkie-2/01.webp",
+          "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
+          "width": 1779,
+          "height": 884
+        },
+        {
+          "src": "/images/projects/dom-lodzkie-2/02.webp",
+          "alt": "Widok tarasu i przeszklonej elewacji domu wśród zieleni",
+          "width": 1780,
+          "height": 884
+        },
+        {
+          "src": "/images/projects/dom-lodzkie-2/03.webp",
+          "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
+          "width": 1781,
+          "height": 884
+        },
+        {
+          "src": "/images/projects/dom-lodzkie-2/04.webp",
+          "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
+          "width": 1781,
+          "height": 884
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-lodzkie-2/01.webp",
+        "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
+        "width": 1779,
+        "height": 884,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft"
+    },
+    {
+      "slug": "dom-lowicz",
+      "title": "Dom w Łowiczu",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-lowicz/01.webp",
+          "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
+          "width": 1747,
+          "height": 900
+        },
+        {
+          "src": "/images/projects/dom-lowicz/02.webp",
+          "alt": "Widok frontu parterowego domu z garażem i podjazdem",
+          "width": 1747,
+          "height": 900
+        },
+        {
+          "src": "/images/projects/dom-lowicz/03.webp",
+          "alt": "Perspektywa tarasu parterowego domu z szerokimi przeszkleniami",
+          "width": 1746,
+          "height": 901
+        },
+        {
+          "src": "/images/projects/dom-lowicz/04.webp",
+          "alt": "Widok przeszklonej elewacji domu z ogrodu",
+          "width": 1748,
+          "height": 900
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-lowicz/01.webp",
+        "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
+        "width": 1747,
+        "height": 900,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft"
+    },
+    {
+      "slug": "przebudowa-budynku",
+      "title": "Przebudowa budynku pod opieką konserwatora",
+      "category": "Przebudowy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/przebudowa-budynku/01.webp",
+          "alt": "Wizualizacja ceglanego budynku przy narożniku ulicy po przebudowie",
+          "width": 1534,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/przebudowa-budynku/02.webp",
+          "alt": "Perspektywa frontowych elewacji ceglanego budynku",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/przebudowa-budynku/03.webp",
+          "alt": "Boczna elewacja ceglanego budynku z dwuspadowym dachem",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/przebudowa-budynku/01.webp",
+        "alt": "Wizualizacja ceglanego budynku przy narożniku ulicy po przebudowie",
+        "width": 1534,
+        "height": 1024,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft"
+    },
+    {
+      "slug": "przestrzen-publiczna",
+      "title": "Przestrzeń publiczna",
+      "category": "Przestrzenie publiczne",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/przestrzen-publiczna/01.webp",
+          "alt": "Wizualizacja plenerowej strefy rekreacji z urządzeniami do ćwiczeń i ścieżkami",
+          "width": 1862,
+          "height": 845
+        },
+        {
+          "src": "/images/projects/przestrzen-publiczna/02.webp",
+          "alt": "Widok urządzeń rekreacyjnych i miejsc odpoczynku w przestrzeni publicznej",
+          "width": 1862,
+          "height": 845
+        },
+        {
+          "src": "/images/projects/przestrzen-publiczna/03.webp",
+          "alt": "Szeroki widok plenerowej strefy rekreacji z zielenią",
+          "width": 1862,
+          "height": 845
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/przestrzen-publiczna/01.webp",
+        "alt": "Wizualizacja plenerowej strefy rekreacji z urządzeniami do ćwiczeń i ścieżkami",
+        "width": 1862,
+        "height": 845,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft"
+    },
+    {
+      "slug": "salon",
+      "title": "Salon",
+      "category": "Wnętrza",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/salon/01.webp",
+          "alt": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową",
+          "width": 1870,
+          "height": 841
+        },
+        {
+          "src": "/images/projects/salon/02.webp",
+          "alt": "Perspektywa salonu z jadalnią i jasnymi tekstyliami",
+          "width": 1870,
+          "height": 840
+        },
+        {
+          "src": "/images/projects/salon/03.webp",
+          "alt": "Widok stołu, krzeseł i części wypoczynkowej salonu",
+          "width": 1870,
+          "height": 841
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/salon/01.webp",
+        "alt": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową",
+        "width": 1870,
+        "height": 841,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "draft"
+    },
+    {
+      "slug": "dom-kostka-przebudowa",
+      "title": "Przebudowa domu typu kostka",
+      "category": "Domy",
+      "description": "",
+      "images": [
+        {
+          "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+          "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/dom-kostka-przebudowa/02.webp",
+          "alt": "Front domu typu kostka z garażem w dolnej kondygnacji",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/images/projects/dom-kostka-przebudowa/03.webp",
+          "alt": "Widok ogrodu przy przebudowanym domu typu kostka",
+          "width": 1536,
+          "height": 1024
+        }
+      ],
+      "cover": {
+        "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+        "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
+        "width": 1536,
+        "height": 1024,
+        "objectPosition": "50% 50%",
+        "objectFit": "cover"
+      },
+      "credits": {
+        "authorship": "pending-confirmation",
+        "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+      },
+      "publicationStatus": "pending-confirmation"
+    }
+  ]
+}

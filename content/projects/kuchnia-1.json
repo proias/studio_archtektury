@@ -1,0 +1,47 @@
+{
+  "title": "Kuchnia",
+  "category": "Wnętrza",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/kuchnia-1/01.webp",
+      "alt": "Wizualizacja kuchni z kamienną wyspą, drewnianą zabudową i dwiema lampami",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "src": "/images/projects/kuchnia-1/02.webp",
+      "alt": "Symetryczny widok kuchni z wyspą i drewnianymi stołkami",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "src": "/images/projects/kuchnia-1/03.webp",
+      "alt": "Detal kamiennej wyspy, baterii i zabudowy kuchennej",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "src": "/images/projects/kuchnia-1/04.webp",
+      "alt": "Pionowy widok wyspy kuchennej i strefy z drewnianymi stołkami",
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/kuchnia-1/01.webp",
+    "alt": "Wizualizacja kuchni z kamienną wyspą, drewnianą zabudową i dwiema lampami",
+    "width": 1254,
+    "height": 1254,
+    "objectPosition": "50% 35%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "featuredOrder": 5,
+  "order": 5,
+  "sourceFolder": "KUCHNIA1"
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Salon",
+  "category": "Wnętrza",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/salon/01.webp",
+      "alt": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową",
+      "width": 1870,
+      "height": 841
+    },
+    {
+      "src": "/images/projects/salon/02.webp",
+      "alt": "Perspektywa salonu z jadalnią i jasnymi tekstyliami",
+      "width": 1870,
+      "height": 840
+    },
+    {
+      "src": "/images/projects/salon/03.webp",
+      "alt": "Widok stołu, krzeseł i części wypoczynkowej salonu",
+      "width": 1870,
+      "height": 841
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/salon/01.webp",
+    "alt": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową",
+    "width": 1870,
+    "height": 841,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "order": 11,
+  "sourceFolder": "SALON"
+}

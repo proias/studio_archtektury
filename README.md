@@ -23,19 +23,18 @@ Testy przeglądarkowe używają osobnego tymczasowego profilu Chrome bez okna. N
 
 ## Treści i obrazy
 
-Katalog 12 nowych projektów: lib/project-catalog.json; model i selekcja: lib/projects.ts. Treści firmy: lib/site-content.ts. Powiązanie wszystkich 41 nowych źródeł z plikami docelowymi, rozmiary, wagi i teksty alternatywne: lib/image-manifest.json. Kopie WebP znajdują się w public/images/projects. Źródła pozostały bez zmian. Eksport można odtworzyć poleceniem node scripts/export-images.mjs „ścieżka do źródłowego folderu portfolio” (użyć zwykłych cudzysłowów w terminalu). Fonty są lokalne w app/fonts, razem z licencjami OFL.
+Treści są edytowane przez Keystatic: `content/projects/*.json` i `content/site.json`. Panel lokalny: <http://localhost:3000/keystatic>. Konfiguracja, obsługa i uruchomienie GitHub App na Netlify: [CMS_README.md](CMS_README.md). Adapter `lib/cms/reader.ts` zachowuje publiczny model projektów. Stary katalog i manifest pozostają jako materiał audytowy. Kopie WebP znajdują się w `public/images/projects`; źródła pozostały bez zmian. Fonty są lokalne w `app/fonts`, razem z licencjami OFL.
 
 Jeżeli na Windows wystąpi błąd podwójnego React i ostrzeżenia o C:/ds oraz C:/DS, skrypt node scripts/repair-windows-links.mjs naprawia wyłącznie wielkość liter w dowiązaniach node_modules wskazujących do tego checkoutu. Nie zmienia źródeł ani wersji pakietów.
 
 ## Odbiór
 
-Raport: docs/RAPORT-WDROZENIA.md. Otwarte konfiguracje: docs/INTEGRACJE-I-PRZEKAZANIE.md. Lista do Pauliny: docs/DO-POTWIERDZENIA-Z-PAULINA.md. CMS, serwerowa wysyłka i automatyczne opinie Google nie są gotowymi integracjami.
-
+Raport historyczny: docs/RAPORT-WDROZENIA.md. Otwarte konfiguracje: docs/INTEGRACJE-I-PRZEKAZANIE.md. Lista do Pauliny: docs/DO-POTWIERDZENIA-Z-PAULINA.md. CMS Keystatic jest zaimplementowany; logowanie produkcyjne wymaga konfiguracji GitHub App opisanej w CMS_README.md. Serwerowa wysyłka i automatyczne opinie Google pozostają osobnymi integracjami.
 
 ## Aktualizacja: nowe portfolio i Netlify
 
 Aktualny katalog używa wyłącznie 12 folderów „nowe portfolio” i 41 obrazów. Na liście jest 11 projektów; nierozstrzygnięta przebudowa kostki pozostaje pod bezpośrednim adresem /projekty/dom-kostka-przebudowa.
 
-Next.js i eslint-config-next zaktualizowano punktowo do 15.5.28. Polecenie lint korzysta z ESLint CLI. Konfiguracja Netlify znajduje się w netlify.toml. build:netlify odrzuca CONTEXT=production; wersja jest przygotowaniem do podglądu, bez publikacji.
+Next.js i eslint-config-next zaktualizowano punktowo do 15.5.28. Polecenie lint korzysta z ESLint CLI. Konfiguracja Netlify znajduje się w netlify.toml. `build:netlify` uruchamia build Next.js i przekazuje jego wynik. Sam lokalny build nie publikuje strony.
 
 Aktualne dokumenty: docs/RAPORT-NETLIFY-I-NOWE-PORTFOLIO.md, docs/NETLIFY-ANALIZA-I-WDROZENIE.md, docs/AUDYT-FRONTEND-IMPECCABLE.md i docs/NOWE-PORTFOLIO.md. Wcześniejszy raport wdrożenia opisuje historyczny stan pierwszej wersji.

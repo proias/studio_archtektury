@@ -1,0 +1,46 @@
+{
+  "title": "Dom w Łódzkiem II",
+  "category": "Domy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/dom-lodzkie-2/01.webp",
+      "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
+      "width": 1779,
+      "height": 884
+    },
+    {
+      "src": "/images/projects/dom-lodzkie-2/02.webp",
+      "alt": "Widok tarasu i przeszklonej elewacji domu wśród zieleni",
+      "width": 1780,
+      "height": 884
+    },
+    {
+      "src": "/images/projects/dom-lodzkie-2/03.webp",
+      "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
+      "width": 1781,
+      "height": 884
+    },
+    {
+      "src": "/images/projects/dom-lodzkie-2/04.webp",
+      "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
+      "width": 1781,
+      "height": 884
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/dom-lodzkie-2/01.webp",
+    "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
+    "width": 1779,
+    "height": 884,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "order": 7,
+  "sourceFolder": "DOM ŁODZKIE 2"
+}

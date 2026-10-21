@@ -1,0 +1,46 @@
+{
+  "title": "Dom w Łowiczu",
+  "category": "Domy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/dom-lowicz/01.webp",
+      "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
+      "width": 1747,
+      "height": 900
+    },
+    {
+      "src": "/images/projects/dom-lowicz/02.webp",
+      "alt": "Widok frontu parterowego domu z garażem i podjazdem",
+      "width": 1747,
+      "height": 900
+    },
+    {
+      "src": "/images/projects/dom-lowicz/03.webp",
+      "alt": "Perspektywa tarasu parterowego domu z szerokimi przeszkleniami",
+      "width": 1746,
+      "height": 901
+    },
+    {
+      "src": "/images/projects/dom-lowicz/04.webp",
+      "alt": "Widok przeszklonej elewacji domu z ogrodu",
+      "width": 1748,
+      "height": 900
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/dom-lowicz/01.webp",
+    "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
+    "width": 1747,
+    "height": 900,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "order": 8,
+  "sourceFolder": "DOM ŁOWICZ"
+}

@@ -1,0 +1,7 @@
+{
+  "projects": 12,
+  "uniqueImages": 41,
+  "nativeMetadataReads": 41,
+  "maxConcurrentNativeReads": 1,
+  "peakProcessRSSMiB": 75
+}

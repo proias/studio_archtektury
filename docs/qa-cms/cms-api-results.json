@@ -1,0 +1,14 @@
+{
+  "passed": 9,
+  "checks": [
+    "local API requires no-cors header",
+    "CMS tree lists site and projects",
+    "CMS rejects paths outside allowed directories",
+    "CMS writes singleton",
+    "Reader sees saved content",
+    "CMS reads saved blob",
+    "CMS restores exact original bytes",
+    "production refuses unauthenticated local reads",
+    "production refuses unauthenticated local writes"
+  ]
+}

@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    globalNotFound: true,
+    cpus: 2,
+    webpackMemoryOptimizations: true,
+  },
+  // Public pages are generated at build time, including every project slug.
+  // Images stay in public/CDN instead of being copied into every API function.
   // OpenNext na Netlify kieruje next/image do Image CDN; lokalnie działa optymalizator Next.
   images: { unoptimized: false },
   async headers() {

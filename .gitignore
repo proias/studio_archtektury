@@ -18,6 +18,8 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example
+/.pnpm-store/
 
 # vercel
 .vercel
@@ -27,3 +29,7 @@ yarn-error.log*
 next-env.d.ts
 # lokalny stan i artefakty Netlify
 /.netlify/
+# Generated QA images are not CMS content. Existing tracked artifacts stay tracked.
+/docs/qa*/**/*.png
+# Generated QA images are not CMS content. Existing tracked artifacts stay tracked.
+/docs/qa*/**/*.png

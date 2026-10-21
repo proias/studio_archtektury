@@ -1,0 +1,62 @@
+{
+  "name": "PAULINA CYWIŃSKA STUDIO ARCHITEKTURY",
+  "title": "Paulina Cywińska — Studio Architektury w Łodzi",
+  "description": "Projekty domów, wnętrz i przestrzeni usługowych. Studio Architektury Paulina Cywińska w Łodzi. Poznaj projekty i porozmawiaj o swojej inwestycji.",
+  "phone": "+48 662 477 959",
+  "phoneHref": "tel:+48662477959",
+  "email": "pcywinska.arch@gmail.com",
+  "address": "ul. Łagiewnicka 287Z, 91-509 Łódź",
+  "nip": "8341845004",
+  "maps": "https://maps.app.goo.gl/YPg6NKZmTWbV9Lct9",
+  "serviceArea": [
+    "Łódź",
+    "Warszawa",
+    "Grodzisk Mazowiecki",
+    "Sochaczew",
+    "Skierniewice"
+  ],
+  "about": [
+    "Pracownię prowadzi Paulina Cywińska — architektka z ponad 10-letnim doświadczeniem zawodowym. Projektuje domy, wnętrza i przestrzenie usługowe, łącząc funkcjonalność z uważnością na proporcje, materiały i otoczenie.",
+    "Każdy projekt zaczyna się od rozmowy o potrzebach inwestora i możliwościach miejsca. Celem jest spójna przestrzeń, która dobrze służy swoim użytkownikom."
+  ],
+  "navigation": [
+    {
+      "label": "Projekty",
+      "href": "/#portfolio"
+    },
+    {
+      "label": "O pracowni",
+      "href": "/#about"
+    },
+    {
+      "label": "Współpraca",
+      "href": "/#wspolpraca"
+    },
+    {
+      "label": "Kontakt",
+      "href": "/#kontakt"
+    }
+  ],
+  "processSteps": [
+    {
+      "title": "Konsultacja wstępna",
+      "description": "Rozmawiamy o potrzebach, miejscu i możliwościach inwestycji. Ustalamy zakres współpracy."
+    },
+    {
+      "title": "Koncepcja",
+      "description": "Szukamy układu funkcjonalnego i kierunku estetycznego. Omawiamy propozycje i wspólnie je dopracowujemy."
+    },
+    {
+      "title": "Projekt szczegółowy",
+      "description": "Rozwijamy wybraną koncepcję. Przygotowujemy rysunki i dobór materiałów w uzgodnionym zakresie."
+    },
+    {
+      "title": "Nadzór autorski",
+      "description": "Jeśli obejmuje go współpraca, konsultujemy rozwiązania z wykonawcami i sprawdzamy zgodność prac z projektem."
+    },
+    {
+      "title": "Finalizacja",
+      "description": "Podsumowujemy uzgodniony zakres prac i przekazujemy opracowane materiały. Omawiamy dalsze kroki."
+    }
+  ]
+}

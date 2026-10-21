@@ -1,0 +1,47 @@
+{
+  "title": "Dom na Mazowszu",
+  "category": "Domy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/dom-mazowieckie/01.webp",
+      "alt": "Wizualizacja domu z ciemną elewacją i dwuspadowym dachem od strony tarasu",
+      "width": 1875,
+      "height": 848
+    },
+    {
+      "src": "/images/projects/dom-mazowieckie/02.webp",
+      "alt": "Boczny widok domu z ciemną elewacją i niższą bryłą garażu",
+      "width": 1935,
+      "height": 813
+    },
+    {
+      "src": "/images/projects/dom-mazowieckie/03.webp",
+      "alt": "Front domu z ciemną elewacją, garażem i podjazdem",
+      "width": 2067,
+      "height": 761
+    },
+    {
+      "src": "/images/projects/dom-mazowieckie/04.webp",
+      "alt": "Widok domu na Mazowszu od strony ulicy i ogrodzenia",
+      "width": 1852,
+      "height": 848
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/dom-mazowieckie/01.webp",
+    "alt": "Wizualizacja domu z ciemną elewacją i dwuspadowym dachem od strony tarasu",
+    "width": 1875,
+    "height": 848,
+    "objectPosition": "50% 50%",
+    "objectFit": "contain"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "featuredOrder": 2,
+  "order": 2,
+  "sourceFolder": "DOM MAZOWIECKIE"
+}

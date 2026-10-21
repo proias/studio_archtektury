@@ -1,0 +1,41 @@
+{
+  "title": "Łazienka",
+  "category": "Wnętrza",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/lazienka/01.webp",
+      "alt": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką",
+      "width": 1081,
+      "height": 1379
+    },
+    {
+      "src": "/images/projects/lazienka/02.webp",
+      "alt": "Ukośny widok kamiennej umywalki i podświetlanego lustra w łazience",
+      "width": 1081,
+      "height": 1455
+    },
+    {
+      "src": "/images/projects/lazienka/03.webp",
+      "alt": "Pionowy widok strefy prysznica i toalety w jasnej kamiennej łazience",
+      "width": 1081,
+      "height": 1455
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/lazienka/01.webp",
+    "alt": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką",
+    "width": 1081,
+    "height": 1379,
+    "objectPosition": "50% 62%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "featuredOrder": 6,
+  "order": 6,
+  "sourceFolder": "ŁAZIENKA"
+}

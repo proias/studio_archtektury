@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectGallery } from "@/components/project-gallery";
-import { getProject, projects, portfolioProjects } from "@/lib/projects";
+import {
+  getProjectBySlug,
+  getProjectSlugs,
+  getPortfolioNavigation,
+} from "@/lib/cms/reader";
 type Props = { params: Promise<{ slug: string }> };
-export function generateStaticParams() {
-  return projects.map(({ slug }) => ({ slug }));
+export const dynamicParams = false;
+export async function generateStaticParams() {
+  return (await getProjectSlugs()).map((slug) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = getProject((await params).slug);
+  const project = await getProjectBySlug((await params).slug);
   if (!project) return { title: "Nie znaleziono projektu" };
   return {
     title: project.title,
@@ -30,8 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 export default async function ProjectPage({ params }: Props) {
-  const project = getProject((await params).slug);
+  const project = await getProjectBySlug((await params).slug);
   if (!project) notFound();
+  const portfolioProjects = await getPortfolioNavigation();
   const next =
     portfolioProjects[
       (portfolioProjects.findIndex((p) => p.slug === project.slug) + 1) %
@@ -71,10 +77,12 @@ export default async function ProjectPage({ params }: Props) {
         </div>
         <ProjectGallery images={project.images} title={project.title} />
       </div>
-      <div className="next-project">
-        <span>Kolejny projekt</span>
-        <Link href={`/projekty/${next.slug}`}>{next.title} ↗</Link>
-      </div>
+      {next && (
+        <div className="next-project">
+          <span>Kolejny projekt</span>
+          <Link href={`/projekty/${next.slug}`}>{next.title} ↗</Link>
+        </div>
+      )}
     </main>
   );
 }

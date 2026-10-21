@@ -1,0 +1,47 @@
+{
+  "title": "Dom w Łódzkiem",
+  "category": "Domy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/dom-lodzkie/01.webp",
+      "alt": "Wizualizacja jasnego domu z dwuspadowym dachem od strony tarasu i ogrodu",
+      "width": 1642,
+      "height": 958
+    },
+    {
+      "src": "/images/projects/dom-lodzkie/02.webp",
+      "alt": "Front jasnego domu z ciemnym dachem i niższym garażem",
+      "width": 1640,
+      "height": 958
+    },
+    {
+      "src": "/images/projects/dom-lodzkie/03.webp",
+      "alt": "Boczny widok jasnego domu, z zadaszonym tarasem",
+      "width": 1642,
+      "height": 958
+    },
+    {
+      "src": "/images/projects/dom-lodzkie/04.webp",
+      "alt": "Perspektywa frontu domu z podjazdem i garażem",
+      "width": 1642,
+      "height": 958
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/dom-lodzkie/01.webp",
+    "alt": "Wizualizacja jasnego domu z dwuspadowym dachem od strony tarasu i ogrodu",
+    "width": 1642,
+    "height": 958,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "featuredOrder": 4,
+  "order": 4,
+  "sourceFolder": "DOM ŁODZKIE"
+}

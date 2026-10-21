@@ -1,0 +1,40 @@
+{
+  "title": "Przestrzeń publiczna",
+  "category": "Przestrzenie publiczne",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/przestrzen-publiczna/01.webp",
+      "alt": "Wizualizacja plenerowej strefy rekreacji z urządzeniami do ćwiczeń i ścieżkami",
+      "width": 1862,
+      "height": 845
+    },
+    {
+      "src": "/images/projects/przestrzen-publiczna/02.webp",
+      "alt": "Widok urządzeń rekreacyjnych i miejsc odpoczynku w przestrzeni publicznej",
+      "width": 1862,
+      "height": 845
+    },
+    {
+      "src": "/images/projects/przestrzen-publiczna/03.webp",
+      "alt": "Szeroki widok plenerowej strefy rekreacji z zielenią",
+      "width": 1862,
+      "height": 845
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/przestrzen-publiczna/01.webp",
+    "alt": "Wizualizacja plenerowej strefy rekreacji z urządzeniami do ćwiczeń i ścieżkami",
+    "width": 1862,
+    "height": 845,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "order": 10,
+  "sourceFolder": "PRZESTREZŃ PUBLICZNA"
+}

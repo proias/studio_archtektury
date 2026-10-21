@@ -1,0 +1,40 @@
+{
+  "title": "Przebudowa budynku pod opieką konserwatora",
+  "category": "Przebudowy",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/przebudowa-budynku/01.webp",
+      "alt": "Wizualizacja ceglanego budynku przy narożniku ulicy po przebudowie",
+      "width": 1534,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/przebudowa-budynku/02.webp",
+      "alt": "Perspektywa frontowych elewacji ceglanego budynku",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/przebudowa-budynku/03.webp",
+      "alt": "Boczna elewacja ceglanego budynku z dwuspadowym dachem",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/przebudowa-budynku/01.webp",
+    "alt": "Wizualizacja ceglanego budynku przy narożniku ulicy po przebudowie",
+    "width": 1534,
+    "height": 1024,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "order": 9,
+  "sourceFolder": "PRZEBUDOWA BUDYNKU POD KONSERWATOREM"
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Agroturystyka w Łódzkiem",
+  "category": "Obiekty usługowe",
+  "description": "",
+  "images": [
+    {
+      "src": "/images/projects/agroturystyka-lodzkie/01.webp",
+      "alt": "Wizualizacja drewnianego budynku agroturystyki z koniem przy ogrodzeniu",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/agroturystyka-lodzkie/02.webp",
+      "alt": "Drewniana bryła agroturystyki z balią i strefą wypoczynku",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "src": "/images/projects/agroturystyka-lodzkie/03.webp",
+      "alt": "Widok drewnianego budynku agroturystyki z dużym przeszkleniem",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "cover": {
+    "src": "/images/projects/agroturystyka-lodzkie/01.webp",
+    "alt": "Wizualizacja drewnianego budynku agroturystyki z koniem przy ogrodzeniu",
+    "width": 1536,
+    "height": 1024,
+    "objectPosition": "50% 50%",
+    "objectFit": "cover"
+  },
+  "credits": {
+    "authorship": "pending-confirmation",
+    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+  },
+  "publicationStatus": "draft",
+  "featuredOrder": 3,
+  "order": 3,
+  "sourceFolder": "AGROTURYSTKA ŁODZKIE"
+}

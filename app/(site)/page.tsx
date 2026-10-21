@@ -3,21 +3,24 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { ProjectGrid } from "@/components/project-grid";
 import { ContactSection } from "@/components/contact-section";
-import { featuredProjects } from "@/lib/projects";
+import { getFeaturedProjects, getPrimaryCover } from "@/lib/cms/reader";
 import { processSteps, site } from "@/lib/site-content";
-export default function HomePage() {
-  const hero = featuredProjects[0].cover;
+export default async function HomePage() {
+  const featuredProjects = await getFeaturedProjects();
+  const hero = featuredProjects[0]?.cover || (await getPrimaryCover());
   return (
     <main id="main-content">
       <div className="hero">
-        <Image
-          src={hero.src}
-          alt={hero.alt}
-          width={hero.width}
-          height={hero.height}
-          sizes="(min-width: 1440px) 1280px, 100vw"
-          priority
-        />
+        {hero && (
+          <Image
+            src={hero.src}
+            alt={hero.alt}
+            width={hero.width}
+            height={hero.height}
+            sizes="(min-width: 1440px) 1280px, 100vw"
+            priority
+          />
+        )}
       </div>
       <section className="intro container">
         <p className="eyebrow">Paulina Cywińska · Studio Architektury</p>
