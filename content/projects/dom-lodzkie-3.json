@@ -1,41 +1,42 @@
 {
   "title": "Dom w Łódzkiem III",
   "category": "Domy",
-  "description": "",
+  "location": "Łódź",
+  "year": 2026,
   "images": [
     {
-      "src": "/images/projects/dom-lodzkie-3/01.webp",
+      "src": "/images/projects/dom-lodzkie-3/images/0/src.webp",
       "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
       "width": 1671,
       "height": 941
     },
     {
-      "src": "/images/projects/dom-lodzkie-3/02.webp",
+      "src": "/images/projects/dom-lodzkie-3/images/1/src.webp",
       "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
       "width": 1670,
       "height": 942
     },
     {
-      "src": "/images/projects/dom-lodzkie-3/03.webp",
+      "src": "/images/projects/dom-lodzkie-3/images/2/src.webp",
       "alt": "Widok piętrowego domu z ulicy, z garażem i ogrodzeniem",
       "width": 1672,
       "height": 941
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-lodzkie-3/01.webp",
+    "src": "/images/projects/dom-lodzkie-3/cover/src.webp",
     "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
     "width": 1671,
     "height": 941,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
   },
+  "publicationStatus": "draft",
+  "order": 1,
+  "featuredOrder": 1,
+  "sourceFolder": "DOM ŁODZKIE 3",
   "credits": {
     "authorship": "pending-confirmation",
     "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
-  },
-  "publicationStatus": "draft",
-  "featuredOrder": 1,
-  "order": 1,
-  "sourceFolder": "DOM ŁODZKIE 3"
+  }
 }
