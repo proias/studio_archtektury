@@ -1,51 +1,51 @@
 {
-  "title": "Dom w Łódzkiem III",
-  "category": "Domy",
-  "location": "Łódź",
-  "year": 2026,
-  "images": [
-    {
-      "src": "/images/projects/dom-lodzkie-3/images/0/src.webp",
-      "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
-      "width": 1671,
-      "height": 941
-    },
-    {
-      "src": "/images/projects/dom-lodzkie-3/images/1/src.webp",
-      "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
-      "width": 1670,
-      "height": 942
-    },
-    {
-      "src": "/images/projects/dom-lodzkie-3/images/2/src.webp",
-      "alt": "Widok piętrowego domu z ulicy, z garażem i ogrodzeniem",
-      "width": 1672,
-      "height": 941
-    }
-  ],
-  "cover": {
-    "src": "/images/projects/dom-lodzkie-3/cover/src.webp",
-    "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
-    "width": 1671,
-    "height": 941,
-    "objectPosition": "50% 50%",
-    "objectFit": "cover"
-  },
-  "publicationStatus": "published",
-  "order": 1,
-  "featuredOrder": 1,
-  "sourceFolder": "DOM ŁODZKIE 3",
-  "credits": {
-    "authorship": "pending-confirmation",
-    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
-  },
-  "description": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu. Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową. Widok piętrowego domu z ulicy, z garażem i ogrodzeniem.",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych. Zatwierdzony do publikacji przez właściciela w rozmowie 21.10.2026; dane redakcyjne pozostają tymczasowe.",
-  "seo": {
-    "title": "",
-    "description": "",
-    "image": null,
-    "imageAlt": ""
-  }
+    "title":  "Dom w Łódzkiem III",
+    "category":  "Domy",
+    "location":  "Łódź",
+    "year":  2026,
+    "images":  [
+                   {
+                       "src":  "/images/projects/dom-lodzkie-3/images/0/src.webp",
+                       "alt":  "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+                       "width":  1671,
+                       "height":  941
+                   },
+                   {
+                       "src":  "/images/projects/dom-lodzkie-3/images/1/src.webp",
+                       "alt":  "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
+                       "width":  1670,
+                       "height":  942
+                   },
+                   {
+                       "src":  "/images/projects/dom-lodzkie-3/images/2/src.webp",
+                       "alt":  "Widok piętrowego domu z ulicy, z garażem i ogrodzeniem",
+                       "width":  1672,
+                       "height":  941
+                   }
+               ],
+    "cover":  {
+                  "src":  "/images/projects/dom-lodzkie-3/cover/src.webp",
+                  "alt":  "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+                  "width":  1671,
+                  "height":  941,
+                  "objectPosition":  "50% 50%",
+                  "objectFit":  "cover"
+              },
+    "publicationStatus":  "published",
+    "order":  1,
+    "featuredOrder":  1,
+    "sourceFolder":  "DOM ŁODZKIE 3",
+    "credits":  {
+                    "authorship":  "pending-confirmation",
+                    "note":  "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+                },
+    "description":  "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu. Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową. Widok piętrowego domu z ulicy, z garażem i ogrodzeniem.",
+    "contentStatus":  "temporary",
+    "seo":  {
+                "title":  "",
+                "description":  "",
+                "image":  null,
+                "imageAlt":  ""
+            },
+    "editorialNotes":  "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych. Zatwierdzony do publikacji przez właściciela w rozmowie 21.10.2026; dane redakcyjne pozostają tymczasowe.\nTest techniczny CMS-REVIEW-20261022. Gałąź testowa, nie publikować."
 }
