@@ -7,7 +7,7 @@
   "hero": {
     "src": "/images/site/hero/src.png",
     "alt": "Zdjęcie główne — Paulina Cywińska Studio Architektury",
-    "objectFit": "contain",
+    "objectFit": "cover",
     "objectPosition": "50% 50%"
   }
 }
