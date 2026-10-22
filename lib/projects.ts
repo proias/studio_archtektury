@@ -24,7 +24,10 @@ export type Project = {
   seo?: { title: string; description: string; image: ProjectImage | null };
   cover: ProjectImage;
   images: ProjectImage[];
-  credits: { authorship: "pending-confirmation"; note: string };
+  credits: {
+    authorship: "pending-confirmation" | "own" | "coauthored" | "licensed";
+    note: string;
+  };
   publicationStatus: "draft" | "pending-confirmation" | "published";
   featuredOrder?: number;
 };

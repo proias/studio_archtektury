@@ -8,6 +8,8 @@
   PNPM_VERSION = "10.14.0"
   NEXT_TELEMETRY_DISABLED = "1"
   NEXT_PUBLIC_CONTACT_ENABLED = "true"
+  NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND = "cloud"
+  NEXT_PUBLIC_KEYSTATIC_CLOUD_PROJECT = "architektura/cywinska-studio"
 
 [dev]
   command = "pnpm dev --hostname 127.0.0.1"

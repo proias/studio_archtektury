@@ -3,6 +3,13 @@ import { categories } from "./lib/projects";
 
 // Only public configuration is used here: this module is also bundled for the admin UI.
 const github = process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND === "github";
+const cloud = process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND === "cloud";
+const cloudProject = process.env.NEXT_PUBLIC_KEYSTATIC_CLOUD_PROJECT;
+if (cloud && !cloudProject?.match(/^[\w-]+\/[\w-]+$/)) {
+  throw new Error("Set NEXT_PUBLIC_KEYSTATIC_CLOUD_PROJECT to team/project.");
+}
+const preview = (pathname: string) =>
+  github || cloud ? `/cms-preview?branch={branch}&path=${pathname}` : pathname;
 const repo = process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO;
 if (github && !repo?.match(/^[\w.-]+\/[\w.-]+$/)) {
   throw new Error("Set NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO to owner/repository.");
@@ -51,13 +58,21 @@ const image = (label: string) =>
   });
 
 export default config({
-  storage: github
-    ? { kind: "github", repo: repo as `${string}/${string}` }
-    : { kind: "local" },
+  storage: cloud
+    ? { kind: "cloud", branchPrefix: "cms/" }
+    : github
+      ? {
+          kind: "github",
+          repo: repo as `${string}/${string}`,
+          branchPrefix: "cms/",
+        }
+      : { kind: "local" },
+  ...(cloud ? { cloud: { project: cloudProject! } } : {}),
   ui: { brand: { name: "Cywińska Studio — CMS" } },
   collections: {
     projects: collection({
       label: "Projekty",
+      previewUrl: preview("/projekty/{slug}"),
       path: "content/projects/*",
       slugField: "title",
       columns: ["title", "category", "publicationStatus"],
@@ -165,6 +180,12 @@ export default config({
               label: "Autorstwo",
               options: [
                 { label: "Do potwierdzenia", value: "pending-confirmation" },
+                { label: "Autorstwo własne", value: "own" },
+                { label: "Współautorstwo", value: "coauthored" },
+                {
+                  label: "Materiały zewnętrzne — zgoda na publikację",
+                  value: "licensed",
+                },
               ],
               defaultValue: "pending-confirmation",
             }),
@@ -178,6 +199,7 @@ export default config({
   singletons: {
     pages: singleton({
       label: "Teksty strony głównej i katalogu",
+      previewUrl: preview("/"),
       path: "content/pages",
       format: { data: "json" },
       schema: {
@@ -238,6 +260,7 @@ export default config({
     }),
     redirects: singleton({
       label: "Przekierowania starych adresów",
+      previewUrl: preview("/"),
       path: "content/redirects",
       format: { data: "json" },
       schema: {
@@ -256,6 +279,7 @@ export default config({
     }),
     appearance: singleton({
       label: "Logo i zdjęcie główne",
+      previewUrl: preview("/"),
       path: "content/appearance",
       format: { data: "json" },
       schema: {
@@ -315,6 +339,7 @@ export default config({
     }),
     site: singleton({
       label: "Pracownia, kontakt i SEO",
+      previewUrl: preview("/"),
       path: "content/site",
       format: { data: "json" },
       schema: {

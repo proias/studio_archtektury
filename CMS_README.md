@@ -13,6 +13,31 @@ Panel: <http://127.0.0.1:3000/keystatic>. Domyślny storage to local; jawne `NEX
 
 ## Edycja
 
+## Redakcja, Cloud i podgląd
+
+Hosting korzysta z Keystatic Cloud `architektura/cywinska-studio`. Publiczny wybór storage i projektu jest wersjonowany w `netlify.toml` i ma pierwszeństwo przed tymi samymi zmiennymi w panelu Netlify. Lokalny development nadal może korzystać z `local`. Nie usuwaj starej GitHub App ani jej sekretów przed zakończeniem testu logowania Cloud; nie są wymagane przez sam tryb Cloud.
+
+W Cloud połącz projekt z `proias/studio_archtektury` i zezwól na domenę `https://cywinska-studio.pl` (callback biblioteki: `/keystatic/cloud/oauth/callback`). Redaktorów zapraszaj do osobnego zespołu tej strony. Dostęp Cloud nie wymaga dostępu redaktora do repozytorium GitHub.
+
+1. W CMS utwórz gałąź `cms/nazwa-zmiany` z aktualnego `main`. Prefiks porządkuje listę; ochronę produkcji zapewniają reguły `main`, a nie sam interfejs CMS.
+2. Zapisz dowolną liczbę dokumentów. Pierwszy zapis uruchamia `CMS review`: tworzy jeden PR i prosi `proias` o review. Kolejne zapisy aktualizują ten sam PR. Automatyzacja nie zatwierdza i nie scala zmian.
+3. Po Save kliknij wbudowane **Preview**. Przycisk prowadzi do stanu PR i buildu. Link do strony pojawia się po poprawnym deployu aktualnego commitu. GitHub może opóźnić aktualizację statusu; przycisk odświeżenia sprawdza go ponownie. Nowy, jeszcze niezapisany dokument nie ma podglądu.
+4. Sprawdź podgląd i zatwierdź PR jako właściciel. **Squash and merge** daje jeden commit na `main` i jeden release produkcyjny. Następną sesję rozpocznij od nowej gałęzi z aktualnego `main`.
+
+Netlify musi mieć włączone Deploy Previews i wyłączone branch deploye; w przeciwnym razie ta sama zmiana może powodować dwa buildy. Każdy zapis do otwartego PR może zbudować nowy preview. Szkice pozostają ukryte także w preview; podgląd publicznego detalu wymaga statusu „Opublikowany” na gałęzi roboczej.
+
+GitHub: Actions musi mieć włączone wspólne ustawienie „Allow GitHub Actions to create and approve pull requests”. Workflow ma tylko odczyt repozytorium i zapis PR; nie wykonuje approve ani merge. Jeśli właściciel nie zgodzi się na ten wspólny przełącznik, PR można utworzyć ręcznie z linku na stronie Preview. W powiadomieniach konta GitHub włącz e-mail dla żądań review; prośba o review sama nie gwarantuje dostarczenia maila. Dla PR utworzonego przez Actions GitHub może wymagać **Approve workflows to run** przed uruchomieniem kontroli.
+
+`CMS content boundary` działa na zaufanym kodzie `main`, bez checkoutu PR. Gałęzie `cms/**` mogą zmieniać tylko JSON treści oraz obrazy rastrowe w katalogach CMS. Reguła `main` powinna wymagać tej kontroli i review właściciela (CODEOWNERS). To nadal workflow Git, nie osobny system ról dla pojedynczych kolekcji.
+
+Strona Preview nie czyta tokenów Cloud ani GitHub użytkownika. Odczytuje stan stałego publicznego repozytorium przez publiczne API GitHub; ma ograniczone odpytywanie i obsługę limitu API oraz ręczny link do PR. Nie pokazuje nieudanego ani starszego commitu jako gotowego podglądu. Podgląd nie jest chroniony hasłem i nie służy do poufnych materiałów.
+
+Autorstwo: „Do potwierdzenia”, „Autorstwo własne”, „Współautorstwo” lub „Materiały zewnętrzne — zgoda na publikację”. Autorów, źródło i zakres zgody wpisz w notatce o prawach. Zmiana autorstwa nie zmienia automatycznie publikacji.
+
+Plan i warunki odbioru: [PLAN-CMS-REDAKCJA.md](docs/PLAN-CMS-REDAKCJA.md).
+
+## Pola edycji
+
 - **Teksty strony głównej i katalogu**: nagłówki, wprowadzenia, podpisy sekcji, teksty przycisków, menu i stopki. Identyfikatory kotwic oraz techniczne adresy nawigacji pozostają w kodzie. Enter w polach wielowierszowych może oznaczać podział wiersza na stronie.
 - **Logo i zdjęcie główne**: edytuj napisy logo lub wgraj plik PNG/WebP z przezroczystością. Znak jest wspólny dla nagłówka i stopki. Usuń plik, aby wrócić do napisów. Niezależne hero ma opis, kadrowanie i pozycję; brak uploadu oznacza okładkę pierwszego opublikowanego wyróżnionego projektu.
 - **Projekty**: wszystkie 12 wpisów pozostaje w CMS. Publicznie dostępne są wyłącznie `published`; `draft` i `pending-confirmation` nie trafiają do katalogu, wyróżnień, nawigacji, sitemap ani publicznych detali. Detal szkicu zwraca 404 po deployu.
