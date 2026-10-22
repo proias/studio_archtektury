@@ -1,6 +1,6 @@
 # Plan rozbudowy CMS i przygotowania strony do uruchomienia
 
-Data: 21.10.2026. Status: plan, bez uruchamiania publikacji i indeksowania.
+Data planu: 21.10.2026. Status: wdrożono 22.10.2026; indeksowanie pozostaje wyłączone. Wyniki i pozostałe decyzje: [raport release](RELEASE-CMS-2026-10-22.md).
 
 ## Zakres
 
