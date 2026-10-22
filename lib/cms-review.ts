@@ -86,7 +86,10 @@ export async function readReviewState(
         ? "Zmiany scalono. Nową sesję rozpocznij na nowej gałęzi z aktualnego main."
         : "PR zamknięto bez publikacji. Utwórz nową gałąź do następnych zmian.",
     };
-  const result = await get<CommitStatus>(`commits/${pr.head.sha}/status`);
+  // Read the branch ref, not only PR metadata: GitHub may update the PR a moment after Save.
+  const result = await get<CommitStatus>(
+    `commits/${encodeURIComponent(branch)}/status`,
+  );
   const status =
     result.sha === pr.head.sha
       ? result.statuses.find(
@@ -96,6 +99,7 @@ export async function readReviewState(
   if (!status || status.state === "pending")
     return {
       ...common,
+      head: result.sha,
       state: "building",
       message:
         "Netlify przygotowuje podgląd aktualnego commitu. Strona produkcyjna pozostaje bez zmian.",

@@ -84,6 +84,18 @@ test("review never advertises failed, stale or untrusted deploy as ready", async
     assert.equal(result.previewUrl, undefined);
   }
 });
+test("review checks the current branch even when PR metadata lags behind Save", async () => {
+  const urls = [];
+  const values = [[{ ...pr, head: { sha: "previous" } }], status("success")];
+  const result = await readReviewState("cms/test", "/", async (url) => {
+    urls.push(url);
+    return Response.json(values.shift());
+  });
+  assert.ok(urls[1].endsWith("commits/cms%2Ftest/status"));
+  assert.equal(result.state, "building");
+  assert.equal(result.head, "current");
+  assert.equal(result.previewUrl, undefined);
+});
 test("review handles closed PR and rate limiting without retry loop", async () => {
   const closed = { ...pr, state: "closed" };
   assert.equal(
