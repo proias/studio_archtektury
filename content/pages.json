@@ -1,55 +1,55 @@
 {
-  "intro": {
-    "eyebrow": "Paulina Cywińska · Studio Architektury",
-    "headingFirst": "Architektura",
-    "headingSecond": "dopasowana do życia.",
-    "description": "Projekty domów, wnętrz i przestrzeni usługowych. Indywidualne podejście do miejsca, funkcji i potrzeb inwestora.",
-    "projectsLink": "Zobacz projekty"
-  },
-  "portfolio": {
-    "eyebrow": "Portfolio",
-    "heading": "Wybrane projekty",
-    "allProjectsLink": "Wszystkie projekty"
-  },
-  "about": {
-    "eyebrow": "O pracowni",
-    "heading": "Paulina Cywińska",
-    "lead": "Uważność na miejsce.\nPrzestrzeń dla Ciebie."
-  },
-  "process": {
-    "eyebrow": "Współpraca",
-    "heading": "Od rozmowy\ndo przestrzeni.",
-    "description": "Przejrzysty proces i wspólne decyzje.\nZakres dopasowany do Twojego projektu."
-  },
-  "reviews": {
-    "description": "Poznaj doświadczenia osób, które zaufały pracowni.",
-    "link": "Zobacz opinie w Google"
-  },
-  "contact": {
-    "eyebrow": "Kontakt",
-    "heading": "Porozmawiajmy\no Twoim projekcie.",
-    "description": "Opowiedz o planowanej inwestycji, jej lokalizacji i zakresie. To dobry punkt wyjścia do pierwszej rozmowy.",
-    "mapsLink": "Wyznacz trasę",
-    "serviceArea": "Obszar współpracy",
-    "formHeading": "Napisz o swoim pomyśle",
-    "formDescription": "Wypełnij formularz, aby przesłać zapytanie do pracowni. Możesz również napisać e-mail lub zadzwonić.",
-    "submitLabel": "Wyślij wiadomość"
-  },
-  "footer": {
-    "tagline": "Domy. Wnętrza. Przestrzenie usługowe.",
-    "contactLink": "Porozmawiajmy",
-    "copyrightName": "Paulina Cywińska",
-    "privacyLink": "Prywatność"
-  },
-  "catalog": {
-    "eyebrow": "Portfolio",
-    "heading": "Projekty",
-    "description": "Architektura i wnętrza. Różne potrzeby, spójne podejście do przestrzeni.",
-    "seoDescription": "Projekty domów, obiektów usługowych i wnętrz — portfolio Pauliny Cywińskiej."
-  },
-  "navigation": {
-    "homeLabel": "Paulina Cywińska — strona główna",
-    "mobileName": "Paulina Cywińska",
-    "mobileSubtitle": "Studio Architektury · Łódź"
-  }
+    "intro":  {
+                  "eyebrow":  "Paulina Cywińska · Studio Architektury",
+                  "headingFirst":  "Architektura",
+                  "headingSecond":  "dopasowana do życia.",
+                  "description":  "Projekty domów, wnętrz i przestrzeni usługowych. Indywidualne podejście do miejsca, funkcji i potrzeb inwestora. TEST CMS-REVIEW-20261022 — wyłącznie podgląd.",
+                  "projectsLink":  "Zobacz projekty"
+              },
+    "portfolio":  {
+                      "eyebrow":  "Portfolio",
+                      "heading":  "Wybrane projekty",
+                      "allProjectsLink":  "Wszystkie projekty"
+                  },
+    "about":  {
+                  "eyebrow":  "O pracowni",
+                  "heading":  "Paulina Cywińska",
+                  "lead":  "Uważność na miejsce.\nPrzestrzeń dla Ciebie."
+              },
+    "process":  {
+                    "eyebrow":  "Współpraca",
+                    "heading":  "Od rozmowy\ndo przestrzeni.",
+                    "description":  "Przejrzysty proces i wspólne decyzje.\nZakres dopasowany do Twojego projektu."
+                },
+    "reviews":  {
+                    "description":  "Poznaj doświadczenia osób, które zaufały pracowni.",
+                    "link":  "Zobacz opinie w Google"
+                },
+    "contact":  {
+                    "eyebrow":  "Kontakt",
+                    "heading":  "Porozmawiajmy\no Twoim projekcie.",
+                    "description":  "Opowiedz o planowanej inwestycji, jej lokalizacji i zakresie. To dobry punkt wyjścia do pierwszej rozmowy.",
+                    "mapsLink":  "Wyznacz trasę",
+                    "serviceArea":  "Obszar współpracy",
+                    "formHeading":  "Napisz o swoim pomyśle",
+                    "formDescription":  "Wypełnij formularz, aby przesłać zapytanie do pracowni. Możesz również napisać e-mail lub zadzwonić.",
+                    "submitLabel":  "Wyślij wiadomość"
+                },
+    "footer":  {
+                   "tagline":  "Domy. Wnętrza. Przestrzenie usługowe.",
+                   "contactLink":  "Porozmawiajmy",
+                   "copyrightName":  "Paulina Cywińska",
+                   "privacyLink":  "Prywatność"
+               },
+    "catalog":  {
+                    "eyebrow":  "Portfolio",
+                    "heading":  "Projekty",
+                    "description":  "Architektura i wnętrza. Różne potrzeby, spójne podejście do przestrzeni.",
+                    "seoDescription":  "Projekty domów, obiektów usługowych i wnętrz — portfolio Pauliny Cywińskiej."
+                },
+    "navigation":  {
+                       "homeLabel":  "Paulina Cywińska — strona główna",
+                       "mobileName":  "Paulina Cywińska",
+                       "mobileSubtitle":  "Studio Architektury · Łódź"
+                   }
 }
