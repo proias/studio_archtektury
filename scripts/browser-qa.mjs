@@ -81,6 +81,11 @@ try {
     else if (msg.method === "Network.loadingFailed" && !msg.params.canceled)
       failed.push(msg.params);
   };
+  socket.onclose = () => {
+    for (const request of pending.values())
+      request.reject(new Error("Test Chrome disconnected"));
+    pending.clear();
+  };
   function send(method, params = {}) {
     return new Promise((resolve, reject) => {
       const key = ++id;

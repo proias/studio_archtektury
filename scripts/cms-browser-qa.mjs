@@ -163,6 +163,11 @@ try {
       );
     }
   };
+  socket.onclose = () => {
+    for (const request of pending.values())
+      request.reject(new Error("Test Chrome disconnected"));
+    pending.clear();
+  };
   await send("Page.enable");
   await send("Runtime.enable");
   await send("Network.enable");
