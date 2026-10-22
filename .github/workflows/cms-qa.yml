@@ -44,9 +44,10 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
-      - uses: pnpm/action-setup@v6
-        with:
-          cache: true
+      - name: Enable project pnpm with bundled Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.14.0 --activate
       - run: pnpm install --frozen-lockfile
       - name: Static checks and integration tests
         run: |
@@ -63,3 +64,31 @@ jobs:
           trap 'kill "$CMS_PID" 2>/dev/null || true; cat "$RUNNER_TEMP/cms-dev.log"' EXIT
           node -e 'async function wait(){for(let i=0;i<90;i++){try{if((await fetch("http://127.0.0.1:3001/",{signal:AbortSignal.timeout(15000)})).ok)return}catch{}await new Promise(r=>setTimeout(r,1000))}throw new Error("CMS server did not start")}wait().catch(e=>{console.error(e);process.exitCode=1})'
           node scripts/cms-browser-qa.mjs
+      - name: Wait for current Netlify preview
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+          (async()=>{
+            for(let i=0;i<30;i++) {
+              const r=await fetch('https://api.github.com/repos/'+process.env.GITHUB_REPOSITORY+'/commits/'+event.pull_request.head.sha+'/status',{headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json'}});
+              if(!r.ok) throw Error('Cannot read deploy state: '+r.status);
+              const result=await r.json();
+              const status=result.statuses.find(s=>s.context==='netlify/cywinska-studio/deploy-preview');
+              if(status?.state==='success') return;
+              if(status && ['failure','error'].includes(status.state)) throw Error('Netlify preview failed');
+              await new Promise(r=>setTimeout(r,10000));
+            }
+            throw Error('Netlify preview was not ready within five minutes');
+          })().catch(e=>{console.error(e.message);process.exitCode=1});
+          NODE
+      - name: Hosted Cloud preview browser integration
+        if: github.event_name == 'pull_request'
+        env:
+          QA_URL: https://deploy-preview-${{ github.event.pull_request.number }}--cywinska-studio.netlify.app
+          QA_OUT: docs/qa-release/hosted-ci
+          QA_REVIEW_BRANCH: cms/qa-no-pr
+        run: node scripts/browser-qa.mjs

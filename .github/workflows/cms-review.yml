@@ -1,0 +1,49 @@
+name: CMS review
+
+on:
+  push:
+    branches: ["cms/**"]
+    paths:
+      - "content/**"
+      - "public/images/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: cms-review-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  request-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      # No checkout, dependencies, editor code, secrets, or publication permissions.
+      - name: Create one PR per editorial branch and request owner review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEWER: proias
+        shell: bash
+        run: |
+          node <<'NODE'
+          const repo = process.env.GITHUB_REPOSITORY;
+          const branch = process.env.GITHUB_REF_NAME;
+          const owner = repo.split('/')[0];
+          if (!branch.startsWith('cms/')) throw Error('Expected editorial branch');
+          async function api(path, method='GET', body) {
+            const r = await fetch('https://api.github.com/repos/'+repo+'/'+path, {method, headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+            if (!r.ok) throw Error('GitHub '+r.status+': '+await r.text());
+            return r.status===204?null:r.json();
+          }
+          (async()=>{
+            const prs=await api('pulls?state=open&base=main&head='+encodeURIComponent(owner+':'+branch));
+            const pr=prs[0] || await api('pulls','POST',{head:branch,base:'main',title:'Treści CMS: '+branch.slice(4),body:'Zmiany redakcyjne zapisane w CMS.\n\nSprawdź Deploy Preview aktualnego commitu przed zatwierdzeniem. Produkcja zmieni się dopiero po ręcznym Squash and merge do main.\n\nWłaściciel: @'+process.env.REVIEWER+'. Podgląd jest dostępny w CMS przez Preview. Szkice pozostają ukryte.'});
+            const reviews=await api('pulls/'+pr.number+'/reviews');
+            const requested=pr.requested_reviewers?.some(r=>r.login===process.env.REVIEWER);
+            const alreadyReviewed=reviews.some(r=>r.user.login===process.env.REVIEWER && r.commit_id===pr.head.sha && r.state==='APPROVED');
+            if(!requested && !alreadyReviewed && pr.user.login!==process.env.REVIEWER) await api('pulls/'+pr.number+'/requested_reviewers','POST',{reviewers:[process.env.REVIEWER]});
+            console.log('PR do zatwierdzenia: '+pr.html_url);
+          })().catch(e=>{console.error(e.message);process.exitCode=1});
+          NODE

@@ -7,6 +7,7 @@ const getHandlers = () => (handlers ??= makeRouteHandler({ config }));
 function available() {
   if (process.env.NODE_ENV === "development") return true;
   if (config.storage.kind === "local") return false;
+  if (config.storage.kind === "cloud") return true;
   return Boolean(
     process.env.KEYSTATIC_GITHUB_CLIENT_ID &&
       process.env.KEYSTATIC_GITHUB_CLIENT_SECRET &&

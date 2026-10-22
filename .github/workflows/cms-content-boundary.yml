@@ -1,0 +1,42 @@
+name: CMS content boundary
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  boundary:
+    name: CMS content boundary
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      # Runs trusted base-branch code only. Never checkout or execute PR contents.
+      - name: Restrict editorial PRs to content and raster uploads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const pr=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')).pull_request;
+          if(!pr.head.ref.startsWith('cms/')) { console.log('PR techniczny: przegląd właściciela i standardowe QA.'); process.exit(0); }
+          const allowed=p=>/^content\/(site|pages|appearance|redirects)\.json$/.test(p) || /^content\/projects\/[a-z0-9-]+\.json$/.test(p) || /^public\/images\/(projects|site)\/[a-zA-Z0-9_./-]+\.(png|jpe?g|webp|avif)$/i.test(p);
+          (async()=>{
+            const forbidden=[];
+            for(let page=1;page<=30;page++) {
+              const r=await fetch('https://api.github.com/repos/'+process.env.GITHUB_REPOSITORY+'/pulls/'+pr.number+'/files?per_page=100&page='+page,{headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json'}});
+              if(!r.ok) throw Error('Cannot verify changed files: '+r.status);
+              const files=await r.json();
+              for(const f of files) if(!allowed(f.filename) || (f.previous_filename && !allowed(f.previous_filename))) forbidden.push(f.filename);
+              if(files.length<100) break;
+              if(page===30) throw Error('Too many files to verify safely');
+            }
+            if(forbidden.length) throw Error('Gałąź CMS zmienia pliki spoza treści i obrazów: '+forbidden.join(', '));
+            console.log('Zmiany ograniczone do treści CMS i obrazów. Wymagana recenzja właściciela.');
+          })().catch(e=>{console.error(e.message);process.exitCode=1});
+          NODE

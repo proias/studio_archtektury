@@ -135,6 +135,17 @@ test("zmiana statusu steruje całym odczytem publicznym, a upload i zastąpienie
     assert.equal((await cms.getProjectBySlug(slug)).cover.width, 17);
     assert.ok((await cms.getProjectSlugs()).includes(slug));
     assert.ok((await cms.getFeaturedProjects()).some((p) => p.slug === slug));
+    for (const authorship of ["own", "coauthored", "licensed"]) {
+      entry.credits = {
+        authorship,
+        note: "Potwierdzone w dokumentacji projektu",
+      };
+      save();
+      assert.deepEqual(
+        (await cms.getProjectBySlug(slug)).credits,
+        entry.credits,
+      );
+    }
     await require("sharp")({
       create: { width: 23, height: 13, channels: 3, background: "white" },
     })
