@@ -1,5 +1,7 @@
 # CMS: redakcja i zatwierdzanie zmian
 
+Status: wdrożono 22.10.2026. Wyniki: [raport odbioru](RELEASE-CMS-CLOUD-2026-10-22.md).
+
 ## Plan wdrożenia
 
 1. Rozszerzyć autorstwo o własne, współautorstwo i materiały zewnętrzne ze zgodą. Zachować dotychczasowe wartości oraz domyślne „Do potwierdzenia”; nie zmieniać statusów projektów.

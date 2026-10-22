@@ -27,3 +27,7 @@
 
 # Brak catch-all SPA i funkcji dublujących adapter Next.js.
 
+# Git branch deploys duplicate PR previews; skip them before installing/building.
+[context.branch-deploy]
+  ignore = "exit 0"
+

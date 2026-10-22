@@ -11,8 +11,6 @@ corepack pnpm dev --hostname 127.0.0.1
 
 Panel: <http://127.0.0.1:3000/keystatic>. Domyślny storage to local; jawne `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=github` włącza GitHub także lokalnie. Po zmianie zmiennych zrestartuj serwer. Dev zapisuje do `.next-dev`, a build do `.next`; katalogi są ignorowane przez Git. Ze względu na RAM nadal uruchamiaj build i Chrome kolejno.
 
-## Edycja
-
 ## Redakcja, Cloud i podgląd
 
 Hosting korzysta z Keystatic Cloud `architektura/cywinska-studio`. Publiczny wybór storage i projektu jest wersjonowany w `netlify.toml` i ma pierwszeństwo przed tymi samymi zmiennymi w panelu Netlify. Lokalny development nadal może korzystać z `local`. Nie usuwaj starej GitHub App ani jej sekretów przed zakończeniem testu logowania Cloud; nie są wymagane przez sam tryb Cloud.
@@ -24,11 +22,11 @@ W Cloud połącz projekt z `proias/studio_archtektury` i zezwól na domenę `htt
 3. Po Save kliknij wbudowane **Preview**. Przycisk prowadzi do stanu PR i buildu. Link do strony pojawia się po poprawnym deployu aktualnego commitu. GitHub może opóźnić aktualizację statusu; przycisk odświeżenia sprawdza go ponownie. Nowy, jeszcze niezapisany dokument nie ma podglądu.
 4. Sprawdź podgląd i zatwierdź PR jako właściciel. **Squash and merge** daje jeden commit na `main` i jeden release produkcyjny. Następną sesję rozpocznij od nowej gałęzi z aktualnego `main`.
 
-Netlify musi mieć włączone Deploy Previews i wyłączone branch deploye; w przeciwnym razie ta sama zmiana może powodować dwa buildy. Każdy zapis do otwartego PR może zbudować nowy preview. Szkice pozostają ukryte także w preview; podgląd publicznego detalu wymaga statusu „Opublikowany” na gałęzi roboczej.
+Netlify ma włączone Deploy Previews. `netlify.toml` pomija zwykłe Git branch deploye przez `context.branch-deploy.ignore`, aby nie dublować pełnego buildu PR. W panelu Netlify można dodatkowo pozostawić branch deploye wyłączone. Każdy zapis do otwartego PR może zbudować nowy preview. Szkice pozostają ukryte także w preview; podgląd publicznego detalu wymaga statusu „Opublikowany” na gałęzi roboczej.
 
 GitHub: Actions musi mieć włączone wspólne ustawienie „Allow GitHub Actions to create and approve pull requests”. Workflow ma tylko odczyt repozytorium i zapis PR; nie wykonuje approve ani merge. Jeśli właściciel nie zgodzi się na ten wspólny przełącznik, PR można utworzyć ręcznie z linku na stronie Preview. W powiadomieniach konta GitHub włącz e-mail dla żądań review; prośba o review sama nie gwarantuje dostarczenia maila. Dla PR utworzonego przez Actions GitHub może wymagać **Approve workflows to run** przed uruchomieniem kontroli.
 
-`CMS content boundary` działa na zaufanym kodzie `main`, bez checkoutu PR. Gałęzie `cms/**` mogą zmieniać tylko JSON treści oraz obrazy rastrowe w katalogach CMS. Reguła `main` powinna wymagać tej kontroli i review właściciela (CODEOWNERS). To nadal workflow Git, nie osobny system ról dla pojedynczych kolekcji.
+`CMS content boundary` działa na zaufanym kodzie `main`, bez checkoutu PR, również przez `workflow_run` po PR utworzonym przez Actions. Raportuje wynik na dokładnym commicie gałęzi. Gałęzie `cms/**` mogą zmieniać tylko JSON treści oraz obrazy rastrowe w katalogach CMS. Włączona reguła `main` wymaga tej kontroli, poprawnego Netlify Preview, aktualnej bazy i jednej recenzji właściciela (CODEOWNERS). Nowy zapis unieważnia review. Właściciel-admin ma zatwierdzony wyjątek dla zmian technicznych. Dostępny jest tylko ręczny Squash and merge; auto-merge jest wyłączony, gałęzie są usuwane po merge. To nadal workflow Git, nie osobny system ról dla pojedynczych kolekcji.
 
 Strona Preview nie czyta tokenów Cloud ani GitHub użytkownika. Odczytuje stan stałego publicznego repozytorium przez publiczne API GitHub; ma ograniczone odpytywanie i obsługę limitu API oraz ręczny link do PR. Nie pokazuje nieudanego ani starszego commitu jako gotowego podglądu. Podgląd nie jest chroniony hasłem i nie służy do poufnych materiałów.
 
