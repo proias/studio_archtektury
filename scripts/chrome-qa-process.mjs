@@ -3,6 +3,15 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
+export function chromeExecutable() {
+  return (
+    process.env.CHROME_PATH ||
+    (process.platform === "win32"
+      ? "C:/Program Files/Google/Chrome/Application/chrome.exe"
+      : "/usr/bin/google-chrome")
+  );
+}
+
 export function checkBrowserMemory() {
   const freeMiB = Math.round(os.freemem() / 1024 ** 2);
   const minimumMiB = Number(process.env.QA_MIN_FREE_MIB || 1024);

@@ -35,6 +35,3 @@ export const contactSchema = z.object({
     .max(5000, "Wiadomość może mieć najwyżej 5000 znaków."),
 });
 export type ContactData = z.infer<typeof contactSchema>;
-export function buildMailto(data: ContactData, email: string) {
-  return `mailto:${email}?subject=${encodeURIComponent(`Zapytanie o projekt: ${data.projectType}`)}&body=${encodeURIComponent(`Imię i nazwisko: ${data.name}\nE-mail: ${data.email}\nTelefon: ${data.phone || "—"}\nRodzaj projektu: ${data.projectType}\n\n${data.message}`)}`;
-}

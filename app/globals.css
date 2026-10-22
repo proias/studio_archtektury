@@ -202,6 +202,12 @@ textarea {
   font-size: 10px;
   letter-spacing: 0.22em;
 }
+.wordmark-logo {
+  width: clamp(150px, 45vw, 240px);
+  height: 56px;
+  object-fit: contain;
+  object-position: left center;
+}
 .desktop-nav {
   display: flex;
   gap: 36px;

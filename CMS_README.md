@@ -1,75 +1,76 @@
 # CMS Keystatic — Cywińska Studio
 
-## Lokalnie
+## Uruchomienie lokalne
 
-Wymagane: Node.js 22 i pnpm 10.14.0 (na Windows można używać `corepack pnpm`).
+Wymagane: Node.js 22 i pnpm 10.14.0.
 
 ```sh
 corepack pnpm install
-corepack pnpm dev
+corepack pnpm dev --hostname 127.0.0.1
 ```
 
-Panel: <http://localhost:3000/keystatic>. Domyślnie działa lokalnie, bez konta GitHub.
-Opcjonalnie skopiuj `.env.example` do `.env.local`. Uruchamiaj serwer lokalny tylko na zaufanym komputerze.
-Jawne `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=github` włącza GitHub także w development, co pozwala skonfigurować aplikację GitHub.
+Panel: <http://127.0.0.1:3000/keystatic>. Domyślny storage to local; jawne `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=github` włącza GitHub także lokalnie. Po zmianie zmiennych zrestartuj serwer. Dev zapisuje do `.next-dev`, a build do `.next`; katalogi są ignorowane przez Git. Ze względu na RAM nadal uruchamiaj build i Chrome kolejno.
 
 ## Edycja
 
-- **Projekty**: wszystkie 12 istniejących projektów, tytuł, adres, kategoria, lokalizacja, rok, opis, galeria, okładka, kadrowanie, status, kolejność i notatki o autorstwie.
-- **Pracownia, kontakt i SEO**: metadane, dane kontaktowe, obszar działania, akapity „O pracowni”, nawigacja oraz etapy współpracy.
-- Kolejność galerii jest kolejnością zdjęć na stronie. Okładka jest osobnym polem; przy zmianie pierwszego zdjęcia można zaktualizować ją oddzielnie.
-- Niższa wartość kolejności oznacza wcześniejszą pozycję. Puste wyróżnienie usuwa projekt ze strony głównej.
-- Zachowano istniejące zasady podglądu: `draft` i `published` są widoczne w katalogu, `pending-confirmation` wyłącznie pod bezpośrednim adresem. To celowe zachowanie obecnego projektu, objęte testami.
-- Przesyłaj obrazy w formatach obsługiwanych przez Next.js, najlepiej WebP/JPEG/PNG. Zdjęcia zapisują się pod `public/images/projects`, a odnośniki pod `/images/projects/...`. Wymiary adapter odczytuje automatycznie z pliku; historyczne pola szerokości i wysokości nie wymagają ręcznej edycji.
-- Zachowaj adresy istniejących projektów. Zmiana adresu nie tworzy automatycznego przekierowania.
+- **Teksty strony głównej i katalogu**: nagłówki, wprowadzenia, podpisy sekcji, teksty przycisków, menu i stopki. Identyfikatory kotwic oraz techniczne adresy nawigacji pozostają w kodzie. Enter w polach wielowierszowych może oznaczać podział wiersza na stronie.
+- **Logo i zdjęcie główne**: edytuj napisy logo lub wgraj plik PNG/WebP z przezroczystością. Znak jest wspólny dla nagłówka i stopki. Usuń plik, aby wrócić do napisów. Niezależne hero ma opis, kadrowanie i pozycję; brak uploadu oznacza okładkę pierwszego opublikowanego wyróżnionego projektu.
+- **Projekty**: wszystkie 12 wpisów pozostaje w CMS. Publicznie dostępne są wyłącznie `published`; `draft` i `pending-confirmation` nie trafiają do katalogu, wyróżnień, nawigacji, sitemap ani publicznych detali. Detal szkicu zwraca 404 po deployu.
+- **Status opisu**: `temporary` pokazuje publiczny komunikat „Opis tymczasowy — w przygotowaniu redakcyjnym”. Notatki redakcyjne są niepubliczne. Pierwszy projekt `dom-lodzkie-3` jest opublikowany na polecenie właściciela, pozostałe zachowują statusy. Propozycje opisów powstały na podstawie istniejących opisów wizualizacji; nie dopisano niepotwierdzonych faktów.
+- **SEO projektu**: opcjonalny tytuł, opis i obraz udostępniania; puste pola korzystają z tytułu, opisu i okładki projektu.
+- **Pracownia, kontakt i SEO**: dane kontaktowe, globalne metadane, akapity o pracowni, obszar działania, nawigacja i etapy współpracy.
+- **Przekierowania starych adresów**: przed zmianą sluga zapisz dotychczasowy adres i nowy cel. Cele muszą być opublikowanymi stronami. Build odrzuca błędne reguły; nie ma automatycznego odzyskiwania wcześniejszego sluga. Szczegóły: [audyt adresów](docs/REDIRECT-AUDIT.md).
 
-Zapis lokalny aktualizuje pliki robocze. W trybie GitHub zapis trafia do wybranej gałęzi repozytorium. Publiczna strona prezentuje treść z ostatniego poprawnego wdrożenia Netlify; po zmianie treści potrzebny jest build. Nowe projekty są generowane przez `generateStaticParams`.
+Zapis GitHub tworzy zmianę na wybranej gałęzi. Strona publiczna prezentuje treść ostatniego poprawnego wdrożenia Netlify; nowe adresy generuje build. Na `main` zapis może uruchamiać automatyczny release.
 
 ## GitHub App i Netlify
 
-Keystatic korzysta z **GitHub App** (jej Client ID i Client Secret), nie ze zwykłej samodzielnej OAuth App. Właściwy mechanizm i automatyczny kreator opisuje [dokumentacja GitHub mode](https://keystatic.com/docs/github-mode).
+Aplikacja: `cywinska-studio-cms`; repozytorium: `proias/studio_archtektury`. Użytkownik CMS potrzebuje write do repozytorium. Instalację aplikacji ogranicz do tego repozytorium.
 
-1. Repozytorium tej strony to `proias/studio_archtektury`. Użytkownik CMS potrzebuje dostępu **write**. Podłącz to samo repozytorium i odpowiednią gałąź do ciągłych wdrożeń Netlify.
-2. Lokalnie ustaw `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=github` i `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO=proias/studio_archtektury`. Uruchom ponownie `pnpm dev`, otwórz `/keystatic` i skorzystaj z **Create GitHub App**. Kreator nada wymagane uprawnienia; zainstaluj App tylko dla właściwego repozytorium. Wskaż adres wdrożenia `https://cywinska-studio.pl`.
-3. W ustawieniach GitHub App dodaj callback `https://cywinska-studio.pl/api/keystatic/github/oauth/callback`. Dla lokalnego logowania zachowaj callback utworzony przez kreator (`http://127.0.0.1:3000/api/keystatic/github/oauth/callback`). Dla osobnej domeny podglądu dodaj jej dokładny callback.
-4. Kreator zapisuje Client ID, Client Secret, `KEYSTATIC_SECRET` i slug App w lokalnym pliku `.env`. Wartości przenieś do ustawień środowiska projektu Netlify. Nie zapisuj sekretów w repozytorium.
-5. Ustaw poniższe zmienne dla właściwego kontekstu Netlify. Zmienne publiczne są potrzebne podczas **Builds**. Trzy prywatne zmienne są potrzebne w **Builds i Functions** (lub All scopes, jeżeli plan Netlify nie udostępnia wyboru zakresu). Włącz oznaczenie sekretu dla Client Secret i `KEYSTATIC_SECRET`.
+Callbacki:
 
-| Zmienna                                 | Wartość                                            |
-| --------------------------------------- | -------------------------------------------------- |
-| `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND`    | `github`                                           |
-| `NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO`     | `proias/studio_archtektury`                        |
-| `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | slug utworzonej GitHub App                         |
-| `KEYSTATIC_GITHUB_CLIENT_ID`            | Client ID GitHub App                               |
-| `KEYSTATIC_GITHUB_CLIENT_SECRET`        | Client Secret GitHub App                           |
-| `KEYSTATIC_SECRET`                      | losowy sekret z kreatora lub 32 losowe bajty w hex |
+- `https://cywinska-studio.pl/api/keystatic/github/oauth/callback`
+- `http://127.0.0.1:3000/api/keystatic/github/oauth/callback`
 
-6. Wdróż kod i pliki `content/`, następnie otwórz <https://cywinska-studio.pl/keystatic> i zaloguj się przez GitHub. Sprawdź zapis na gałęzi oraz następujący po nim build Netlify. Dla gałęzi CMS można używać Deploy Previews i scalać zmiany do gałęzi produkcyjnej po sprawdzeniu.
+Do utworzenia nowej aplikacji ustaw lokalnie tryb github i repo, otwórz panel i użyj Create GitHub App. Deployed App URL: `https://cywinska-studio.pl`. Kreator zapisuje Client ID, Client Secret, KEYSTATIC_SECRET i slug w `.env`. Puste wpisy w `.env.local` mogą je przesłaniać. Instrukcja: <https://keystatic.com/docs/github-mode>.
 
-Bez ustawienia trybu GitHub konfiguracja używa `local`, ale produkcyjne endpointy lokalnego zapisu są wyłączone (HTTP 503). Sama obecność panelu nie oznacza skonfigurowanego logowania. Brak sekretów w produkcyjnym trybie GitHub również zwraca 503. Sekrety nie są używane w konfiguracji przesyłanej do przeglądarki. Po zmianie zmiennych publicznych wykonaj nowy build.
+| Zmienna                               | Wartość                   | Zakres Netlify     |
+| ------------------------------------- | ------------------------- | ------------------ |
+| NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND    | github                    | Builds             |
+| NEXT_PUBLIC_KEYSTATIC_GITHUB_REPO     | proias/studio_archtektury | Builds             |
+| NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG | cywinska-studio-cms       | Builds             |
+| KEYSTATIC_GITHUB_CLIENT_ID            | z GitHub App              | Builds + Functions |
+| KEYSTATIC_GITHUB_CLIENT_SECRET        | prywatny sekret           | Builds + Functions |
+| KEYSTATIC_SECRET                      | prywatny losowy sekret    | Builds + Functions |
 
-## Dane i migracja
+Sekrety są poza repozytorium i nigdy nie mają prefiksu NEXT*PUBLIC*. Produkcyjne lokalne API jest wyłączone; brak konfiguracji GitHub zwraca 503. Po zmianach zmiennych wykonaj nowy build. Komenda hostingu: `pnpm run build:netlify`, publish `.next`.
 
-Źródło treści stanowią `content/projects/*.json` oraz `content/site.json`. `lib/cms/reader.ts` korzysta z Keystatic Reader API i zwraca dotychczasowe typy `Project` / `ProjectImage`. `lib/projects.ts` pozostaje wspólnym modułem typów i kategorii dla klienta. `lib/site-content.ts` udostępnia dane singletonu przez import JSON, także komponentom klienckim.
+## Kontakt
 
-Stare `lib/project-catalog.json`, `lib/image-manifest.json` oraz archiwum `docs/` pozostają jako materiał audytowy. Nie edytuj ich w celu zmiany strony. Kopia pełnego kontraktu sprzed migracji znajduje się w `docs/archive/cms-before-migration.json`. Skrypt `scripts/migrate-cms.cjs` został wykonany jednokrotnie; korzysta z tej kopii i odmawia nadpisania istniejących plików. Nie uruchamiaj go ponownie na edytowanej treści.
+Formularz wysyła URL-encoded POST do `/__forms.html` przez Netlify Forms. Statyczna definicja ma nazwę `kontakt-pracownia`; nazwy pól muszą być zgodne. Honeypot i filtr Netlify ograniczają spam. Przycisk blokuje podwójne wysyłanie, błędy zachowują dane, a sukces oznacza przyjęcie zgłoszenia przez usługę, nie przeczytanie e-maila.
 
-Panel i część publiczna mają osobne root layouty `(cms)` i `(site)`. Przejście między nimi przeładowuje dokument, izolując globalny Tailwind i fonty. `global-not-found.tsx` zachowuje publiczny widok 404 w układzie wielu root layoutów. API działa dynamicznie w Node.js; strony portfolio pozostają statyczne. `dynamicParams=false` ogranicza detale do adresów wygenerowanych podczas buildu: edycja Git uruchamia nowy build. Nie wymuszamy kopiowania `public/images` do każdej funkcji API. Optymalizacja Next Image / Netlify Image CDN pozostaje włączona.
+`NEXT_PUBLIC_CONTACT_ENABLED=true` ustawia build Netlify w `netlify.toml`; zwykły lokalny dev nie udaje rzeczywistej wysyłki. Powiadomienia konfiguruj w Netlify Forms → Submission notifications. Odbiorcy nie są ustawieniem publicznego CMS. Integrację trzeba sprawdzić na wdrożeniu: zgłoszenie w panelu Forms oraz powiadomienie w skrzynce, również folder Spam. Dawny nieużywany endpoint `/api/contact` i adapter zostały usunięte.
 
-Wymiary obrazów są odczytywane w jednej kolejce i zapamiętywane bez buforów zdjęć. Development sprawdza znacznik modyfikacji i rozmiar pliku, więc zastąpienie zdjęcia pod tym samym adresem odświeża jego wymiary. Lista slugów i nawigacja nie odczytują zdjęć; metadane strony odczytują tylko jedną okładkę. Build korzysta z maksymalnie dwóch workerów generujących strony i optymalizacji pamięci webpacka.
+## Indeksowanie i adresy
 
-## Weryfikacja
+Canonical i mapa używają `https://cywinska-studio.pl`. `/sitemap.xml` wymienia stronę główną, katalog i opublikowane projekty; deploy previews emitują pustą mapę. Nie podajemy fikcyjnej daty aktualizacji przy każdym buildzie.
+
+Indeksowanie pozostaje wyłączone. Dopiero jawne `SITE_INDEXING_ENABLED=true` razem z kontekstem Netlify `production` zmienia reguły robots oraz nagłówki. Samo ustawienie flagi na preview nie odblokowuje indeksowania. Panel, API i definicja formularza pozostają noindex. Włączenie indeksowania jest osobnym krokiem po zatwierdzeniu treści.
+
+## Weryfikacja i dane
 
 ```sh
 corepack pnpm exec tsc --noEmit
 corepack pnpm lint
 corepack pnpm format:check
 corepack pnpm test
+node scripts/cms-api-qa.cjs
+node scripts/cms-resource-check.cjs
 corepack pnpm build
-# W osobnym terminalu: corepack pnpm start
-corepack pnpm test:browser
 ```
 
-Testy Node obejmują porównanie migracji z kopią wejściową. Po celowej zmianie treści należy odpowiednio zaktualizować oczekiwania testów danych; historycznej kopii nie używaj jako źródła bieżącej treści. Testy Chrome/CDP czytają katalog CMS. `QA_URL` zmienia adres serwera, a `QA_OUT` katalog raportów. Skrypt przeglądarkowy korzysta z lokalnego Chrome na Windows.
+E2E Chrome/CDP: `QA_URL` wskazuje serwer lub podgląd Netlify; `QA_OUT` ustala katalog raportu dla `node scripts/browser-qa.mjs`. Test formularza przechwytuje transport i nie wysyła realnych zapytań. Test rzeczywistej integracji Netlify jest osobny. Zmieniony test przeglądarkowy sprawdza publikację i 404 szkiców zamiast historycznego założenia, że wszystkie 12 detali jest publiczne.
 
-Na komputerze z ograniczoną pamięcią uruchamiaj powyższe kroki kolejno. Nie uruchamiaj buildu równolegle z `dev` ani testami Chrome. Domyślny próg startu Chrome to 1 GiB wolnego RAM. Opcjonalny tryb ograniczony `QA_MIN_FREE_MIB=512` obniża go do 512 MiB; obu wariantów pilnuje monitor kończący własne procesy Chrome, jeśli wolna pamięć spadnie poniżej 128 MiB. Profile i procesy testowe są sprzątane po teście. Test CMS rozgrzewa trasy przed uruchomieniem Chrome i ponownie sprawdza wolną pamięć. Lekki pomiar adaptera, bez serwera i przeglądarki: `node scripts/cms-resource-check.cjs`. Test faktycznych handlerów zapisu, bez serwera i Chrome: `node scripts/cms-api-qa.cjs`; tymczasowo zmienia tytuł singletonu i przywraca oryginalne bajty pliku. Audyt i ograniczenia pomiarów: [docs/CMS-RESOURCES.md](docs/CMS-RESOURCES.md).
+Treści: `content/site.json`, `pages.json`, `appearance.json`, `redirects.json`, `projects/*.json`. Publiczne karty dostają wyłącznie dane potrzebne do renderowania, bez notatek redakcyjnych i archiwalnych praw. Wymiary obrazów są odczytywane pojedynczo i pamiętane; nie przechowujemy buforów zdjęć. Publiczny odczyt nie przetwarza galerii szkiców.
+
+Archiwum sprzed migracji jest w `docs/archive/cms-before-migration.json`. Test historyczny sprawdza rzeczywisty skrypt migracji w wirtualnym filesystemie, bez porównywania każdej późniejszej edycji CMS do starych treści. Nie uruchamiaj ponownie `scripts/migrate-cms.cjs` na edytowanych danych. Jednorazowe przygotowanie opisów jest udokumentowane skryptem `scripts/prepare-release-content.cjs`; nie jest częścią buildu.

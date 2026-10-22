@@ -3,12 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { categories, type Project } from "@/lib/projects";
+import { categories, type ProjectCard } from "@/lib/projects";
 export function ProjectGrid({
   projects,
   filters = false,
 }: {
-  projects: Project[];
+  projects: ProjectCard[];
   filters?: boolean;
 }) {
   const [category, setCategory] = useState("Wszystkie");

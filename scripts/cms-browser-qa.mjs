@@ -5,6 +5,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import {
   checkBrowserMemory,
+  chromeExecutable,
   closeTestChrome,
   monitorBrowserMemory,
 } from "./chrome-qa-process.mjs";
@@ -37,6 +38,8 @@ try {
 }
 await fs.mkdir(out, { recursive: true });
 const original = await fs.readFile("content/site.json", "utf8");
+const originalAppearance = await fs.readFile("content/appearance.json", "utf8");
+const appearanceFixture = "public/images/site/cms-appearance-browser-test.png";
 const site = JSON.parse(original);
 const checks = [],
   errors = [],
@@ -45,12 +48,15 @@ const checks = [],
 let socket,
   id = 0,
   edited = false,
+  appearanceEdited = false,
+  fixtureCreated = false,
   savedToDisk = false;
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), "cms-qa-"));
 const chrome = spawn(
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  chromeExecutable(),
   [
     "--headless=new",
+    ...(process.env.CI ? ["--no-sandbox"] : []),
     "--disable-gpu",
     "--disable-background-networking",
     "--no-first-run",
@@ -206,6 +212,93 @@ try {
     "CMS loads existing image assets",
     imageResponses.every((image) => image.status === 200),
   );
+  await goto("/keystatic/singleton/appearance", "Główny napis logo");
+  check(
+    "CMS exposes logo text and upload editor",
+    await evaluate(
+      'document.body.innerText.includes("Plik logo") && [...document.querySelectorAll("input")].some(i => i.value === "PAULINA CYWIŃSKA")',
+    ),
+  );
+  check(
+    "CMS exposes independent hero image and framing controls",
+    await evaluate(
+      'document.body.innerText.includes("Zdjęcie główne strony") && document.body.innerText.includes("Kadrowanie zdjęcia głównego") && document.body.innerText.includes("Pozycja kadru")',
+    ),
+  );
+  const { default: sharp } = await import("sharp");
+  await fs.writeFile(
+    appearanceFixture,
+    await sharp({
+      create: { width: 64, height: 32, channels: 4, background: "#638072" },
+    })
+      .png()
+      .toBuffer(),
+    { flag: "wx" },
+  );
+  fixtureCreated = true;
+  const appearance = JSON.parse(originalAppearance);
+  appearance.logo.src = "/images/site/cms-appearance-browser-test.png";
+  appearance.logo.alt = "Logo testowe CMS";
+  appearance.hero = {
+    src: appearance.logo.src,
+    alt: "Zdjęcie testowe CMS",
+    objectFit: "cover",
+    objectPosition: "50% 0%",
+  };
+  appearanceEdited = true;
+  await fs.writeFile("content/appearance.json", JSON.stringify(appearance));
+  await goto("/", "Architektura");
+  await until(() =>
+    evaluate(
+      '[...document.querySelectorAll(".wordmark-logo")].length === 2 && [...document.querySelectorAll(".site-header .wordmark-logo, .hero img")].every(i => i.complete && i.naturalWidth > 0) && document.querySelector(".hero img").alt === "Zdjęcie testowe CMS"',
+    ),
+  );
+  check(
+    "uploaded logo renders in header and footer",
+    await evaluate(
+      '[...document.querySelectorAll(".wordmark-logo")].every(i => i.alt === "Logo testowe CMS")',
+    ),
+  );
+  check(
+    "independent hero renders with selected framing",
+    await evaluate(
+      'getComputedStyle(document.querySelector(".hero img")).objectFit === "cover" && getComputedStyle(document.querySelector(".hero img")).objectPosition === "50% 0%"',
+    ),
+  );
+  await evaluate('document.querySelector(".site-footer").scrollIntoView()');
+  await until(() =>
+    evaluate(
+      'document.querySelector(".site-footer .wordmark-logo").complete && document.querySelector(".site-footer .wordmark-logo").naturalWidth > 0',
+    ),
+  );
+  await evaluate("window.scrollTo(0, 0)");
+  for (const width of [1440, 390]) {
+    await send("Emulation.setDeviceMetricsOverride", {
+      width,
+      height: 1000,
+      deviceScaleFactor: 1,
+      mobile: width < 600,
+    });
+    check(
+      `uploaded logo and hero fit viewport ${width}`,
+      await evaluate(
+        'document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll(".wordmark-logo")].every(i => i.getBoundingClientRect().width <= 240)',
+      ),
+    );
+    const capture = await send("Page.captureScreenshot", { format: "png" });
+    await fs.writeFile(
+      path.join(out, `appearance-${width}.png`),
+      Buffer.from(capture.data, "base64"),
+    );
+  }
+  await fs.writeFile("content/appearance.json", originalAppearance);
+  appearanceEdited = false;
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: 1440,
+    height: 1000,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
   await goto("/keystatic/singleton/site", "Tytuł SEO");
   const title = site.title + " — test CMS";
   await evaluate(
@@ -281,6 +374,9 @@ try {
 } finally {
   stopMemoryMonitor();
   if (edited) await fs.writeFile("content/site.json", original);
+  if (appearanceEdited)
+    await fs.writeFile("content/appearance.json", originalAppearance);
+  if (fixtureCreated) await fs.rm(appearanceFixture, { force: true });
   socket?.close();
   await closeTestChrome(chrome, profile);
 }

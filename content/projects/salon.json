@@ -1,7 +1,7 @@
 {
   "title": "Salon",
   "category": "Wnętrza",
-  "description": "",
+  "description": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową. Perspektywa salonu z jadalnią i jasnymi tekstyliami. Widok stołu, krzeseł i części wypoczynkowej salonu.",
   "images": [
     {
       "src": "/images/projects/salon/01.webp",
@@ -36,5 +36,13 @@
   },
   "publicationStatus": "draft",
   "order": 11,
-  "sourceFolder": "SALON"
+  "sourceFolder": "SALON",
+  "contentStatus": "temporary",
+  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": null,
+    "imageAlt": ""
+  }
 }

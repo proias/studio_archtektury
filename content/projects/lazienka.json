@@ -1,7 +1,7 @@
 {
   "title": "Łazienka",
   "category": "Wnętrza",
-  "description": "",
+  "description": "Wizualizacja łazienki z kamienną umywalką, szerokim lustrem i drewnianą szafką. Ukośny widok kamiennej umywalki i podświetlanego lustra w łazience. Pionowy widok strefy prysznica i toalety w jasnej kamiennej łazience.",
   "images": [
     {
       "src": "/images/projects/lazienka/01.webp",
@@ -37,5 +37,13 @@
   "publicationStatus": "draft",
   "featuredOrder": 6,
   "order": 6,
-  "sourceFolder": "ŁAZIENKA"
+  "sourceFolder": "ŁAZIENKA",
+  "contentStatus": "temporary",
+  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "seo": {
+    "title": "",
+    "description": "",
+    "image": null,
+    "imageAlt": ""
+  }
 }

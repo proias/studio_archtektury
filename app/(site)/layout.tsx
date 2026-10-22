@@ -3,8 +3,9 @@ import localFont from "next/font/local";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site-content";
-import { getPrimaryCover } from "@/lib/cms/reader";
-import { getPreviewOrigin } from "@/lib/deployment";
+import { getHomeHero } from "@/lib/cms/reader";
+import { PRODUCTION_ORIGIN } from "@/lib/deployment";
+import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 import "../globals.css";
 const montserrat = localFont({
   src: "../fonts/Montserrat.ttf",
@@ -21,12 +22,12 @@ const ptSans = localFont({
   variable: "--font-pt-sans",
 });
 export async function generateMetadata(): Promise<Metadata> {
-  const cover = await getPrimaryCover();
+  const cover = await getHomeHero();
   return {
-    metadataBase: new URL(getPreviewOrigin()),
+    metadataBase: new URL(PRODUCTION_ORIGIN),
     title: { default: site.title, template: "%s — Paulina Cywińska" },
     description: site.description,
-    robots: { index: false, follow: false },
+    robots: { index: indexingEnabled(), follow: indexingEnabled() },
     openGraph: {
       locale: "pl_PL",
       type: "website",

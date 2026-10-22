@@ -1,4 +1,15 @@
 import type { MetadataRoute } from "next";
+import { indexingEnabled } from "@/lib/indexing-policy.mjs";
+import { canonicalUrl } from "@/lib/deployment";
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", disallow: "/" } };
+  return indexingEnabled()
+    ? {
+        rules: {
+          userAgent: "*",
+          allow: "/",
+          disallow: ["/keystatic", "/api/", "/__forms.html"],
+        },
+        sitemap: canonicalUrl("/sitemap.xml"),
+      }
+    : { rules: { userAgent: "*", disallow: "/" } };
 }

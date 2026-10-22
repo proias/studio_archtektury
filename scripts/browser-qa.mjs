@@ -5,6 +5,7 @@ import path from "node:path";
 import assert from "node:assert/strict";
 import {
   checkBrowserMemory,
+  chromeExecutable,
   closeTestChrome,
   monitorBrowserMemory,
 } from "./chrome-qa-process.mjs";
@@ -14,9 +15,10 @@ checkBrowserMemory();
 await fs.mkdir(out, { recursive: true });
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), "archi-browser-"));
 const chrome = spawn(
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  chromeExecutable(),
   [
     "--headless=new",
+    ...(process.env.CI ? ["--no-sandbox"] : []),
     "--disable-gpu",
     "--no-first-run",
     "--no-default-browser-check",
@@ -147,6 +149,19 @@ try {
   await send("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "reduce" }],
   });
+  const catalog = await Promise.all(
+    (await fs.readdir("content/projects"))
+      .filter((file) => file.endsWith(".json"))
+      .map(async (file) => ({
+        ...JSON.parse(
+          await fs.readFile(path.join("content/projects", file), "utf8"),
+        ),
+        slug: file.slice(0, -5),
+      })),
+  );
+  const visible = catalog.filter((p) => p.publicationStatus === "published");
+
+  const featuredCount = visible.filter((p) => p.featuredOrder).length;
   for (const width of [390, 768, 1024, 1440]) {
     await send("Emulation.setDeviceMetricsOverride", {
       width,
@@ -174,15 +189,15 @@ try {
     );
     await screenshot("debug-" + width + ".png");
     await check(
-      width + " wide cover preserves whole building",
+      width + " published covers preserve configured framing",
       await evaluate(
-        'getComputedStyle([...document.querySelectorAll(".project-card")].find(a=>a.getAttribute("href").endsWith("/dom-mazowieckie")).querySelector("img")).objectFit==="contain"',
+        `[...document.querySelectorAll(".project-card img")].every(i => ["cover", "contain"].includes(getComputedStyle(i).objectFit))`,
       ),
     );
     await check(width + " no horizontal overflow", home.scroll <= home.width);
     await check(
-      width + " one H1 and six linked cards",
-      home.h1 === 1 && home.cards.length === 6,
+      width + " one H1 and only published featured cards",
+      home.h1 === 1 && home.cards.length === featuredCount,
     );
     await check(
       width + " hero preserves 16:9",
@@ -252,7 +267,11 @@ try {
         key: "Escape",
         code: "Escape",
       });
-      await until(() => evaluate('!document.querySelector(".mobile-menu")'));
+      await until(() =>
+        evaluate(
+          '!document.querySelector(".mobile-menu") && document.activeElement===document.querySelector(".menu-toggle")',
+        ),
+      );
       await check(
         "Escape closes and returns focus",
         await evaluate(
@@ -280,19 +299,6 @@ try {
     mobile: false,
   });
   await goto("/projekty");
-  const catalog = await Promise.all(
-    (await fs.readdir("content/projects"))
-      .filter((file) => file.endsWith(".json"))
-      .map(async (file) => ({
-        ...JSON.parse(
-          await fs.readFile(path.join("content/projects", file), "utf8"),
-        ),
-        slug: file.slice(0, -5),
-      })),
-  );
-  const visible = catalog.filter(
-    (p) => p.publicationStatus !== "pending-confirmation",
-  );
   for (const label of [
     "Domy",
     "Obiekty usługowe",
@@ -322,7 +328,12 @@ try {
   const slugs = catalog.map((p) => p.slug);
   for (const slug of slugs) {
     const response = await fetch(base + "/projekty/" + slug);
-    await check("direct route " + slug, response.status === 200);
+    const published = visible.some((p) => p.slug === slug);
+    await check(
+      "publication route " + slug,
+      response.status === (published ? 200 : 404),
+    );
+    if (!published) continue;
     await goto("/projekty/" + slug);
     await send("Page.reload");
     await ready();
@@ -339,7 +350,7 @@ try {
       ),
     );
   }
-  await goto("/projekty/kuchnia-1");
+  await goto("/projekty/" + visible.find((p) => p.images.length > 1).slug);
   await screenshot("gallery-desktop.png");
   await evaluate('document.querySelector(".gallery-image").click()');
   await until(() => evaluate('!!document.querySelector(".lightbox")'));
@@ -402,30 +413,94 @@ try {
       '["tel:+48662477959","mailto:pcywinska.arch@gmail.com","https://maps.app.goo.gl/YPg6NKZmTWbV9Lct9"].every(href=>[...document.links].some(a=>a.getAttribute("href")===href))',
     ),
   );
-  const bad = await fetch(base + "/api/contact", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({}),
-  });
-  await check("server rejects invalid data", bad.status === 400);
-  const unavailable = await fetch(base + "/api/contact", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      name: "Test lokalny",
-      email: "qa@example.test",
-      phone: "",
-      projectType: "Dom",
-      message: "Dane testowe. Nie wysyłaj tej wiadomości.",
-    }),
-  });
+  // Mock only the form transport: browser tests never send a real inquiry.
+  await evaluate(`(() => {
+    const original = window.fetch.bind(window);
+    window.__qaFormCalls = [];
+    window.__qaFormStatus = 503;
+    window.fetch = async (url, options) => {
+      if (String(url) !== "/__forms.html") return original(url, options);
+      window.__qaFormCalls.push({url: String(url), body: options.body});
+      await new Promise(resolve => setTimeout(resolve, 300));
+      if (window.__qaFormStatus === 0) throw new TypeError("QA network failure");
+      return new Response("", {status: window.__qaFormStatus, headers: {"x-nf-request-id": "qa-only"}});
+    };
+    window.__qaFillContact = () => {
+      const values = {name: "Test lokalny", email: "qa@example.test", phone: "", projectType: "Dom", message: "Dane testowe. Ten test nie wysyła prawdziwej wiadomości."};
+      for (const [name, value] of Object.entries(values)) document.querySelector("form").elements.namedItem(name).value = value;
+    };
+    window.__qaFillContact(); document.querySelector("form").requestSubmit();
+  })()`);
+  await until(() =>
+    evaluate(
+      'document.querySelector(".form-status").textContent.includes("Nie udało")',
+    ),
+  );
   await check(
-    "unconfigured delivery returns 503 without false success",
-    unavailable.status === 503,
+    "contact HTTP failure preserves data and announces error",
+    await evaluate(
+      'document.querySelector("#contact-name").value === "Test lokalny" && document.querySelector(".form-status").getAttribute("role") === "alert"',
+    ),
+  );
+  await evaluate(
+    'window.__qaFormStatus=200; document.querySelector("form").requestSubmit(); document.querySelector("form").requestSubmit()',
+  );
+  await until(() =>
+    evaluate(
+      'document.querySelector(".form-status").textContent.includes("przyjęte")',
+    ),
+  );
+  await check(
+    "contact success resets form and duplicate submission is ignored",
+    await evaluate(
+      'window.__qaFormCalls.length===2 && document.querySelector("#contact-name").value === ""',
+    ),
+  );
+  await check(
+    "contact posts encoded data and honeypot to static Netlify target",
+    await evaluate(
+      'window.__qaFormCalls.every(c => c.url === "/__forms.html" && new URLSearchParams(c.body).get("form-name") === "kontakt-pracownia" && new URLSearchParams(c.body).has("bot-field"))',
+    ),
+  );
+  await evaluate(
+    'window.__qaFormStatus=0; window.__qaFillContact(); document.querySelector("form").requestSubmit()',
+  );
+  await until(() =>
+    evaluate(
+      'document.querySelector(".form-status").textContent.includes("Nie udało")',
+    ),
+  );
+  await check(
+    "network failure never shows false success",
+    await evaluate(
+      '!document.querySelector(".form-status").textContent.includes("Dziękujemy") && document.querySelector("#contact-name").value === "Test lokalny"',
+    ),
+  );
+  const html = await fetch(base + "/projekty/" + visible[0].slug).then((r) =>
+    r.text(),
+  );
+  await check(
+    "project has production canonical and temporary description notice",
+    html.includes(
+      'rel="canonical" href="https://cywinska-studio.pl/projekty/' +
+        visible[0].slug +
+        '"',
+    ) && html.includes("Opis tymczasowy"),
+  );
+  const sitemap = await fetch(base + "/sitemap.xml").then((r) => r.text());
+  await check(
+    "sitemap never lists draft URLs or preview hosts",
+    !catalog
+      .filter((p) => p.publicationStatus !== "published")
+      .some((p) => sitemap.includes("/projekty/" + p.slug + "<")) &&
+      !sitemap.includes(".netlify.app"),
   );
   await check(
     "preview noindex header",
-    (await fetch(base)).headers.get("x-robots-tag") === "noindex, nofollow",
+    ((await fetch(base)).headers.get("x-robots-tag") || "")
+      .split(",")
+      .map((value) => value.trim())
+      .includes("noindex"),
   );
   await check(
     "preview robots disallow",

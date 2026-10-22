@@ -1,21 +1,24 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site-content";
-import {
-  contactSchema,
-  projectTypes,
-  buildMailto,
-} from "@/lib/contact-validation";
+import { contactSchema, projectTypes } from "@/lib/contact-validation";
+import { sendContact } from "@/lib/contact-form";
+import { pageCopy } from "@/lib/page-content";
+import { TextLines } from "./text-lines";
 export function ContactSection() {
+  const submitting = useRef(false);
+  const [failed, setFailed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string[] | undefined>>(
       {},
     ),
     [busy, setBusy] = useState(false),
     [status, setStatus] = useState("");
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting.current) return;
     setStatus("");
+    setFailed(false);
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form));
     const result = contactSchema.safeParse(data);
@@ -28,12 +31,25 @@ export function ContactSection() {
       return;
     }
     setErrors({});
+    submitting.current = true;
     setBusy(true);
-    window.location.href = buildMailto(result.data, site.email);
-    setStatus(
-      "Przygotowano treść do programu pocztowego. Wyślij ją z własnej skrzynki. Jeśli program się nie otworzył, napisz bezpośrednio na podany adres e-mail.",
-    );
-    setBusy(false);
+    try {
+      if (process.env.NEXT_PUBLIC_CONTACT_ENABLED !== "true")
+        throw new Error("Formularz wymaga wdrożenia Netlify.");
+      await sendContact(result.data, String(data["bot-field"] || ""));
+      setStatus(
+        "Dziękujemy. Zgłoszenie zostało przyjęte przez formularz pracowni.",
+      );
+      form.reset();
+    } catch {
+      setFailed(true);
+      setStatus(
+        "Nie udało się potwierdzić przyjęcia wiadomości. Dane pozostały w formularzu. Spróbuj ponownie lub skontaktuj się e-mailem albo telefonicznie.",
+      );
+    } finally {
+      setBusy(false);
+      submitting.current = false;
+    }
   }
   const fieldError = (name: string) =>
     errors[name]?.length ? (
@@ -49,15 +65,11 @@ export function ContactSection() {
     <section id="kontakt" className="section dark-section contact-section">
       <div className="container contact-columns">
         <div>
-          <p className="eyebrow">Kontakt</p>
+          <p className="eyebrow">{pageCopy.contact.eyebrow}</p>
           <h2>
-            Porozmawiajmy
-            <br />o Twoim projekcie.
+            <TextLines text={pageCopy.contact.heading} />
           </h2>
-          <p className="contact-intro">
-            Opowiedz o planowanej inwestycji, jej lokalizacji i zakresie. To
-            dobry punkt wyjścia do pierwszej rozmowy.
-          </p>
+          <p className="contact-intro">{pageCopy.contact.description}</p>
           <address>
             <a className="contact-email" href={"mailto:" + site.email}>
               {site.email}
@@ -70,21 +82,32 @@ export function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Wyznacz trasę <ArrowUpRight size={17} />
+              {pageCopy.contact.mapsLink} <ArrowUpRight size={17} />
             </a>
           </address>
           <p className="service-area">
-            <span>Obszar współpracy</span>
+            <span>{pageCopy.contact.serviceArea}</span>
             {site.serviceArea.join(" · ")}
           </p>
         </div>
         <div className="contact-form-wrap">
-          <h3>Napisz o swoim pomyśle</h3>
-          <p className="form-note">
-            Uzupełnij szczegóły i otwórz program pocztowy z przygotowaną
-            treścią. Możesz też napisać lub zadzwonić bezpośrednio.
-          </p>
-          <form noValidate onSubmit={submit}>
+          <h3>{pageCopy.contact.formHeading}</h3>
+          <p className="form-note">{pageCopy.contact.formDescription}</p>
+          <form
+            name="kontakt-pracownia"
+            method="POST"
+            action="/__forms.html"
+            noValidate
+            onSubmit={submit}
+            aria-busy={busy}
+          >
+            <input type="hidden" name="form-name" value="kontakt-pracownia" />
+            <div hidden aria-hidden="true">
+              <label>
+                Nie wypełniaj tego pola
+                <input name="bot-field" tabIndex={-1} autoComplete="off" />
+              </label>
+            </div>
             <div className="form-row">
               <div>
                 <label htmlFor="contact-name">Imię i nazwisko *</label>
@@ -161,14 +184,19 @@ export function ContactSection() {
               {fieldError("message")}
             </div>
             <p className="form-note">
-              * Pola wymagane. Dane pozostają w przeglądarce do chwili wysłania
-              wiadomości w Twoim programie pocztowym.
+              * Pola wymagane. Wysłane dane przetwarza pracownia za
+              pośrednictwem Netlify Forms.{" "}
+              <a href="/prywatnosc">Informacje o prywatności</a>.
             </p>
             <button className="contact-submit" disabled={busy} type="submit">
-              {busy ? "Przygotowywanie…" : "Otwórz program pocztowy"}
+              {busy ? "Wysyłanie…" : pageCopy.contact.submitLabel}
               <ArrowUpRight size={18} />
             </button>
-            <p className="form-status" role="status" aria-live="polite">
+            <p
+              className="form-status"
+              role={failed ? "alert" : "status"}
+              aria-live={failed ? "assertive" : "polite"}
+            >
               {status}
             </p>
           </form>
