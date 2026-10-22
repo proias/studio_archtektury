@@ -44,9 +44,10 @@ jobs:
         with:
           node-version: "22"
           package-manager-cache: false
-      - uses: pnpm/action-setup@v6
-        with:
-          cache: true
+      - name: Enable project pnpm with bundled Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.14.0 --activate
       - run: pnpm install --frozen-lockfile
       - name: Static checks and integration tests
         run: |

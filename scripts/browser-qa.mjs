@@ -119,7 +119,9 @@ try {
   async function goto(route) {
     await send("Page.navigate", { url: base + route });
     await until(() =>
-      evaluate("location.pathname === " + JSON.stringify(route.split("#")[0])),
+      evaluate(
+        "location.pathname === " + JSON.stringify(route.split(/[?#]/)[0]),
+      ),
     );
     await ready();
   }
@@ -508,6 +510,71 @@ try {
       "Disallow: /",
     ),
   );
+  if (process.env.QA_REVIEW_BRANCH) {
+    const query = new URLSearchParams({
+      branch: process.env.QA_REVIEW_BRANCH,
+      path: "/",
+    });
+    const response = await fetch(base + "/api/cms-preview?" + query);
+    const review = await response.json();
+    await check(
+      "review API reads the public PR state without editor credentials",
+      response.ok &&
+        ["waiting", "building", "ready", "merged", "closed"].includes(
+          review.state,
+        ),
+    );
+    await goto("/cms-preview?" + query);
+    await until(() =>
+      evaluate(
+        'document.querySelector("[role=status]")?.textContent !== "Sprawdzanie zapisanych zmian…"',
+      ),
+    );
+    await check(
+      "preview status page is isolated from public layout",
+      await evaluate(
+        '!document.querySelector(".site-header, .site-footer") && document.querySelector("h1").textContent === "Podgląd zapisanych zmian"',
+      ),
+    );
+    for (const width of [390, 1440]) {
+      await send("Emulation.setDeviceMetricsOverride", {
+        width,
+        height: 1000,
+        deviceScaleFactor: 1,
+        mobile: width === 390,
+      });
+      await check(
+        "review status no horizontal overflow " + width,
+        await evaluate(
+          "document.documentElement.scrollWidth <= innerWidth + 1",
+        ),
+      );
+      await screenshot("review-" + width + ".png");
+    }
+    await check(
+      "review does not invent a ready link",
+      await evaluate(
+        review.state === "ready"
+          ? "!!document.querySelector('a[href^=\"https://deploy-preview-\"]')"
+          : "!document.querySelector('a[href^=\"https://deploy-preview-\"]')",
+      ),
+    );
+    const headers = (await fetch(base + "/cms-preview")).headers;
+    await check(
+      "review page always noindex",
+      (headers.get("x-robots-tag") || "").includes("noindex"),
+    );
+    await send("Page.navigate", { url: base + "/keystatic" });
+    await until(() =>
+      evaluate(
+        'document.body.innerText.includes("Log in with Keystatic Cloud")',
+      ),
+    );
+    await check(
+      "hosted CMS uses Cloud login and excludes public layout",
+      await evaluate('!document.querySelector(".site-header, .site-footer")'),
+    );
+  }
   await check("no browser JS errors", errors.length === 0);
   await check("no failed resources", failed.length === 0);
   await fs.writeFile(
