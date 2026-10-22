@@ -2,11 +2,10 @@
   "logo": {
     "title": "PAULINA CYWIŃSKA",
     "subtitle": "STUDIO ARCHITEKTURY",
-    "src": null,
     "alt": "Paulina Cywińska — Studio Architektury"
   },
   "hero": {
-    "src": null,
+    "src": "/images/site/hero/src.png",
     "alt": "Zdjęcie główne — Paulina Cywińska Studio Architektury",
     "objectFit": "contain",
     "objectPosition": "50% 50%"
