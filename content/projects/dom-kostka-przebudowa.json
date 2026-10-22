@@ -2,47 +2,42 @@
   "title": "Przebudowa domu typu kostka",
   "category": "Domy",
   "description": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami. Front domu typu kostka z garażem w dolnej kondygnacji. Widok ogrodu przy przebudowanym domu typu kostka.",
+  "contentStatus": "temporary",
+  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "seo": {},
   "images": [
     {
-      "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+      "src": "/images/projects/dom-kostka-przebudowa/images/0/src.webp",
       "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
       "width": 1536,
       "height": 1024
     },
     {
-      "src": "/images/projects/dom-kostka-przebudowa/02.webp",
+      "src": "/images/projects/dom-kostka-przebudowa/images/1/src.webp",
       "alt": "Front domu typu kostka z garażem w dolnej kondygnacji",
       "width": 1536,
       "height": 1024
     },
     {
-      "src": "/images/projects/dom-kostka-przebudowa/03.webp",
+      "src": "/images/projects/dom-kostka-przebudowa/images/2/src.webp",
       "alt": "Widok ogrodu przy przebudowanym domu typu kostka",
       "width": 1536,
       "height": 1024
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-kostka-przebudowa/01.webp",
+    "src": "/images/projects/dom-kostka-przebudowa/cover/src.webp",
     "alt": "Wizualizacja przebudowy domu typu kostka z tarasem i dużymi przeszkleniami",
     "width": 1536,
     "height": 1024,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
   },
+  "publicationStatus": "published",
+  "order": 1,
+  "sourceFolder": "DOM KOSTKA PRZEBUDOWA",
   "credits": {
     "authorship": "pending-confirmation",
     "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
-  },
-  "publicationStatus": "pending-confirmation",
-  "order": 12,
-  "sourceFolder": "DOM KOSTKA PRZEBUDOWA",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
-  "seo": {
-    "title": "",
-    "description": "",
-    "image": null,
-    "imageAlt": ""
   }
 }
