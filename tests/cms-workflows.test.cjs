@@ -5,6 +5,7 @@ const vm = require("node:vm");
 function script(name) {
   return fs
     .readFileSync(`.github/workflows/${name}.yml`, "utf8")
+    .replace(/\r\n/g, "\n")
     .split("node <<'NODE'\n")[1]
     .split("\n          NODE")[0];
 }
@@ -67,7 +68,7 @@ test("CMS workflow creates one PR, requests owner review and never approves or m
   const repeat = await runReview(true);
   assert.equal(repeat.filter((c) => c.method === "POST").length, 0);
 });
-async function boundary(files) {
+async function boundary(files, workflowRun = false) {
   const process = {
     env: {
       GITHUB_REPOSITORY: "proias/studio_archtektury",
@@ -77,6 +78,8 @@ async function boundary(files) {
     exitCode: 0,
   };
   const errors = [];
+  const statuses = [];
+  const pr = { number: 7, head: { ref: "cms/test", sha: "current" } };
   await vm.runInNewContext(script("cms-content-boundary"), {
     process,
     console: {
@@ -90,13 +93,29 @@ async function boundary(files) {
       return {
         readFileSync: () =>
           JSON.stringify({
-            pull_request: { number: 7, head: { ref: "cms/test" } },
+            ...(workflowRun
+              ? {
+                  workflow_run: {
+                    head_repository: { full_name: "proias/studio_archtektury" },
+                    head_branch: "cms/test",
+                    head_sha: "current",
+                  },
+                }
+              : { pull_request: pr }),
           }),
       };
     },
-    fetch: async () => ({ ok: true, json: async () => files }),
+    fetch: async (url, options) => {
+      let data = files;
+      if (url.includes("/pulls?")) data = [pr];
+      if (url.includes("/statuses/current")) {
+        statuses.push(JSON.parse(options.body).state);
+        data = {};
+      }
+      return { ok: true, status: 200, json: async () => data };
+    },
   });
-  return { code: process.exitCode, errors };
+  return { code: process.exitCode, errors, statuses };
 }
 test("trusted boundary permits content and raster images, rejects code and renamed code", async () => {
   assert.equal(
@@ -117,4 +136,12 @@ test("trusted boundary permits content and raster images, rejects code and renam
     },
   ])
     assert.equal((await boundary([file])).code, 1);
+});
+test("trusted boundary also runs after bot-created PR and reports the exact head commit", async () => {
+  const valid = await boundary([{ filename: "content/pages.json" }], true);
+  assert.equal(valid.code, 0);
+  assert.deepEqual(valid.statuses, ["success"]);
+  const forbidden = await boundary([{ filename: "app/page.tsx" }], true);
+  assert.equal(forbidden.code, 1);
+  assert.deepEqual(forbidden.statuses, ["failure"]);
 });

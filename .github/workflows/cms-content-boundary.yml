@@ -1,6 +1,9 @@
 name: CMS content boundary
 
 on:
+  workflow_run:
+    workflows: ["CMS review"]
+    types: [completed]
   pull_request_target:
     branches: [main]
     types: [opened, synchronize, reopened, ready_for_review]
@@ -8,9 +11,11 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  statuses: write
 
 jobs:
   boundary:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     name: CMS content boundary
     runs-on: ubuntu-24.04
     timeout-minutes: 3
@@ -23,20 +28,33 @@ jobs:
         run: |
           node <<'NODE'
           const fs=require('node:fs');
-          const pr=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')).pull_request;
-          if(!pr.head.ref.startsWith('cms/')) { console.log('PR techniczny: przegląd właściciela i standardowe QA.'); process.exit(0); }
+          const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+          let pr=event.pull_request;
+          async function api(path, method='GET', body) {
+            const r=await fetch('https://api.github.com/repos/'+process.env.GITHUB_REPOSITORY+'/'+path,{method,headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+            if(!r.ok) throw Error('Cannot verify content boundary: '+r.status);
+            return r.status===204?null:r.json();
+          }
+          const report=state=>api('statuses/'+pr.head.sha,'POST',{state,context:'CMS content boundary',description:state==='success'?'Zakres plików poprawny; wymagana recenzja właściciela.':'Zmiany poza treściami CMS lub błąd weryfikacji.'});
           const allowed=p=>/^content\/(site|pages|appearance|redirects)\.json$/.test(p) || /^content\/projects\/[a-z0-9-]+\.json$/.test(p) || /^public\/images\/(projects|site)\/[a-zA-Z0-9_./-]+\.(png|jpe?g|webp|avif)$/i.test(p);
           (async()=>{
+            if(event.workflow_run) {
+              const run=event.workflow_run;
+              if(run.head_repository.full_name!==process.env.GITHUB_REPOSITORY || !run.head_branch.startsWith('cms/')) return;
+              const prs=await api('pulls?state=open&base=main&head='+encodeURIComponent(process.env.GITHUB_REPOSITORY.split('/')[0]+':'+run.head_branch));
+              pr=prs.find(p=>p.head.sha===run.head_sha);
+              if(!pr) { console.log('Brak otwartego PR dla tego commitu; pomijam nieaktualny run.'); return; }
+            }
+            if(!pr.head.ref.startsWith('cms/')) { await report('success'); return; }
             const forbidden=[];
             for(let page=1;page<=30;page++) {
-              const r=await fetch('https://api.github.com/repos/'+process.env.GITHUB_REPOSITORY+'/pulls/'+pr.number+'/files?per_page=100&page='+page,{headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json'}});
-              if(!r.ok) throw Error('Cannot verify changed files: '+r.status);
-              const files=await r.json();
+              const files=await api('pulls/'+pr.number+'/files?per_page=100&page='+page);
               for(const f of files) if(!allowed(f.filename) || (f.previous_filename && !allowed(f.previous_filename))) forbidden.push(f.filename);
               if(files.length<100) break;
               if(page===30) throw Error('Too many files to verify safely');
             }
             if(forbidden.length) throw Error('Gałąź CMS zmienia pliki spoza treści i obrazów: '+forbidden.join(', '));
+            await report('success');
             console.log('Zmiany ograniczone do treści CMS i obrazów. Wymagana recenzja właściciela.');
-          })().catch(e=>{console.error(e.message);process.exitCode=1});
+          })().catch(async e=>{console.error(e.message);if(pr) await report('failure').catch(err=>console.error(err.message));process.exitCode=1});
           NODE
