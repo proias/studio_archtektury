@@ -105,6 +105,7 @@ export function ScrollShowroom({
 
     // Anchor links land on the finished case study rather than a hidden title
     // midway through the sticky scene. Ordinary wheel/touch scrolling stays native.
+    let programmaticFocus = false;
     const goToPortfolio = (behavior: ScrollBehavior, focusHeading = false) => {
       if (element.dataset.motion !== "desktop") return;
       const top =
@@ -114,10 +115,13 @@ export function ScrollShowroom({
         stage.offsetHeight -
         headerHeight();
       window.scrollTo({ top, behavior });
-      if (focusHeading)
+      if (focusHeading) {
+        programmaticFocus = true;
         element
           .querySelector<HTMLElement>("#portfolio-heading")
           ?.focus({ preventScroll: true });
+        programmaticFocus = false;
+      }
     };
     const onClick = (event: MouseEvent) => {
       if (
@@ -153,8 +157,9 @@ export function ScrollShowroom({
     const hashChange = () => {
       if (location.hash === "#portfolio") goToPortfolio("instant");
     };
-    document.addEventListener("click", onClick);
+    document.addEventListener("click", onClick, true);
     const onFocus = (event: FocusEvent) => {
+      if (programmaticFocus) return;
       if (
         (event.target as Element).closest(
           ".showroom-project-title, .showroom-project-copy",
@@ -167,7 +172,7 @@ export function ScrollShowroom({
     const initialAnchor = requestAnimationFrame(hashChange);
     return () => {
       cancelAnimationFrame(initialAnchor);
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onClick, true);
       element.removeEventListener("focusin", onFocus);
       window.removeEventListener("hashchange", hashChange);
       scope.revert();
@@ -218,7 +223,7 @@ export function ScrollShowroom({
           </div>
         </div>
       </div>
-      <div id="portfolio" className="showroom-track">
+      <div className="showroom-track">
         <div className="showroom-sticky container">
           <Link
             href={`/projekty/${project.slug}`}
@@ -248,7 +253,10 @@ export function ScrollShowroom({
               <ArrowUpRight size={25} />
             </span>
           </Link>
-          <div className="showroom-project-title section-heading">
+          <div
+            id="portfolio"
+            className="showroom-project-title section-heading"
+          >
             <div>
               <p className="eyebrow">01 / {pageCopy.portfolio.eyebrow}</p>
               <h2 id="portfolio-heading" tabIndex={-1}>

@@ -430,6 +430,20 @@ try {
     "portfolio CTA lands on the revealed project",
     await evaluate('document.activeElement.id==="portfolio-heading"'),
   );
+  await evaluate(`window.scrollTo({top:${scene.start},behavior:"instant"})`);
+  await pause(150);
+  await evaluate(
+    'document.querySelector(".desktop-nav a[href=\"/#portfolio\"]").click()',
+  );
+  await until(() =>
+    evaluate(
+      'Number(getComputedStyle(document.querySelector(".showroom-project-copy")).opacity)>.98',
+    ),
+  );
+  await check(
+    "Next navigation link reaches the finished scroll scene",
+    await evaluate('document.activeElement.id==="portfolio-heading"'),
+  );
   await send("Emulation.setDeviceMetricsOverride", {
     width: 390,
     height: 844,
