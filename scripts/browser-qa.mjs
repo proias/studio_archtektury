@@ -245,7 +245,7 @@ try {
     await check(
       width + " hero uses responsive editorial framing",
       Math.abs(
-        home.hero.width / home.hero.height - (width < 600 ? 4 / 3 : 16 / 9),
+        home.hero.width / home.hero.height - (width < 768 ? 4 / 3 : 16 / 10),
       ) < 0.01,
     );
     await check(width + " all images loaded", home.images);
@@ -347,103 +347,137 @@ try {
   await send("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
   });
+
   await goto("/?qa-motion=desktop");
   await until(() =>
     evaluate(
-      'document.querySelector(".scroll-showroom")?.dataset.motion === "desktop"',
+      'document.querySelector(".atelier-home")?.dataset.kinetic === "desktop"',
     ),
   );
-  const scene = await evaluate(
-    '(()=>{const t=document.querySelector(".showroom-track"),s=document.querySelector(".showroom-sticky");return {start:t.getBoundingClientRect().top+scrollY-84,travel:t.offsetHeight-s.offsetHeight}})()',
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await pause(200);
+  const openingWidth = await evaluate(
+    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
+  );
+  await evaluate('scrollTo({top:800,behavior:"instant"})');
+  await pause(200);
+  const expandedWidth = await evaluate(
+    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
   );
   await check(
-    "hero scroll distance is one third shorter",
-    Math.abs(scene.travel / 1000 - 0.766667) < 0.01,
+    "hero expands four percent across 800px",
+    Math.abs(expandedWidth / openingWidth - 1.04) < 0.005,
   );
   await check(
-    "contact CTA uses the requested label",
+    "header frosts after scrolling",
     await evaluate(
-      'document.querySelector(".header-brief").textContent.includes("Napisz do Nas")',
+      'document.querySelector(".site-header").classList.contains("nav--scrolled")',
     ),
   );
-  const motionStates = [];
-  for (const fraction of [0, 0.5, 1, 0]) {
+  for (const [name, selector] of [
+    ["hero", ".kinetic-hero"],
+    ["manifest", "#manifest"],
+    ["portfolio", "#portfolio"],
+    ["process", ".atelier-process"],
+    ["contact", ".contact-section"],
+  ]) {
     await evaluate(
-      `window.scrollTo({top:${scene.start + scene.travel * fraction},behavior:"instant"})`,
+      "document.querySelector(" +
+        JSON.stringify(selector) +
+        ').scrollIntoView({behavior:"instant"})',
     );
-    await pause(200);
-    const state = await evaluate(
-      '(()=>{const p=document.querySelector(".showroom-picture"),c=document.querySelector(".showroom-project-copy"),t=document.querySelector(".showroom-project-title");return {scroll:scrollY,picture:p.getBoundingClientRect().toJSON(),copy:c.getBoundingClientRect().toJSON(),opacity:Number(getComputedStyle(c).opacity),titleOpacity:Number(getComputedStyle(t).opacity)}})()',
+    await pause(1400);
+    const shot = await send("Page.captureScreenshot", { format: "png" });
+    await fs.writeFile(
+      path.join(out, "kinetic-" + name + ".png"),
+      Buffer.from(shot.data, "base64"),
     );
-    motionStates.push(state);
-    if (motionStates.length <= 3) {
-      const shot = await send("Page.captureScreenshot", { format: "png" });
-      await fs.writeFile(
-        path.join(out, `motion-desktop-${fraction}.png`),
-        Buffer.from(shot.data, "base64"),
+    await check(
+      name + " has no horizontal overflow",
+      await evaluate("document.documentElement.scrollWidth<=innerWidth"),
+    );
+    if (name === "manifest") {
+      await evaluate(
+        'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
+      );
+      await pause(200);
+      await check(
+        "manifest counters finish",
+        await evaluate(
+          'Array.from(document.querySelectorAll("[data-count-to]")).map(x=>x.textContent).join("/")==="10+/100%"',
+        ),
+      );
+      await check(
+        "header switches to dark",
+        await evaluate(
+          'document.querySelector(".site-header").classList.contains("nav--dark")',
+        ),
       );
     }
   }
   await check(
-    "scroll changes hero into a smaller project frame",
-    motionStates[2].picture.width / motionStates[0].picture.width < 0.7 &&
-      motionStates[2].picture.width / motionStates[0].picture.width > 0.6,
-  );
-  await check(
-    "project information is revealed by scroll",
-    motionStates[0].opacity < 0.05 &&
-      motionStates[2].opacity > 0.98 &&
-      motionStates[2].titleOpacity > 0.98,
-  );
-  await check(
-    "reverse scroll restores the opening frame",
-    Math.abs(motionStates[3].picture.width - motionStates[0].picture.width) <
-      2 && motionStates[3].opacity < 0.05,
-  );
-  await check(
-    "finished image and project copy do not overlap",
-    motionStates[2].picture.right < motionStates[2].copy.left,
-  );
-  for (const fraction of [0.4, 0.5, 0.65, 0.75, 0.65, 0.4]) {
+    "one process phase is active",
     await evaluate(
-      `window.scrollTo({top:${scene.start + scene.travel * fraction},behavior:"instant"})`,
+      'document.querySelectorAll(".atelier-process-list > li[data-active=true]").length===1',
+    ),
+  );
+
+  // Serialize selectors as JS literals: nested attribute quotes previously broke CI.
+  const portfolioNavSelector = '.desktop-nav a[href="/#portfolio"]';
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await evaluate(
+    "document.querySelector(" +
+      JSON.stringify(portfolioNavSelector) +
+      ").click()",
+  );
+  await until(() =>
+    evaluate('document.activeElement.id==="portfolio-heading"'),
+  );
+  await check(
+    "desktop navigation reaches portfolio without selector syntax errors",
+    await evaluate('document.activeElement.id==="portfolio-heading"'),
+  );
+  const featuredTop = await evaluate(
+    'document.querySelector(".kinetic-featured").getBoundingClientRect().top+scrollY',
+  );
+  const pinned = [];
+  for (const offset of [160, 280]) {
+    await evaluate(
+      "scrollTo({top:" + (featuredTop + offset) + ',behavior:"instant"})',
     );
-    await pause(100);
-    await check(
-      `title stays clear of image at progress ${fraction}`,
+    await pause(150);
+    pinned.push(
       await evaluate(
-        '(()=>{const t=document.querySelector(".showroom-project-title"),p=document.querySelector(".showroom-picture");return Number(getComputedStyle(t).opacity)<.02 || t.getBoundingClientRect().bottom < p.getBoundingClientRect().top})()',
+        'document.querySelector(".featured-project-image").getBoundingClientRect().top',
       ),
     );
   }
-  await fs.writeFile(
-    path.join(out, "motion-states.json"),
-    JSON.stringify(motionStates, null, 2),
-  );
-  await evaluate('document.querySelector(".hero-aside a").click()');
-  await until(() =>
-    evaluate(
-      'Math.abs(Number(getComputedStyle(document.querySelector(".showroom-project-copy")).opacity)-1)<.02',
-    ),
-  );
   await check(
-    "portfolio CTA lands on the revealed project",
-    await evaluate('document.activeElement.id==="portfolio-heading"'),
+    "featured image remains sticky while text scrolls",
+    Math.abs(pinned[0] - pinned[1]) < 2 && Math.abs(pinned[0] - 108) < 2,
   );
-  await evaluate(`window.scrollTo({top:${scene.start},behavior:"instant"})`);
-  await pause(150);
+  await goto("/?qa-counter-interruption=1");
   await evaluate(
-    'document.querySelector(".desktop-nav a[href=\"/#portfolio\"]").click()',
+    'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
   );
+  await pause(100);
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+  });
   await until(() =>
     evaluate(
-      'Number(getComputedStyle(document.querySelector(".showroom-project-copy")).opacity)>.98',
+      'document.querySelector(".atelier-home").dataset.kinetic==="static"',
     ),
   );
   await check(
-    "Next navigation link reaches the finished scroll scene",
-    await evaluate('document.activeElement.id==="portfolio-heading"'),
+    "interrupted counters restore final values",
+    await evaluate(
+      'Array.from(document.querySelectorAll("[data-count-to]")).every(el=>el.textContent===el.dataset.countTo+el.dataset.countSuffix)',
+    ),
   );
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
   await send("Emulation.setDeviceMetricsOverride", {
     width: 390,
     height: 844,
@@ -453,60 +487,55 @@ try {
   await goto("/?qa-motion=mobile");
   await until(() =>
     evaluate(
-      'document.querySelector(".scroll-showroom")?.dataset.motion === "mobile"',
+      'document.querySelector(".atelier-home")?.dataset.kinetic==="mobile"',
     ),
   );
   await check(
-    "mobile uses normal flow without a pinned scroll runway",
+    "mobile uses normal flow",
     await evaluate(
-      'getComputedStyle(document.querySelector(".showroom-sticky")).position!=="sticky" && document.documentElement.scrollWidth<=innerWidth',
+      'getComputedStyle(document.querySelector(".featured-project-image")).position!=="sticky" && document.documentElement.scrollWidth<=innerWidth',
     ),
   );
-  await evaluate('window.scrollTo({top:0,behavior:"instant"})');
-  await pause(700);
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await pause(800);
   {
     const shot = await send("Page.captureScreenshot", { format: "png" });
     await fs.writeFile(
-      path.join(out, "motion-mobile.png"),
+      path.join(out, "kinetic-mobile.png"),
       Buffer.from(shot.data, "base64"),
     );
   }
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+  });
+  await until(() =>
+    evaluate(
+      'document.querySelector(".atelier-home")?.dataset.kinetic==="static"',
+    ),
+  );
+  await check(
+    "live reduced motion restores static images",
+    await evaluate(
+      'getComputedStyle(document.querySelector(".kinetic-hero-frame")).transform==="none"',
+    ),
+  );
+  testingNoJs = true;
+  await send("Emulation.setScriptExecutionDisabled", { value: true });
+  await send("Page.navigate", { url: base + "/?qa-no-js=1" });
+  await pause(700);
+  await check(
+    "no JS keeps content visible",
+    await evaluate(
+      '!!document.querySelector("h1") && !document.querySelector(".atelier-home").dataset.kinetic && getComputedStyle(document.querySelector(".featured-project-copy")).opacity==="1"',
+    ),
+  );
+  await send("Emulation.setScriptExecutionDisabled", { value: false });
   await send("Emulation.setDeviceMetricsOverride", {
     width: 1440,
     height: 1000,
     deviceScaleFactor: 1,
     mobile: false,
   });
-  await until(() =>
-    evaluate(
-      'document.querySelector(".scroll-showroom")?.dataset.motion === "desktop"',
-    ),
-  );
-  await send("Emulation.setEmulatedMedia", {
-    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
-  });
-  await until(() =>
-    evaluate(
-      'document.querySelector(".scroll-showroom")?.dataset.motion === "static"',
-    ),
-  );
-  await check(
-    "live reduced-motion preference removes pinning and restores copy",
-    await evaluate(
-      'getComputedStyle(document.querySelector(".showroom-sticky")).position!=="sticky" && Number(getComputedStyle(document.querySelector(".showroom-project-copy")).opacity)===1',
-    ),
-  );
-  testingNoJs = true;
-  await send("Emulation.setScriptExecutionDisabled", { value: true });
-  await send("Page.navigate", { url: base + "/?qa-no-js=1" });
-  await pause(400);
-  await check(
-    "no-JS fallback keeps hero and project content visible",
-    await evaluate(
-      '!!document.querySelector("h1") && !document.querySelector(".scroll-showroom").dataset.motion && Number(getComputedStyle(document.querySelector(".showroom-project-copy")).opacity)===1',
-    ),
-  );
-  await send("Emulation.setScriptExecutionDisabled", { value: false });
   await goto("/projekty");
   testingNoJs = false;
   for (const label of [

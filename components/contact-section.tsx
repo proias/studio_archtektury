@@ -65,7 +65,7 @@ export function ContactSection() {
     <section
       id="kontakt"
       className="section dark-section contact-section"
-      data-section="Kontakt"
+      data-section="06 / Kontakt"
     >
       <div className="container contact-columns">
         <div>
@@ -97,7 +97,7 @@ export function ContactSection() {
         <div className="contact-form-wrap">
           <div className="brief-card-top">
             <span>Twój nowy rozdział</span>
-            <span>Karta briefu / 01</span>
+            <span>REF: CYWINSKA-ARCH-2026</span>
           </div>
           <h3>{pageCopy.contact.formHeading}</h3>
           <p className="form-note">{pageCopy.contact.formDescription}</p>
@@ -118,7 +118,12 @@ export function ContactSection() {
             </div>
             <div className="form-row">
               <div>
-                <label htmlFor="contact-name">Imię i nazwisko *</label>
+                <label htmlFor="contact-name">
+                  <span className="field-index" aria-hidden="true">
+                    01 /{" "}
+                  </span>
+                  Imię i nazwisko *
+                </label>
                 <input
                   id="contact-name"
                   name="name"
@@ -130,7 +135,12 @@ export function ContactSection() {
                 {fieldError("name")}
               </div>
               <div>
-                <label htmlFor="contact-email">E-mail *</label>
+                <label htmlFor="contact-email">
+                  <span className="field-index" aria-hidden="true">
+                    02 /{" "}
+                  </span>
+                  E-mail *
+                </label>
                 <input
                   id="contact-email"
                   name="email"
@@ -146,6 +156,9 @@ export function ContactSection() {
             <div className="form-row">
               <div>
                 <label htmlFor="contact-phone">
+                  <span className="field-index" aria-hidden="true">
+                    03 /{" "}
+                  </span>
                   Telefon <span>(opcjonalnie)</span>
                 </label>
                 <input
@@ -159,7 +172,12 @@ export function ContactSection() {
                 {fieldError("phone")}
               </div>
               <div>
-                <label htmlFor="contact-type">Rodzaj projektu *</label>
+                <label htmlFor="contact-type">
+                  <span className="field-index" aria-hidden="true">
+                    04 /{" "}
+                  </span>
+                  Rodzaj projektu *
+                </label>
                 <select
                   id="contact-type"
                   name="projectType"
@@ -178,7 +196,12 @@ export function ContactSection() {
               </div>
             </div>
             <div>
-              <label htmlFor="contact-message">Wiadomość *</label>
+              <label htmlFor="contact-message">
+                <span className="field-index" aria-hidden="true">
+                  05 /{" "}
+                </span>
+                Wiadomość *
+              </label>
               <textarea
                 id="contact-message"
                 name="message"

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ScrollShowroom } from "@/components/scroll-showroom";
 import Link from "next/link";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight, Plus, Star } from "lucide-react";
 import { ProjectGrid } from "@/components/project-grid";
 import { ContactSection } from "@/components/contact-section";
 import { AtelierMotion } from "@/components/atelier-motion";
@@ -68,10 +68,7 @@ export default async function HomePage() {
         }}
       />
       {featured ? (
-        <ScrollShowroom
-          project={projectCard(featured)}
-          description={featured.description}
-        />
+        <ScrollShowroom project={projectCard(featured)} />
       ) : (
         <section className="section container">
           <h1>
@@ -84,26 +81,11 @@ export default async function HomePage() {
       )}
 
       <section
-        className="section portfolio-section portfolio-followup"
-        data-section="Projekty"
-      >
-        <div className="container">
-          <ProjectGrid projects={secondary.map(projectCard)} />
-          <div className="portfolio-bottom">
-            <span>Różne miejsca. Wspólna wrażliwość.</span>
-            <Link className="text-link" href="/projekty">
-              Odkryj całe portfolio
-              <ArrowUpRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section
         id="manifest"
-        className="manifest-section dark-section"
-        data-section="Podejście"
+        className="manifest-section dark-section tone-dark"
+        data-section="02 / Podejście"
       >
+        <span className="tone-curtain curtain-paper" aria-hidden="true" />
         <div className="container">
           <div className="manifest-layout">
             <div>
@@ -129,12 +111,30 @@ export default async function HomePage() {
           </div>
           <div className="manifest-stats">
             <div>
-              <strong>10+</strong>
+              <strong>
+                <span className="sr-only">10+</span>
+                <span
+                  data-count-to="10"
+                  data-count-suffix="+"
+                  aria-hidden="true"
+                >
+                  10+
+                </span>
+              </strong>
               <span>lat doświadczenia</span>
             </div>
             <div>
-              <strong>Indywidualnie</strong>
-              <span>od pierwszej kreski</span>
+              <strong>
+                <span className="sr-only">100%</span>
+                <span
+                  data-count-to="100"
+                  data-count-suffix="%"
+                  aria-hidden="true"
+                >
+                  100%
+                </span>
+              </strong>
+              <span>indywidualnych koncepcji</span>
             </div>
             <div>
               <strong>Nadzór autorski</strong>
@@ -149,12 +149,111 @@ export default async function HomePage() {
       </section>
 
       <section
+        id="portfolio"
+        className="section portfolio-section portfolio-followup kinetic-portfolio tone-light"
+        data-section="03 / Projekty"
+      >
+        <span className="tone-curtain curtain-basalt" aria-hidden="true" />
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">03 / {pageCopy.portfolio.eyebrow}</p>
+              <h2 id="portfolio-heading" tabIndex={-1}>
+                {pageCopy.portfolio.heading}
+                <span className="blue-dot">.</span>
+              </h2>
+            </div>
+            <Link href="/projekty" className="text-link">
+              {pageCopy.portfolio.allProjectsLink}
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+          {featured && (
+            <article className="featured-project kinetic-featured">
+              <Link
+                className="featured-project-image"
+                href={`/projekty/${featured.slug}`}
+                data-magnetic-view
+                aria-label={`Poznaj projekt: ${featured.title}`}
+              >
+                <Image
+                  src={featured.cover.src}
+                  alt={featured.cover.alt}
+                  fill
+                  sizes="(min-width:900px) 60vw, 100vw"
+                  style={{
+                    objectFit: featured.cover.objectFit,
+                    objectPosition: featured.cover.objectPosition,
+                  }}
+                />
+                <span className="image-label">Łódź / LAT 51.7592° N</span>
+                <span className="image-open">
+                  <ArrowUpRight size={24} />
+                </span>
+                <span className="kinetic-view-cursor" aria-hidden="true">
+                  <span className="cursor-disc">
+                    Zobacz
+                    <ArrowUpRight size={15} />
+                  </span>
+                </span>
+              </Link>
+              <div className="featured-project-copy">
+                <span className="project-index" aria-hidden="true">
+                  01
+                </span>
+                <p className="eyebrow">
+                  {featured.category} / {featured.location}
+                </p>
+                <h3>{featured.title}</h3>
+                <p>{featured.description}</p>
+                <dl>
+                  <div>
+                    <dt>Lokalizacja</dt>
+                    <dd>{featured.location}</dd>
+                  </div>
+                  <div>
+                    <dt>Materiał</dt>
+                    <dd>Wizualizacje</dd>
+                  </div>
+                </dl>
+                <Link
+                  className="solid-link"
+                  href={`/projekty/${featured.slug}`}
+                >
+                  Poznaj projekt
+                  <ArrowUpRight size={16} />
+                </Link>
+                <p className="featured-closing">
+                  Od proporcji bryły
+                  <br />
+                  do ostatniego detalu.
+                </p>
+              </div>
+            </article>
+          )}
+          <ProjectGrid projects={secondary.map(projectCard)} />
+          <div className="portfolio-bottom">
+            <span>Różne miejsca. Wspólna wrażliwość.</span>
+            <Link className="text-link" href="/projekty">
+              Odkryj całe portfolio
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section
         id="about"
         className="section atelier-about"
-        data-section="Pracownia"
+        data-section="04 / Pracownia"
       >
         <div className="container atelier-about-layout">
           <div className="studio-image">
+            <span className="studio-stamp">
+              Paulina Cywińska
+              <br />
+              Studio Architektury / Łódź
+            </span>
             <div className="studio-drawing">
               <Image
                 src={studioImage?.src || "/images/site/hero/src.png"}
@@ -190,7 +289,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="atelier-about-copy">
-            <p className="eyebrow">03 / {pageCopy.about.eyebrow}</p>
+            <p className="eyebrow">04 / {pageCopy.about.eyebrow}</p>
             <h2>
               {pageCopy.about.heading}
               <span className="blue-dot">.</span>
@@ -204,6 +303,14 @@ export default async function HomePage() {
             <div className="principle-grid">
               {principles.map(([title, description], i) => (
                 <div key={title}>
+                  <span
+                    className="principle-rule rule-top"
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="principle-rule rule-side"
+                    aria-hidden="true"
+                  />
                   <span className="eyebrow">
                     0{i + 1} / {title}
                   </span>
@@ -218,12 +325,12 @@ export default async function HomePage() {
       <section
         id="wspolpraca"
         className="section atelier-process"
-        data-section="Współpraca"
+        data-section="05 / Proces"
       >
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">04 / {pageCopy.process.eyebrow}</p>
+              <p className="eyebrow">05 / {pageCopy.process.eyebrow}</p>
               <h2>
                 <TextLines text={pageCopy.process.heading} />
               </h2>
@@ -235,6 +342,9 @@ export default async function HomePage() {
             </p>
           </div>
           <ol className="atelier-process-list">
+            <li className="process-spine" aria-hidden="true">
+              <span />
+            </li>
             {processSteps.map((step, index) => (
               <li key={step.title}>
                 <details open={index === 0}>
@@ -250,7 +360,10 @@ export default async function HomePage() {
             ))}
           </ol>
           <div className="reviews-inner atelier-reviews">
-            <p>{pageCopy.reviews.description}</p>
+            <p>
+              <Star className="review-star" size={18} aria-hidden="true" />
+              {pageCopy.reviews.description}
+            </p>
             <a
               className="text-link"
               href={site.maps}
