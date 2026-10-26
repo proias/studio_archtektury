@@ -1,0 +1,174 @@
+/* One real image passes from the opening frame into the first case study.
+   Without JS/reduced motion, the same DOM is a conventional readable layout. */
+.scroll-showroom {
+  --scene-height: calc(100svh - 84px);
+}
+.scroll-showroom .atelier-intro {
+  padding-bottom: 0;
+}
+.showroom-sticky {
+  position: relative;
+}
+.showroom-picture {
+  transform-origin: left center;
+}
+.showroom-project-title {
+  margin-top: 60px;
+}
+.showroom-project-copy {
+  display: block;
+  margin-bottom: 0;
+}
+.showroom-project-copy .featured-project-copy {
+  max-width: 540px;
+  padding-top: 0;
+}
+.showroom-project-copy .project-index {
+  display: none;
+}
+.showroom-scroll-hint {
+  display: none;
+}
+.portfolio-followup {
+  position: relative;
+  z-index: 2;
+  background: var(--background);
+}
+.portfolio-followup .project-cover {
+  isolation: isolate;
+}
+.portfolio-followup .project-cover img {
+  height: 140% !important;
+  top: -20% !important;
+  transition: none;
+}
+.portfolio-followup .project-card {
+  background: var(--background);
+}
+.scroll-showroom[data-motion="desktop"] .showroom-track {
+  height: calc(var(--scene-height) + 76.6667svh);
+}
+.scroll-showroom[data-motion="desktop"] .showroom-sticky {
+  position: sticky;
+  top: 84px;
+  height: var(--scene-height);
+}
+.scroll-showroom[data-motion="desktop"] .showroom-picture {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  z-index: 1;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-picture > img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  transition: none;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-picture:hover > img {
+  transform: none;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-project-title {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-project-title a {
+  pointer-events: auto;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-project-copy {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 30%;
+  translate: 0 -36%;
+  opacity: 0;
+  z-index: 2;
+}
+.scroll-showroom[data-motion="desktop"] .showroom-project-copy .project-index {
+  display: block;
+  font-size: clamp(60px, 7vw, 100px);
+}
+.scroll-showroom[data-motion="desktop"] .showroom-project-copy h3 {
+  font-size: clamp(25px, 2.8vw, 40px);
+}
+.scroll-showroom[data-motion="desktop"] .showroom-scroll-hint {
+  display: flex;
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+  color: var(--foreground);
+  pointer-events: none;
+}
+.showroom-scroll-hint span {
+  padding: 8px 12px;
+  background: var(--background);
+  font:
+    9px ui-monospace,
+    Consolas,
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.showroom-scroll-hint svg {
+  background: var(--background);
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+}
+.showroom-project-title a:focus-visible,
+.showroom-project-copy a:focus-visible {
+  outline: 2px solid var(--blueprint);
+}
+@media (min-width: 900px) and (max-height: 720px) {
+  .scroll-showroom[data-motion="desktop"]
+    .showroom-project-copy
+    .project-index {
+    display: none;
+  }
+  .scroll-showroom[data-motion="desktop"] .showroom-project-title h2 {
+    font-size: 34px;
+  }
+  .scroll-showroom[data-motion="desktop"] .showroom-project-copy {
+    translate: 0 -25%;
+  }
+  .scroll-showroom[data-motion="desktop"] .showroom-project-copy dl {
+    margin-bottom: 16px;
+  }
+}
+@media (max-width: 899px) {
+  .scroll-showroom .showroom-project-title {
+    margin-top: 40px;
+  }
+  .showroom-project-copy .featured-project-copy {
+    max-width: none;
+  }
+  .showroom-project-copy {
+    margin-top: 25px;
+  }
+  .scroll-showroom .showroom-picture > img {
+    transition: none;
+  }
+  .portfolio-followup {
+    padding-top: 60px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-followup .project-cover img {
+    height: 100% !important;
+    top: 0 !important;
+  }
+}

@@ -7,6 +7,14 @@ import { getHomeHero } from "@/lib/cms/reader";
 import { PRODUCTION_ORIGIN } from "@/lib/deployment";
 import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 import "../globals.css";
+import "../atelier.css";
+import "../showroom.css";
+const spaceGrotesk = localFont({
+  src: "../fonts/SpaceGrotesk.ttf",
+  weight: "300 700",
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
 const montserrat = localFont({
   src: "../fonts/Montserrat.ttf",
   weight: "100 900",
@@ -53,7 +61,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={montserrat.variable + " " + ptSans.variable}>
+    <html
+      lang="pl"
+      className={
+        montserrat.variable +
+        " " +
+        ptSans.variable +
+        " " +
+        spaceGrotesk.variable
+      }
+    >
       <body>
         <a href="#main-content" className="skip-link">
           Przejdź do treści

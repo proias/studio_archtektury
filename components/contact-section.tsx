@@ -62,7 +62,11 @@ export function ContactSection() {
     "aria-describedby": errors[name] ? name + "-error" : undefined,
   });
   return (
-    <section id="kontakt" className="section dark-section contact-section">
+    <section
+      id="kontakt"
+      className="section dark-section contact-section"
+      data-section="Kontakt"
+    >
       <div className="container contact-columns">
         <div>
           <p className="eyebrow">{pageCopy.contact.eyebrow}</p>
@@ -91,6 +95,10 @@ export function ContactSection() {
           </p>
         </div>
         <div className="contact-form-wrap">
+          <div className="brief-card-top">
+            <span>Twój nowy rozdział</span>
+            <span>Karta briefu / 01</span>
+          </div>
           <h3>{pageCopy.contact.formHeading}</h3>
           <p className="form-note">{pageCopy.contact.formDescription}</p>
           <form

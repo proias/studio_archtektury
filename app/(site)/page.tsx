@@ -1,120 +1,266 @@
 import Image from "next/image";
+import { ScrollShowroom } from "@/components/scroll-showroom";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { ProjectGrid } from "@/components/project-grid";
 import { ContactSection } from "@/components/contact-section";
-import { getFeaturedProjects, getHomeHero } from "@/lib/cms/reader";
+import { AtelierMotion } from "@/components/atelier-motion";
+import {
+  getAllProjects,
+  getFeaturedProjects,
+  getHomeHero,
+} from "@/lib/cms/reader";
 import { processSteps, site } from "@/lib/site-content";
 import { pageCopy } from "@/lib/page-content";
 import { TextLines } from "@/components/text-lines";
 import { canonicalUrl } from "@/lib/deployment";
 import { projectCard } from "@/lib/projects";
+
 export const metadata = { alternates: { canonical: canonicalUrl("/") } };
+const principles = [
+  [
+    "Relacja z miejscem",
+    "Projekt wyrasta z otoczenia. Światło, krajobraz i kontekst są jego początkiem.",
+  ],
+  [
+    "Uczciwość materiału",
+    "Faktura, kolor i detal. Materiały, które tworzą atmosferę i dobrze się starzeją.",
+  ],
+  [
+    "Czytelna funkcja",
+    "Codzienne rytuały przekładamy na przestrzeń, w której wszystko ma swoje miejsce.",
+  ],
+  [
+    "Partnerstwo",
+    "Rozmowa i wspólne decyzje. Od pierwszego spotkania do ostatniego detalu.",
+  ],
+];
+
 export default async function HomePage() {
-  const featuredProjects = await getFeaturedProjects();
-  const hero = await getHomeHero();
+  const [projects, featuredProjects, studioImage] = await Promise.all([
+    getAllProjects(),
+    getFeaturedProjects(),
+    getHomeHero(),
+  ]);
+  const featured = featuredProjects[0] || projects[0];
+  const secondary = [...featuredProjects, ...projects].filter(
+    (project, index, list) =>
+      project.slug !== featured?.slug &&
+      list.findIndex((item) => item.slug === project.slug) === index,
+  );
   return (
-    <main id="main-content">
-      <div className="hero">
-        {hero && (
-          <Image
-            src={hero.src}
-            alt={hero.alt}
-            width={hero.width}
-            height={hero.height}
-            style={
-              hero.objectFit
-                ? {
-                    objectFit: hero.objectFit,
-                    objectPosition: hero.objectPosition,
-                  }
-                : undefined
-            }
-            sizes="(min-width: 1440px) 1280px, 100vw"
-            priority
-          />
-        )}
-      </div>
-      <section className="intro container">
-        <p className="eyebrow">{pageCopy.intro.eyebrow}</p>
-        <div className="intro-columns">
+    <main id="main-content" className="atelier-home">
+      <AtelierMotion />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: site.name,
+            url: canonicalUrl("/"),
+            description: site.description,
+            telephone: site.phone,
+            email: site.email,
+            address: site.address,
+            areaServed: site.serviceArea,
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
+      {featured ? (
+        <ScrollShowroom
+          project={projectCard(featured)}
+          description={featured.description}
+        />
+      ) : (
+        <section className="section container">
           <h1>
             {pageCopy.intro.headingFirst}
-            <br className="desktop-break" /> {pageCopy.intro.headingSecond}
+            <br />
+            {pageCopy.intro.headingSecond}
           </h1>
-          <div>
-            <p>{pageCopy.intro.description}</p>
-            <a className="text-link" href="#portfolio">
-              {pageCopy.intro.projectsLink} <ArrowRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="portfolio" className="section portfolio-section">
+          <p className="page-intro">{pageCopy.intro.description}</p>
+        </section>
+      )}
+
+      <section
+        className="section portfolio-section portfolio-followup"
+        data-section="Projekty"
+      >
         <div className="container">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">{pageCopy.portfolio.eyebrow}</p>
-              <h2>{pageCopy.portfolio.heading}</h2>
-            </div>
+          <ProjectGrid projects={secondary.map(projectCard)} />
+          <div className="portfolio-bottom">
+            <span>Różne miejsca. Wspólna wrażliwość.</span>
             <Link className="text-link" href="/projekty">
-              {pageCopy.portfolio.allProjectsLink} <ArrowUpRight size={18} />
+              Odkryj całe portfolio
+              <ArrowUpRight size={18} />
             </Link>
           </div>
-          <ProjectGrid projects={featuredProjects.map(projectCard)} />
         </div>
       </section>
-      <section id="about" className="section dark-section">
-        <div className="container about-columns">
-          <div>
-            <p className="eyebrow">{pageCopy.about.eyebrow}</p>
-            <h2>{pageCopy.about.heading}</h2>
-            <p className="about-lead">
-              <TextLines text={pageCopy.about.lead} />
+
+      <section
+        id="manifest"
+        className="manifest-section dark-section"
+        data-section="Podejście"
+      >
+        <div className="container">
+          <div className="manifest-layout">
+            <div>
+              <p className="eyebrow">02 / Sposób myślenia</p>
+              <h2>
+                Przestrzeń z uważnością
+                <br />
+                na proporcje, materiał
+                <br />i codzienność<span>.</span>
+              </h2>
+            </div>
+            <p>
+              Wierzymy, że architektura powinna odpowiadać na prawdziwe życie.
+              Na codzienność, która bywa różna i potrzebuje własnego miejsca.
+              Dlatego nie zaczynamy od bryły. Zaczynamy od rozmowy.
+            </p>
+            <p>
+              Każda decyzja ma znaczenie: od usytuowania domu, przez rytm
+              światła we wnętrzu, po detal, którego dotykasz każdego dnia.
+              Łączymy wrażliwość na przestrzeń z konkretnym, technicznym
+              warsztatem.
             </p>
           </div>
-          <div className="about-copy">
+          <div className="manifest-stats">
+            <div>
+              <strong>10+</strong>
+              <span>lat doświadczenia</span>
+            </div>
+            <div>
+              <strong>Indywidualnie</strong>
+              <span>od pierwszej kreski</span>
+            </div>
+            <div>
+              <strong>Nadzór autorski</strong>
+              <span>w uzgodnionym zakresie</span>
+            </div>
+            <div>
+              <strong>Łódź & Mazowsze</strong>
+              <span>tu projektujemy · i nie tylko</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        className="section atelier-about"
+        data-section="Pracownia"
+      >
+        <div className="container atelier-about-layout">
+          <div className="studio-image">
+            <div className="studio-drawing">
+              <Image
+                src={studioImage?.src || "/images/site/hero/src.png"}
+                alt={
+                  studioImage?.alt ||
+                  "Warsztat pracowni — od rysunku do przestrzeni"
+                }
+                width={studioImage?.width || 2795}
+                height={studioImage?.height || 1305}
+                sizes="(min-width: 900px) 42vw, 100vw"
+                loading="eager"
+                style={{
+                  objectFit: studioImage?.objectFit,
+                  objectPosition: studioImage?.objectPosition,
+                }}
+              />
+              <span className="drawing-cross cross-one" />
+              <span className="drawing-cross cross-two" />
+              <span className="drawing-note">
+                Od pierwszej kreski.
+                <br />
+                Do Twojej przestrzeni.
+              </span>
+            </div>
+            <div className="image-footnote">
+              <span>Paulina Cywińska / Studio Architektury</span>
+              <span>Łódź, PL</span>
+            </div>
+            <p className="studio-quote">
+              Uważność na miejsce.
+              <br />
+              Przestrzeń dla Ciebie.
+            </p>
+          </div>
+          <div className="atelier-about-copy">
+            <p className="eyebrow">03 / {pageCopy.about.eyebrow}</p>
+            <h2>
+              {pageCopy.about.heading}
+              <span className="blue-dot">.</span>
+            </h2>
+            <p className="atelier-about-lead">
+              <TextLines text={pageCopy.about.lead} />
+            </p>
             {site.about.map((p) => (
               <p key={p}>{p}</p>
             ))}
+            <div className="principle-grid">
+              {principles.map(([title, description], i) => (
+                <div key={title}>
+                  <span className="eyebrow">
+                    0{i + 1} / {title}
+                  </span>
+                  <p>{description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
-      <section id="wspolpraca" className="section">
-        <div className="container process-columns">
-          <div>
-            <p className="eyebrow">{pageCopy.process.eyebrow}</p>
-            <h2>
-              <TextLines text={pageCopy.process.heading} />
-            </h2>
+
+      <section
+        id="wspolpraca"
+        className="section atelier-process"
+        data-section="Współpraca"
+      >
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">04 / {pageCopy.process.eyebrow}</p>
+              <h2>
+                <TextLines text={pageCopy.process.heading} />
+              </h2>
+            </div>
             <p className="process-intro">
               <TextLines text={pageCopy.process.description} />
+              <br />
+              Ty opowiadasz. Wspólnie nadajemy pomysłom kształt.
             </p>
           </div>
-          <ol className="process-list">
+          <ol className="atelier-process-list">
             {processSteps.map((step, index) => (
               <li key={step.title}>
-                <span className="step-number">0{index + 1}</span>
-                <div>
-                  <h3>{step.title}</h3>
+                <details open={index === 0}>
+                  <summary>
+                    <span className="step-number">0{index + 1}</span>
+                    <h3>{step.title}</h3>
+                    <span className="process-preview">{step.description}</span>
+                    <Plus size={19} />
+                  </summary>
                   <p>{step.description}</p>
-                </div>
+                </details>
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-      <section className="reviews-section">
-        <div className="container reviews-inner">
-          <p>{pageCopy.reviews.description}</p>
-          <a
-            className="text-link"
-            href={site.maps}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {pageCopy.reviews.link} <ArrowUpRight size={18} />
-          </a>
+          <div className="reviews-inner atelier-reviews">
+            <p>{pageCopy.reviews.description}</p>
+            <a
+              className="text-link"
+              href={site.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {pageCopy.reviews.link}
+              <ArrowUpRight size={16} />
+            </a>
+          </div>
         </div>
       </section>
       <ContactSection />
