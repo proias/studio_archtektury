@@ -1,11 +1,18 @@
 {
-  "name": "PAULINA CYWIŃSKA STUDIO ARCHITEKTURY",
-  "title": "Paulina Cywińska — Studio Architektury w Łodzi",
-  "description": "Projekty domów, wnętrz i przestrzeni usługowych. Studio Architektury Paulina Cywińska w Łodzi. Poznaj projekty i porozmawiaj o swojej inwestycji.",
+  "name": "Paulina Cywińska — Studio Architektury",
+  "title": "Paulina Cywińska — architektka w Łodzi | Studio Architektury",
+  "description": "Paulina Cywińska — architektka w Łodzi. Projekty domów, wnętrz i przestrzeni usługowych w Łodzi, Warszawie i okolicach. Studio Architektury od koncepcji po detal.",
   "phone": "+48 662 477 959",
   "phoneHref": "tel:+48662477959",
   "email": "pcywinska.arch@gmail.com",
   "address": "ul. Łagiewnicka 287Z, 91-509 Łódź",
+  "postalAddress": {
+    "streetAddress": "ul. Łagiewnicka 287Z",
+    "postalCode": "91-509",
+    "addressLocality": "Łódź",
+    "addressRegion": "łódzkie",
+    "addressCountry": "PL"
+  },
   "nip": "8341845004",
   "maps": "https://maps.app.goo.gl/YPg6NKZmTWbV9Lct9",
   "serviceArea": [

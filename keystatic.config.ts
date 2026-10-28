@@ -354,6 +354,16 @@ export default config({
         phoneHref: required("Link telefonu (tel:+48...)"),
         email: required("E-mail"),
         address: required("Adres"),
+        postalAddress: fields.object(
+          {
+            streetAddress: required("Ulica i numer"),
+            postalCode: required("Kod pocztowy"),
+            addressLocality: required("Miejscowość"),
+            addressRegion: required("Województwo"),
+            addressCountry: required("Kod kraju (ISO 3166-1 alpha-2)"),
+          },
+          { label: "Adres do danych strukturalnych SEO" },
+        ),
         nip: required("NIP"),
         maps: fields.url({
           label: "Google Maps",

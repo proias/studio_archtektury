@@ -40,6 +40,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: project.seo?.title || project.title,
+      description,
+      images: [image.src],
+    },
     robots: { index: indexingEnabled(), follow: indexingEnabled() },
   };
 }

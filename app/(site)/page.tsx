@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ScrollShowroom } from "@/components/scroll-showroom";
 import Link from "next/link";
@@ -16,7 +17,10 @@ import { TextLines } from "@/components/text-lines";
 import { canonicalUrl } from "@/lib/deployment";
 import { projectCard } from "@/lib/projects";
 
-export const metadata = { alternates: { canonical: canonicalUrl("/") } };
+export const metadata: Metadata = {
+  alternates: { canonical: canonicalUrl("/") },
+  openGraph: { url: canonicalUrl("/") },
+};
 const principles = [
   [
     "Relacja z miejscem",
@@ -56,14 +60,44 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: site.name,
-            url: canonicalUrl("/"),
-            description: site.description,
-            telephone: site.phone,
-            email: site.email,
-            address: site.address,
-            areaServed: site.serviceArea,
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": `${canonicalUrl("/")}#website`,
+                name: site.title,
+                url: canonicalUrl("/"),
+                inLanguage: "pl-PL",
+                publisher: { "@id": `${canonicalUrl("/")}#studio` },
+              },
+              {
+                "@type": "ProfessionalService",
+                "@id": `${canonicalUrl("/")}#studio`,
+                name: site.name,
+                url: canonicalUrl("/"),
+                description: site.description,
+                telephone: site.phone,
+                email: site.email,
+                taxID: site.nip,
+                address: {
+                  "@type": "PostalAddress",
+                  ...site.postalAddress,
+                },
+                areaServed: site.serviceArea.map((name) => ({
+                  "@type": "City",
+                  name,
+                })),
+                hasMap: site.maps,
+                ...(featured
+                  ? { image: canonicalUrl(featured.cover.src) }
+                  : {}),
+                founder: {
+                  "@type": "Person",
+                  name: "Paulina Cywińska",
+                  jobTitle: "Architektka",
+                  worksFor: { "@id": `${canonicalUrl("/")}#studio` },
+                },
+              },
+            ],
           }).replace(/</g, "\\u003c"),
         }}
       />

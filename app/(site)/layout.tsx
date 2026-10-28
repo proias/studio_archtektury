@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site-content";
-import { getHomeHero } from "@/lib/cms/reader";
+import { getPrimaryCover } from "@/lib/cms/reader";
 import { PRODUCTION_ORIGIN } from "@/lib/deployment";
 import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 import "../globals.css";
@@ -30,7 +30,7 @@ const ptSans = localFont({
   variable: "--font-pt-sans",
 });
 export async function generateMetadata(): Promise<Metadata> {
-  const cover = await getHomeHero();
+  const cover = await getPrimaryCover();
   return {
     metadataBase: new URL(PRODUCTION_ORIGIN),
     title: { default: site.title, template: "%s — Paulina Cywińska" },
@@ -39,6 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: "pl_PL",
       type: "website",
+      siteName: site.name,
       title: site.title,
       description: site.description,
       images: cover
@@ -52,7 +53,12 @@ export async function generateMetadata(): Promise<Metadata> {
           ]
         : [],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: site.title,
+      description: site.description,
+      images: cover ? [cover.src] : [],
+    },
   };
 }
 export default function RootLayout({
