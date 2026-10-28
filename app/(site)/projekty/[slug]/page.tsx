@@ -67,24 +67,14 @@ export default async function ProjectPage({ params }: Props) {
             </p>
           )}
           {project.description && <p>{project.description}</p>}
-          <dl>
-            <div>
-              <dt>Materiał</dt>
-              <dd>Wizualizacje</dd>
-            </div>
-            {project.location && (
+          {project.location && (
+            <dl>
               <div>
                 <dt>Lokalizacja</dt>
                 <dd>{project.location}</dd>
               </div>
-            )}
-            {project.year && (
-              <div>
-                <dt>Rok projektu</dt>
-                <dd>{project.year}</dd>
-              </div>
-            )}
-          </dl>
+            </dl>
+          )}
           <Link href="/#kontakt" className="text-link">
             Porozmawiajmy o projekcie ↗
           </Link>

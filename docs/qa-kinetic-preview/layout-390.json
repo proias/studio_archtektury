@@ -1,0 +1,62 @@
+{
+  "width": 390,
+  "scroll": 375,
+  "h1": 1,
+  "cards": [
+    {
+      "href": "/projekty/dom-mazowieckie",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-mazowieckie%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/agroturystyka-lodzkie",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fagroturystyka-lodzkie%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/dom-lodzkie",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-lodzkie%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/kuchnia-1",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fkuchnia-1%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/lazienka",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Flazienka%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/dom-kostka-przebudowa",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-kostka-przebudowa%2Fcover%2Fsrc.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/dom-lodzkie-2",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-lodzkie-2%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/dom-lowicz",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-lowicz%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/przebudowa-budynku",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fprzebudowa-budynku%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/przestrzen-publiczna",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fprzestrzen-publiczna%2F01.webp&w=3840&q=75"
+    },
+    {
+      "href": "/projekty/salon",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fsalon%2F01.webp&w=3840&q=75"
+    }
+  ],
+  "hero": {
+    "width": 335,
+    "height": 251,
+    "naturalWidth": 343,
+    "naturalHeight": 192,
+    "objectFit": "cover"
+  },
+  "headFont": "spaceGrotesk, \"spaceGrotesk Fallback\", montserrat, \"montserrat Fallback\", Arial, sans-serif",
+  "bodyFont": "ptSans, \"ptSans Fallback\", Arial, sans-serif",
+  "images": true,
+  "reduced": "auto"
+}

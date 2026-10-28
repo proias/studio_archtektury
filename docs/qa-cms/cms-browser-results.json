@@ -1,5 +1,5 @@
 {
-  "passed": 10,
+  "passed": 17,
   "checks": [
     "public layout has header and font",
     "CMS excludes public header and footer",
@@ -7,6 +7,13 @@
     "CMS lists all 12 migrated projects",
     "project editor loads title and existing images",
     "CMS loads existing image assets",
+    "CMS exposes logo text and upload editor",
+    "CMS exposes studio illustration and framing controls",
+    "uploaded logo renders in header and footer",
+    "studio illustration renders with selected framing",
+    "hero continues to use the published portfolio cover",
+    "uploaded logo and studio illustration fit viewport 1440",
+    "uploaded logo and studio illustration fit viewport 390",
     "CMS saves singleton to JSON",
     "saved CMS content reaches public page",
     "public layout restored after CMS",
@@ -15,15 +22,15 @@
   "errors": [],
   "imageResponses": [
     {
-      "url": "http://127.0.0.1:3101/api/keystatic/blob/943b69c694fa59c1d025fa27fb9a59ce033729f8/public/images/projects/dom-lodzkie-3/01.webp",
+      "url": "http://127.0.0.1:3002/api/keystatic/blob/943b69c694fa59c1d025fa27fb9a59ce033729f8/public/images/projects/dom-lodzkie-3/cover/src.webp",
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:3101/api/keystatic/blob/b1d89e0db1001bb19ae6ae4da3866057120d3659/public/images/projects/dom-lodzkie-3/02.webp",
+      "url": "http://127.0.0.1:3002/api/keystatic/blob/b1d89e0db1001bb19ae6ae4da3866057120d3659/public/images/projects/dom-lodzkie-3/images/1/src.webp",
       "status": 200
     },
     {
-      "url": "http://127.0.0.1:3101/api/keystatic/blob/809f70d28d2403f9e83fe3d14b7a2fa531d77004/public/images/projects/dom-lodzkie-3/03.webp",
+      "url": "http://127.0.0.1:3002/api/keystatic/blob/809f70d28d2403f9e83fe3d14b7a2fa531d77004/public/images/projects/dom-lodzkie-3/images/2/src.webp",
       "status": 200
     }
   ]

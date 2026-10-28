@@ -1,7 +1,7 @@
 {
-  "title": "Salon",
+  "title": "Salon z akcentem zieleni",
   "category": "Wnętrza",
-  "description": "Wizualizacja salonu z jasną sofą, stołem i zieloną zabudową. Perspektywa salonu z jadalnią i jasnymi tekstyliami. Widok stołu, krzeseł i części wypoczynkowej salonu.",
+  "description": "Jasna sofa, miękkie tekstylia i zielona zabudowa tworzą przytulną przestrzeń wspólnego życia. Salon łączy część wypoczynkową z jadalnią, zapewniając miejsce zarówno na spokojny wieczór, jak i spotkania przy stole. Zieleń nadaje wnętrzu charakter, a jasne tkaniny wprowadzają lekkość. Całość opiera się na prostych formach i spójnej kolorystyce, które sprzyjają codziennemu odpoczynkowi.",
   "images": [
     {
       "src": "/images/projects/salon/01.webp",
@@ -37,8 +37,8 @@
   "publicationStatus": "published",
   "order": 11,
   "sourceFolder": "SALON",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "contentStatus": "approved",
+  "editorialNotes": "",
   "seo": {
     "title": "",
     "description": "",
