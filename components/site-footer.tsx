@@ -19,7 +19,10 @@ export function SiteFooter() {
           © {new Date().getFullYear()} {pageCopy.footer.copyrightName}
         </span>
         <span>NIP {site.nip}</span>
-        <Link href="/prywatnosc">{pageCopy.footer.privacyLink}</Link>
+        <nav className="footer-legal-links" aria-label="Informacje prawne">
+          <Link href="/prywatnosc">{pageCopy.footer.privacyLink}</Link>
+          <Link href="/regulamin">Regulamin</Link>
+        </nav>
       </div>
     </footer>
   );

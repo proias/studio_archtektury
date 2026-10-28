@@ -79,6 +79,8 @@ test("sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje wła
       [
         "https://cywinska-studio.pl/",
         "https://cywinska-studio.pl/projekty",
+        "https://cywinska-studio.pl/prywatnosc",
+        "https://cywinska-studio.pl/regulamin",
         ...(await require("../lib/cms/reader.ts").getProjectSlugs()).map(
           (slug) => "https://cywinska-studio.pl/projekty/" + slug,
         ),
