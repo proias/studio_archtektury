@@ -1,8 +1,14 @@
 {
-  "title": "Dom w Łowiczu",
+  "title": "Dom na jednym poziomie",
   "category": "Domy",
-  "description": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu. Widok frontu parterowego domu z garażem i podjazdem. Perspektywa tarasu parterowego domu z szerokimi przeszkleniami. Widok przeszklonej elewacji domu z ogrodu.",
+  "description": "Rozłożysta, parterowa bryła i szerokie przeszklenia budują bliską relację domu z ogrodem. Życie na jednym poziomie pozwala płynnie przechodzić między wnętrzem a tarasem, włączając zieleń w codzienność mieszkańców. Od frontu garaż i podjazd tworzą uporządkowaną strefę wejścia, a część ogrodowa otwiera się na odpoczynek i wspólny czas. To architektura o spokojnych proporcjach, zaprojektowana z myślą o wygodzie codziennego życia.",
   "images": [
+    {
+      "src": "/images/projects/dom-lowicz/04.webp",
+      "alt": "Widok przeszklonej elewacji domu z ogrodu",
+      "width": 1748,
+      "height": 900
+    },
     {
       "src": "/images/projects/dom-lowicz/01.webp",
       "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
@@ -20,31 +26,25 @@
       "alt": "Perspektywa tarasu parterowego domu z szerokimi przeszkleniami",
       "width": 1746,
       "height": 901
-    },
-    {
-      "src": "/images/projects/dom-lowicz/04.webp",
-      "alt": "Widok przeszklonej elewacji domu z ogrodu",
-      "width": 1748,
-      "height": 900
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-lowicz/01.webp",
-    "alt": "Wizualizacja parterowego domu w Łowiczu od strony ogrodu",
-    "width": 1747,
+    "src": "/images/projects/dom-lowicz/04.webp",
+    "alt": "Widok przeszklonej elewacji domu z ogrodu",
+    "width": 1748,
     "height": 900,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
   },
   "credits": {
-    "authorship": "pending-confirmation",
-    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+    "authorship": "own",
+    "note": "Projekt opracowany przez Paulinę Cywińską; prawa i zakres publikacji określają zawarte umowy."
   },
-  "publicationStatus": "draft",
+  "publicationStatus": "published",
   "order": 8,
   "sourceFolder": "DOM ŁOWICZ",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "contentStatus": "approved",
+  "editorialNotes": "",
   "seo": {
     "title": "",
     "description": "",

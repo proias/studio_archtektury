@@ -3,10 +3,18 @@ import localFont from "next/font/local";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site-content";
-import { getHomeHero } from "@/lib/cms/reader";
+import { getPrimaryCover } from "@/lib/cms/reader";
 import { PRODUCTION_ORIGIN } from "@/lib/deployment";
 import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 import "../globals.css";
+import "../atelier.css";
+import "../showroom.css";
+const spaceGrotesk = localFont({
+  src: "../fonts/SpaceGrotesk.ttf",
+  weight: "300 700",
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
 const montserrat = localFont({
   src: "../fonts/Montserrat.ttf",
   weight: "100 900",
@@ -22,7 +30,7 @@ const ptSans = localFont({
   variable: "--font-pt-sans",
 });
 export async function generateMetadata(): Promise<Metadata> {
-  const cover = await getHomeHero();
+  const cover = await getPrimaryCover();
   return {
     metadataBase: new URL(PRODUCTION_ORIGIN),
     title: { default: site.title, template: "%s — Paulina Cywińska" },
@@ -31,6 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       locale: "pl_PL",
       type: "website",
+      siteName: site.name,
       title: site.title,
       description: site.description,
       images: cover
@@ -44,7 +53,12 @@ export async function generateMetadata(): Promise<Metadata> {
           ]
         : [],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: site.title,
+      description: site.description,
+      images: cover ? [cover.src] : [],
+    },
   };
 }
 export default function RootLayout({
@@ -53,7 +67,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pl" className={montserrat.variable + " " + ptSans.variable}>
+    <html
+      lang="pl"
+      className={
+        montserrat.variable +
+        " " +
+        ptSans.variable +
+        " " +
+        spaceGrotesk.variable
+      }
+    >
       <body>
         <a href="#main-content" className="skip-link">
           Przejdź do treści

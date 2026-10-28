@@ -4,6 +4,7 @@ require("./register.cjs");
 const { canonicalUrl } = require("../lib/deployment.ts");
 const { indexingEnabled } = require("../lib/indexing-policy.mjs");
 const { validateRedirects, loadRedirects } = require("../lib/redirects.mjs");
+const robots = require("../app/robots.ts").default;
 const sitemap = require("../app/sitemap.ts").default;
 
 test("canonical jest produkcyjny, a indeksowanie wymaga jawnej zgody i kontekstu produkcji", () => {
@@ -26,6 +27,49 @@ test("canonical jest produkcyjny, a indeksowanie wymaga jawnej zgody i kontekstu
     true,
   );
 });
+test("globalne nagłówki ograniczają HTTPS, uprawnienia przeglądarki i typy treści", async () => {
+  const { default: nextConfig } = await import("../next.config.mjs");
+  const rules = await nextConfig.headers();
+  const global = rules.find((rule) => rule.source === "/:path*").headers;
+  const headers = Object.fromEntries(
+    global.map(({ key, value }) => [key, value]),
+  );
+  assert.equal(headers["X-Content-Type-Options"], "nosniff");
+  assert.equal(headers["Referrer-Policy"], "strict-origin-when-cross-origin");
+  assert.equal(headers["Strict-Transport-Security"], "max-age=31536000");
+  assert.equal(
+    headers["Permissions-Policy"],
+    "camera=(), microphone=(), geolocation=()",
+  );
+});
+test("robots zezwala na indeksowanie tylko w zatwierdzonej produkcji", () => {
+  const original = {
+    context: process.env.CONTEXT,
+    enabled: process.env.SITE_INDEXING_ENABLED,
+  };
+  try {
+    process.env.CONTEXT = "production";
+    process.env.SITE_INDEXING_ENABLED = "true";
+    assert.deepEqual(robots(), {
+      rules: {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/keystatic", "/cms-preview", "/api/", "/__forms.html"],
+      },
+      sitemap: "https://cywinska-studio.pl/sitemap.xml",
+    });
+    process.env.CONTEXT = "deploy-preview";
+    assert.deepEqual(robots(), {
+      rules: { userAgent: "*", disallow: "/" },
+    });
+  } finally {
+    if (original.context === undefined) delete process.env.CONTEXT;
+    else process.env.CONTEXT = original.context;
+    if (original.enabled === undefined)
+      delete process.env.SITE_INDEXING_ENABLED;
+    else process.env.SITE_INDEXING_ENABLED = original.enabled;
+  }
+});
 test("sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje własnej mapy", async () => {
   const original = process.env.CONTEXT;
   try {
@@ -35,6 +79,8 @@ test("sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje wła
       [
         "https://cywinska-studio.pl/",
         "https://cywinska-studio.pl/projekty",
+        "https://cywinska-studio.pl/prywatnosc",
+        "https://cywinska-studio.pl/regulamin",
         ...(await require("../lib/cms/reader.ts").getProjectSlugs()).map(
           (slug) => "https://cywinska-studio.pl/projekty/" + slug,
         ),
@@ -94,5 +140,13 @@ test("nowe singletony są czytelne dla Keystatic i zachowują teksty startowe", 
   assert.deepEqual(
     await reader.singletons.redirects.read(),
     require("../content/redirects.json"),
+  );
+  assert.deepEqual(
+    await reader.singletons.site.read(),
+    require("../content/site.json"),
+  );
+  assert.equal(
+    (await reader.singletons.site.read()).postalAddress.addressCountry,
+    "PL",
   );
 });

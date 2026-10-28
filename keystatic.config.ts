@@ -278,7 +278,7 @@ export default config({
       },
     }),
     appearance: singleton({
-      label: "Logo i zdjęcie główne",
+      label: "Logo i ilustracja pracowni",
       previewUrl: preview("/"),
       path: "content/appearance",
       format: { data: "json" },
@@ -301,20 +301,20 @@ export default config({
         hero: fields.object(
           {
             src: fields.image({
-              label: "Zdjęcie główne strony",
+              label: "Ilustracja w sekcji O pracowni",
               description:
-                "Niezależne od zdjęć projektów. Puste pole zachowuje okładkę pierwszego wyróżnionego projektu.",
+                "Obraz warsztatu w sekcji O pracowni. Puste pole używa okładki projektu. Zdjęcie w otwarciu strony pochodzi z pierwszego wyróżnionego opublikowanego projektu.",
               directory: "public/images/site",
               publicPath: "/images/site/",
             }),
             alt: fields.text({
-              label: "Opis zdjęcia głównego",
+              label: "Opis ilustracji pracowni",
               description:
                 "Opisz zawartość wybranego zdjęcia dla osób, które go nie widzą.",
               validation: { isRequired: true },
             }),
             objectFit: fields.select({
-              label: "Kadrowanie zdjęcia głównego",
+              label: "Kadrowanie ilustracji",
               options: [
                 { label: "Cały obraz", value: "contain" },
                 { label: "Wypełnij kadr", value: "cover" },
@@ -333,7 +333,7 @@ export default config({
               defaultValue: "50% 50%",
             }),
           },
-          { label: "Zdjęcie główne" },
+          { label: "Ilustracja pracowni" },
         ),
       },
     }),
@@ -354,6 +354,16 @@ export default config({
         phoneHref: required("Link telefonu (tel:+48...)"),
         email: required("E-mail"),
         address: required("Adres"),
+        postalAddress: fields.object(
+          {
+            streetAddress: required("Ulica i numer"),
+            postalCode: required("Kod pocztowy"),
+            addressLocality: required("Miejscowość"),
+            addressRegion: required("Województwo"),
+            addressCountry: required("Kod kraju (ISO 3166-1 alpha-2)"),
+          },
+          { label: "Adres do danych strukturalnych SEO" },
+        ),
         nip: required("NIP"),
         maps: fields.url({
           label: "Google Maps",

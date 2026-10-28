@@ -11,6 +11,9 @@
   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND = "cloud"
   NEXT_PUBLIC_KEYSTATIC_CLOUD_PROJECT = "architektura/cywinska-studio"
 
+[context.production.environment]
+  SITE_INDEXING_ENABLED = "true"
+
 [dev]
   command = "pnpm dev --hostname 127.0.0.1"
   targetPort = 3000
@@ -24,10 +27,11 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Brak catch-all SPA i funkcji dublujących adapter Next.js.
 
 # Git branch deploys duplicate PR previews; skip them before installing/building.
 [context.branch-deploy]
   ignore = "exit 0"
-

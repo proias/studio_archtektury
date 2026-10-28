@@ -1,11 +1,18 @@
 {
-  "name": "PAULINA CYWIŃSKA STUDIO ARCHITEKTURY",
-  "title": "Paulina Cywińska — Studio Architektury w Łodzi",
-  "description": "Projekty domów, wnętrz i przestrzeni usługowych. Studio Architektury Paulina Cywińska w Łodzi. Poznaj projekty i porozmawiaj o swojej inwestycji.",
+  "name": "Paulina Cywińska — Studio Architektury",
+  "title": "Paulina Cywińska — architektka w Łodzi | Studio Architektury",
+  "description": "Paulina Cywińska — architektka w Łodzi. Projekty domów, wnętrz i przestrzeni usługowych w Łodzi, Warszawie i okolicach. Studio Architektury od koncepcji po detal.",
   "phone": "+48 662 477 959",
   "phoneHref": "tel:+48662477959",
   "email": "pcywinska.arch@gmail.com",
   "address": "ul. Łagiewnicka 287Z, 91-509 Łódź",
+  "postalAddress": {
+    "streetAddress": "ul. Łagiewnicka 287Z",
+    "postalCode": "91-509",
+    "addressLocality": "Łódź",
+    "addressRegion": "łódzkie",
+    "addressCountry": "PL"
+  },
   "nip": "8341845004",
   "maps": "https://maps.app.goo.gl/YPg6NKZmTWbV9Lct9",
   "serviceArea": [
@@ -16,8 +23,8 @@
     "Skierniewice"
   ],
   "about": [
-    "Pracownię prowadzi Paulina Cywińska — architektka z ponad 10-letnim doświadczeniem zawodowym. Projektuje domy, wnętrza i przestrzenie usługowe, łącząc funkcjonalność z uważnością na proporcje, materiały i otoczenie.",
-    "Każdy projekt zaczyna się od rozmowy o potrzebach inwestora i możliwościach miejsca. Celem jest spójna przestrzeń, która dobrze służy swoim użytkownikom."
+    "Nazywam się Paulina Cywińska. Jestem architektką z ponad 10-letnim doświadczeniem i posiadam uprawnienia budowlane do projektowania bez ograniczeń w specjalności architektonicznej. Projektuję domy, wnętrza i przestrzenie usługowe, łącząc estetykę z wygodą codziennego użytkowania. Zwracam uwagę na proporcje, światło i materiały, dbając o spójność projektu — od bryły budynku po detal.",
+    "Współpracę zaczynam od rozmowy o potrzebach, oczekiwaniach i sposobie życia przyszłych użytkowników. Przekładam je na konkretne rozwiązania, szukając równowagi między wizją inwestora, możliwościami miejsca i budżetem. Zależy mi na tworzeniu przestrzeni, w których dobrze się żyje i pracuje."
   ],
   "navigation": [
     {

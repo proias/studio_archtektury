@@ -33,8 +33,8 @@ Raport historyczny: docs/RAPORT-WDROZENIA.md. Otwarte konfiguracje: docs/INTEGRA
 
 ## Aktualizacja: nowe portfolio i Netlify
 
-Aktualny katalog używa wyłącznie 12 folderów „nowe portfolio” i 41 obrazów. Na liście jest 11 projektów; nierozstrzygnięta przebudowa kostki pozostaje pod bezpośrednim adresem /projekty/dom-kostka-przebudowa.
+Aktualny katalog używa wyłącznie 12 folderów „nowe portfolio” i 41 obrazów. Wszystkie 12 projektów, w tym przebudowa domu typu kostka, jest publicznych za potwierdzeniem właścicielki z 28.10.2026.
 
 Next.js i eslint-config-next zaktualizowano punktowo do 15.5.28. Polecenie lint korzysta z ESLint CLI. Konfiguracja Netlify znajduje się w netlify.toml. `build:netlify` uruchamia build Next.js i przekazuje jego wynik. Sam lokalny build nie publikuje strony.
 
-Aktualne dokumenty: docs/RAPORT-NETLIFY-I-NOWE-PORTFOLIO.md, docs/NETLIFY-ANALIZA-I-WDROZENIE.md, docs/AUDYT-FRONTEND-IMPECCABLE.md i docs/NOWE-PORTFOLIO.md. Wcześniejszy raport wdrożenia opisuje historyczny stan pierwszej wersji.
+Aktualne dokumenty: docs/RAPORT-NETLIFY-I-NOWE-PORTFOLIO.md, docs/NETLIFY-ANALIZA-I-WDROZENIE.md, docs/AUDYT-FRONTEND-IMPECCABLE.md i docs/NOWE-PORTFOLIO.md. Wcześniejszy raport wdrożenia opisuje historyczny stan pierwszej wersji. Lista wymagań, wyniki kontroli i otwarte kwestie: [docs/AUDYT-WYMAGAN-PROJEKTU.md](docs/AUDYT-WYMAGAN-PROJEKTU.md).

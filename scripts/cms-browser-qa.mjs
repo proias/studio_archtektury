@@ -225,9 +225,9 @@ try {
     ),
   );
   check(
-    "CMS exposes independent hero image and framing controls",
+    "CMS exposes studio illustration and framing controls",
     await evaluate(
-      'document.body.innerText.includes("Zdjęcie główne strony") && document.body.innerText.includes("Kadrowanie zdjęcia głównego") && document.body.innerText.includes("Pozycja kadru")',
+      'document.body.innerText.includes("Ilustracja w sekcji O pracowni") && document.body.innerText.includes("Kadrowanie ilustracji") && document.body.innerText.includes("Pozycja kadru")',
     ),
   );
   const { default: sharp } = await import("sharp");
@@ -255,7 +255,7 @@ try {
   await goto("/", "Architektura");
   await until(() =>
     evaluate(
-      '[...document.querySelectorAll(".wordmark-logo")].length === 2 && [...document.querySelectorAll(".site-header .wordmark-logo, .hero img")].every(i => i.complete && i.naturalWidth > 0) && document.querySelector(".hero img").alt === "Zdjęcie testowe CMS"',
+      '[...document.querySelectorAll(".wordmark-logo")].length === 2 && [...document.querySelectorAll(".site-header .wordmark-logo, .studio-drawing img")].every(i => i.complete && i.naturalWidth > 0) && document.querySelector(".studio-drawing img").alt === "Zdjęcie testowe CMS"',
     ),
   );
   check(
@@ -265,9 +265,15 @@ try {
     ),
   );
   check(
-    "independent hero renders with selected framing",
+    "studio illustration renders with selected framing",
     await evaluate(
-      'getComputedStyle(document.querySelector(".hero img")).objectFit === "cover" && getComputedStyle(document.querySelector(".hero img")).objectPosition === "50% 0%"',
+      'getComputedStyle(document.querySelector(".studio-drawing img")).objectFit === "cover" && getComputedStyle(document.querySelector(".studio-drawing img")).objectPosition === "50% 0%"',
+    ),
+  );
+  check(
+    "hero continues to use the published portfolio cover",
+    await evaluate(
+      'document.querySelector(".hero img").alt !== "Zdjęcie testowe CMS" && document.querySelector(".hero img").src.includes("images%2Fprojects")',
     ),
   );
   await evaluate('document.querySelector(".site-footer").scrollIntoView()');
@@ -285,7 +291,7 @@ try {
       mobile: width < 600,
     });
     check(
-      `uploaded logo and hero fit viewport ${width}`,
+      `uploaded logo and studio illustration fit viewport ${width}`,
       await evaluate(
         'document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll(".wordmark-logo")].every(i => i.getBoundingClientRect().width <= 240)',
       ),

@@ -34,9 +34,12 @@ const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const stopMemoryMonitor = monitorBrowserMemory(chrome);
 let socket;
 let id = 0;
+let documentLoaderId;
 const pending = new Map();
 const errors = [];
 const failed = [];
+const intentionallyBlockedScripts = [];
+let testingNoJs = false;
 const checks = [];
 async function until(fn, timeout = 30000) {
   const start = Date.now();
@@ -71,15 +74,27 @@ try {
           ? p.reject(new Error(JSON.stringify(msg.error)))
           : p.resolve(msg.result);
       }
-    } else if (msg.method === "Runtime.exceptionThrown")
+    } else if (
+      msg.method === "Page.frameNavigated" &&
+      !msg.params.frame.parentId
+    )
+      documentLoaderId = msg.params.frame.loaderId;
+    else if (msg.method === "Runtime.exceptionThrown")
       errors.push(msg.params.exceptionDetails);
     else if (
       msg.method === "Runtime.consoleAPICalled" &&
       msg.params.type === "error"
     )
       errors.push(msg.params.args.map((a) => a.value || a.description));
-    else if (msg.method === "Network.loadingFailed" && !msg.params.canceled)
-      failed.push(msg.params);
+    else if (msg.method === "Network.loadingFailed" && !msg.params.canceled) {
+      if (
+        testingNoJs &&
+        msg.params.type === "Script" &&
+        msg.params.blockedReason === "csp"
+      )
+        intentionallyBlockedScripts.push(msg.params);
+      else failed.push(msg.params);
+    }
   };
   socket.onclose = () => {
     for (const request of pending.values())
@@ -96,7 +111,7 @@ try {
           pending.delete(key);
           reject(new Error("CDP timeout " + method));
         }
-      }, 20000).unref();
+      }, 45000).unref();
     });
   }
   async function evaluate(expression) {
@@ -116,13 +131,31 @@ try {
         'document.readyState === "complete" && !!document.querySelector("main")',
       ),
     );
-    await evaluate("document.fonts.ready.then(()=>true)");
     await evaluate(
-      'Promise.all([...document.images].map(i=>{i.loading="eager";return i.decode().catch(()=>{})})).then(()=>true)',
+      "Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,8000))]).then(()=>true)",
     );
+    await evaluate(
+      '(async()=>{for(const i of document.images){if(!i.complete||!i.naturalWidth){i.scrollIntoView({behavior:"instant",block:"center"});await new Promise(r=>setTimeout(r,150));await Promise.race([i.decode().catch(()=>{}),new Promise(r=>setTimeout(r,10000))]);}}return true})()',
+    );
+    try {
+      await until(() =>
+        evaluate("[...document.images].every(i=>i.complete&&i.naturalWidth>0)"),
+      );
+    } catch {
+      throw new Error(
+        "Images did not settle: " +
+          JSON.stringify(
+            await evaluate(
+              "[...document.images].map(i=>({src:i.currentSrc,loaded:i.complete,width:i.naturalWidth,loading:i.loading}))",
+            ),
+          ),
+      );
+    }
   }
   async function goto(route) {
-    await send("Page.navigate", { url: base + route });
+    const navigation = await send("Page.navigate", { url: base + route });
+    if (navigation.loaderId)
+      await until(() => documentLoaderId === navigation.loaderId);
     await until(() =>
       evaluate(
         "location.pathname === " + JSON.stringify(route.split(/[?#]/)[0]),
@@ -168,15 +201,14 @@ try {
   );
   const visible = catalog.filter((p) => p.publicationStatus === "published");
 
-  const featuredCount = visible.filter((p) => p.featuredOrder).length;
-  for (const width of [390, 768, 1024, 1440]) {
+  for (const width of [1440, 1024, 768, 390]) {
     await send("Emulation.setDeviceMetricsOverride", {
       width,
       height: 1000,
       deviceScaleFactor: 1,
       mobile: false,
     });
-    await goto("/");
+    await goto("/?qa-viewport=" + width);
     await evaluate("window.scrollTo(0,0)");
     const home = await evaluate(
       '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".project-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".hero img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
@@ -204,16 +236,23 @@ try {
     await check(width + " no horizontal overflow", home.scroll <= home.width);
     await check(
       width + " one H1 and only published featured cards",
-      home.h1 === 1 && home.cards.length === featuredCount,
+      home.h1 === 1 &&
+        home.cards.length === visible.length - 1 &&
+        (await evaluate(
+          'document.querySelectorAll(".featured-project").length',
+        )) === 1,
     );
     await check(
-      width + " hero preserves 16:9",
-      Math.abs(home.hero.width / home.hero.height - 16 / 9) < 0.01,
+      width + " hero uses responsive editorial framing",
+      Math.abs(
+        home.hero.width / home.hero.height - (width < 768 ? 4 / 3 : 16 / 10),
+      ) < 0.01,
     );
     await check(width + " all images loaded", home.images);
     await check(
       width + " actual local fonts applied",
-      home.headFont.includes("montserrat") && home.bodyFont.includes("ptSans"),
+      home.headFont.includes("spaceGrotesk") &&
+        home.bodyFont.includes("ptSans"),
     );
     await check(width + " reduced motion", home.reduced === "auto");
     await fs.writeFile(
@@ -305,7 +344,200 @@ try {
     deviceScaleFactor: 1,
     mobile: false,
   });
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
+
+  await goto("/?qa-motion=desktop");
+  await until(() =>
+    evaluate(
+      'document.querySelector(".atelier-home")?.dataset.kinetic === "desktop"',
+    ),
+  );
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await pause(200);
+  const openingWidth = await evaluate(
+    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
+  );
+  await evaluate('scrollTo({top:800,behavior:"instant"})');
+  await pause(200);
+  const expandedWidth = await evaluate(
+    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
+  );
+  await check(
+    "hero expands four percent across 800px",
+    Math.abs(expandedWidth / openingWidth - 1.04) < 0.005,
+  );
+  await check(
+    "header frosts after scrolling",
+    await evaluate(
+      'document.querySelector(".site-header").classList.contains("nav--scrolled")',
+    ),
+  );
+  for (const [name, selector] of [
+    ["hero", ".kinetic-hero"],
+    ["manifest", "#manifest"],
+    ["portfolio", "#portfolio"],
+    ["process", ".atelier-process"],
+    ["contact", ".contact-section"],
+  ]) {
+    await evaluate(
+      "document.querySelector(" +
+        JSON.stringify(selector) +
+        ').scrollIntoView({behavior:"instant"})',
+    );
+    await pause(1400);
+    const shot = await send("Page.captureScreenshot", { format: "png" });
+    await fs.writeFile(
+      path.join(out, "kinetic-" + name + ".png"),
+      Buffer.from(shot.data, "base64"),
+    );
+    await check(
+      name + " has no horizontal overflow",
+      await evaluate("document.documentElement.scrollWidth<=innerWidth"),
+    );
+    if (name === "manifest") {
+      await evaluate(
+        'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
+      );
+      await pause(200);
+      await check(
+        "manifest counters finish",
+        await evaluate(
+          'Array.from(document.querySelectorAll("[data-count-to]")).map(x=>x.textContent).join("/")==="10+/100%"',
+        ),
+      );
+      await check(
+        "header switches to dark",
+        await evaluate(
+          'document.querySelector(".site-header").classList.contains("nav--dark")',
+        ),
+      );
+    }
+  }
+  await check(
+    "one process phase is active",
+    await evaluate(
+      'document.querySelectorAll(".atelier-process-list > li[data-active=true]").length===1',
+    ),
+  );
+
+  // Serialize selectors as JS literals: nested attribute quotes previously broke CI.
+  const portfolioNavSelector = '.desktop-nav a[href="/#portfolio"]';
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await evaluate(
+    "document.querySelector(" +
+      JSON.stringify(portfolioNavSelector) +
+      ").click()",
+  );
+  await until(() =>
+    evaluate('document.activeElement.id==="portfolio-heading"'),
+  );
+  await check(
+    "desktop navigation reaches portfolio without selector syntax errors",
+    await evaluate('document.activeElement.id==="portfolio-heading"'),
+  );
+  const featuredTop = await evaluate(
+    'document.querySelector(".kinetic-featured").getBoundingClientRect().top+scrollY',
+  );
+  const pinned = [];
+  for (const offset of [160, 280]) {
+    await evaluate(
+      "scrollTo({top:" + (featuredTop + offset) + ',behavior:"instant"})',
+    );
+    await pause(150);
+    pinned.push(
+      await evaluate(
+        'document.querySelector(".featured-project-image").getBoundingClientRect().top',
+      ),
+    );
+  }
+  await check(
+    "featured image remains sticky while text scrolls",
+    Math.abs(pinned[0] - pinned[1]) < 2 && Math.abs(pinned[0] - 108) < 2,
+  );
+  await goto("/?qa-counter-interruption=1");
+  await evaluate(
+    'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
+  );
+  await pause(100);
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+  });
+  await until(() =>
+    evaluate(
+      'document.querySelector(".atelier-home").dataset.kinetic==="static"',
+    ),
+  );
+  await check(
+    "interrupted counters restore final values",
+    await evaluate(
+      'Array.from(document.querySelectorAll("[data-count-to]")).every(el=>el.textContent===el.dataset.countTo+el.dataset.countSuffix)',
+    ),
+  );
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 1,
+    mobile: true,
+  });
+  await goto("/?qa-motion=mobile");
+  await until(() =>
+    evaluate(
+      'document.querySelector(".atelier-home")?.dataset.kinetic==="mobile"',
+    ),
+  );
+  await check(
+    "mobile uses normal flow",
+    await evaluate(
+      'getComputedStyle(document.querySelector(".featured-project-image")).position!=="sticky" && document.documentElement.scrollWidth<=innerWidth',
+    ),
+  );
+  await evaluate('scrollTo({top:0,behavior:"instant"})');
+  await pause(800);
+  {
+    const shot = await send("Page.captureScreenshot", { format: "png" });
+    await fs.writeFile(
+      path.join(out, "kinetic-mobile.png"),
+      Buffer.from(shot.data, "base64"),
+    );
+  }
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+  });
+  await until(() =>
+    evaluate(
+      'document.querySelector(".atelier-home")?.dataset.kinetic==="static"',
+    ),
+  );
+  await check(
+    "live reduced motion restores static images",
+    await evaluate(
+      'getComputedStyle(document.querySelector(".kinetic-hero-frame")).transform==="none"',
+    ),
+  );
+  testingNoJs = true;
+  await send("Emulation.setScriptExecutionDisabled", { value: true });
+  await send("Page.navigate", { url: base + "/?qa-no-js=1" });
+  await pause(700);
+  await check(
+    "no JS keeps content visible",
+    await evaluate(
+      '!!document.querySelector("h1") && !document.querySelector(".atelier-home").dataset.kinetic && getComputedStyle(document.querySelector(".featured-project-copy")).opacity==="1"',
+    ),
+  );
+  await send("Emulation.setScriptExecutionDisabled", { value: false });
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: 1440,
+    height: 1000,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
   await goto("/projekty");
+  testingNoJs = false;
   for (const label of [
     "Domy",
     "Obiekty usługowe",

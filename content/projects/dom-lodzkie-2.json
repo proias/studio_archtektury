@@ -1,8 +1,14 @@
 {
-  "title": "Dom w Łódzkiem II",
+  "title": "Dom z wysokim przeszkleniem",
   "category": "Domy",
-  "description": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej. Widok tarasu i przeszklonej elewacji domu wśród zieleni. Front domu z wysokim dwuspadowym dachem i tarasem. Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem.",
+  "description": "Dwuspadowe dachy nadają bryle wyrazisty rytm, a wysokie przeszklenie strefy dziennej otwiera dom na światło i otaczającą zieleń. Salon i taras tworzą wspólną przestrzeń codziennego życia — od spokojnych poranków po spotkania z bliskimi. Wieczorem rozświetlone wnętrze podkreśla geometrię budynku i nadaje mu ciepły charakter. To dom, w którym prosta forma architektoniczna łączy się z przestronnością i bliskością ogrodu.",
   "images": [
+    {
+      "src": "/images/projects/dom-lodzkie-2/04.webp",
+      "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
+      "width": 1781,
+      "height": 884
+    },
     {
       "src": "/images/projects/dom-lodzkie-2/01.webp",
       "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
@@ -20,31 +26,25 @@
       "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
       "width": 1781,
       "height": 884
-    },
-    {
-      "src": "/images/projects/dom-lodzkie-2/04.webp",
-      "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
-      "width": 1781,
-      "height": 884
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-lodzkie-2/01.webp",
-    "alt": "Wizualizacja domu z dwuspadowymi dachami i wysokim przeszkleniem strefy dziennej",
-    "width": 1779,
+    "src": "/images/projects/dom-lodzkie-2/04.webp",
+    "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
+    "width": 1781,
     "height": 884,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
   },
   "credits": {
-    "authorship": "pending-confirmation",
-    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+    "authorship": "own",
+    "note": "Projekt opracowany przez Paulinę Cywińską; prawa i zakres publikacji określają zawarte umowy."
   },
-  "publicationStatus": "draft",
+  "publicationStatus": "published",
   "order": 7,
   "sourceFolder": "DOM ŁODZKIE 2",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych.",
+  "contentStatus": "approved",
+  "editorialNotes": "",
   "seo": {
     "title": "",
     "description": "",
