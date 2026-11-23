@@ -26,7 +26,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link className="header-brief" href="/#kontakt">
-          Napisz do Nas <span aria-hidden="true">↗</span>
+          Opisz swoją działkę
         </Link>
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>

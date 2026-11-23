@@ -37,9 +37,7 @@ export function ContactSection() {
       if (process.env.NEXT_PUBLIC_CONTACT_ENABLED !== "true")
         throw new Error("Formularz wymaga wdrożenia Netlify.");
       await sendContact(result.data, String(data["bot-field"] || ""));
-      setStatus(
-        "Dziękujemy. Zgłoszenie zostało przyjęte przez formularz pracowni.",
-      );
+      setStatus("Dziękuję, wiadomość dotarła. Odezwę się wkrótce.");
       form.reset();
     } catch {
       setFailed(true);
@@ -95,10 +93,6 @@ export function ContactSection() {
           </p>
         </div>
         <div className="contact-form-wrap">
-          <div className="brief-card-top">
-            <span>Twój nowy rozdział</span>
-            <span>REF: CYWINSKA-ARCH-2026</span>
-          </div>
           <h3>{pageCopy.contact.formHeading}</h3>
           <p className="form-note">{pageCopy.contact.formDescription}</p>
           <form
@@ -118,12 +112,7 @@ export function ContactSection() {
             </div>
             <div className="form-row">
               <div>
-                <label htmlFor="contact-name">
-                  <span className="field-index" aria-hidden="true">
-                    01 /{" "}
-                  </span>
-                  Imię i nazwisko *
-                </label>
+                <label htmlFor="contact-name">Imię i nazwisko *</label>
                 <input
                   id="contact-name"
                   name="name"
@@ -135,12 +124,7 @@ export function ContactSection() {
                 {fieldError("name")}
               </div>
               <div>
-                <label htmlFor="contact-email">
-                  <span className="field-index" aria-hidden="true">
-                    02 /{" "}
-                  </span>
-                  E-mail *
-                </label>
+                <label htmlFor="contact-email">E-mail *</label>
                 <input
                   id="contact-email"
                   name="email"
@@ -156,9 +140,6 @@ export function ContactSection() {
             <div className="form-row">
               <div>
                 <label htmlFor="contact-phone">
-                  <span className="field-index" aria-hidden="true">
-                    03 /{" "}
-                  </span>
                   Telefon <span>(opcjonalnie)</span>
                 </label>
                 <input
@@ -172,12 +153,7 @@ export function ContactSection() {
                 {fieldError("phone")}
               </div>
               <div>
-                <label htmlFor="contact-type">
-                  <span className="field-index" aria-hidden="true">
-                    04 /{" "}
-                  </span>
-                  Rodzaj projektu *
-                </label>
+                <label htmlFor="contact-type">Rodzaj projektu *</label>
                 <select
                   id="contact-type"
                   name="projectType"
@@ -196,12 +172,7 @@ export function ContactSection() {
               </div>
             </div>
             <div>
-              <label htmlFor="contact-message">
-                <span className="field-index" aria-hidden="true">
-                  05 /{" "}
-                </span>
-                Wiadomość *
-              </label>
+              <label htmlFor="contact-message">Wiadomość *</label>
               <textarea
                 id="contact-message"
                 name="message"
@@ -209,15 +180,14 @@ export function ContactSection() {
                 rows={4}
                 minLength={20}
                 maxLength={5000}
-                placeholder="Lokalizacja, potrzeby, planowany zakres…"
+                placeholder="Gdzie jest działka i co chcesz zbudować?"
                 {...a11y("message")}
               />
               {fieldError("message")}
             </div>
             <p className="form-note">
-              * Pola wymagane. Wysłane dane przetwarza pracownia za
-              pośrednictwem Netlify Forms.{" "}
-              <a href="/prywatnosc">Informacje o prywatności</a>.
+              * Pola wymagane. Dane z formularza przetwarzam za pośrednictwem
+              Netlify Forms. <a href="/prywatnosc">Informacje o prywatności</a>.
             </p>
             <button className="contact-submit" disabled={busy} type="submit">
               {busy ? "Wysyłanie…" : pageCopy.contact.submitLabel}

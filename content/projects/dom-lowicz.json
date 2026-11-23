@@ -41,7 +41,7 @@
     "note": "Projekt opracowany przez Paulinę Cywińską; prawa i zakres publikacji określają zawarte umowy."
   },
   "publicationStatus": "published",
-  "order": 8,
+  "order": 4,
   "sourceFolder": "DOM ŁOWICZ",
   "contentStatus": "approved",
   "editorialNotes": "",
@@ -50,5 +50,6 @@
     "description": "",
     "image": null,
     "imageAlt": ""
-  }
+  },
+  "featuredOrder": 4
 }

@@ -4,9 +4,9 @@
   "description": "Dwuspadowe dachy nadają bryle wyrazisty rytm, a wysokie przeszklenie strefy dziennej otwiera dom na światło i otaczającą zieleń. Salon i taras tworzą wspólną przestrzeń codziennego życia — od spokojnych poranków po spotkania z bliskimi. Wieczorem rozświetlone wnętrze podkreśla geometrię budynku i nadaje mu ciepły charakter. To dom, w którym prosta forma architektoniczna łączy się z przestronnością i bliskością ogrodu.",
   "images": [
     {
-      "src": "/images/projects/dom-lodzkie-2/04.webp",
-      "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
-      "width": 1781,
+      "src": "/images/projects/dom-lodzkie-2/02.webp",
+      "alt": "Widok tarasu i przeszklonej elewacji domu wśród zieleni",
+      "width": 1780,
       "height": 884
     },
     {
@@ -16,22 +16,22 @@
       "height": 884
     },
     {
-      "src": "/images/projects/dom-lodzkie-2/02.webp",
-      "alt": "Widok tarasu i przeszklonej elewacji domu wśród zieleni",
-      "width": 1780,
+      "src": "/images/projects/dom-lodzkie-2/03.webp",
+      "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
+      "width": 1781,
       "height": 884
     },
     {
-      "src": "/images/projects/dom-lodzkie-2/03.webp",
-      "alt": "Front domu z wysokim dwuspadowym dachem i tarasem",
+      "src": "/images/projects/dom-lodzkie-2/04.webp",
+      "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
       "width": 1781,
       "height": 884
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-lodzkie-2/04.webp",
-    "alt": "Wieczorna wizualizacja domu z oświetlonym przeszklonym salonem",
-    "width": 1781,
+    "src": "/images/projects/dom-lodzkie-2/02.webp",
+    "alt": "Dom z wysokim przeszkleniem i drewnianą okładziną w dziennym świetle",
+    "width": 1780,
     "height": 884,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
@@ -41,7 +41,7 @@
     "note": "Projekt opracowany przez Paulinę Cywińską; prawa i zakres publikacji określają zawarte umowy."
   },
   "publicationStatus": "published",
-  "order": 7,
+  "order": 2,
   "sourceFolder": "DOM ŁODZKIE 2",
   "contentStatus": "approved",
   "editorialNotes": "",
@@ -50,5 +50,6 @@
     "description": "",
     "image": null,
     "imageAlt": ""
-  }
+  },
+  "featuredOrder": 2
 }

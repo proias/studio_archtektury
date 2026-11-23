@@ -9,25 +9,20 @@ import { indexingEnabled } from "@/lib/indexing-policy.mjs";
 import "../globals.css";
 import "../atelier.css";
 import "../showroom.css";
-const spaceGrotesk = localFont({
-  src: "../fonts/SpaceGrotesk.ttf",
-  weight: "300 700",
+import "../ciepla.css";
+const newsreader = localFont({
+  src: "../fonts/Newsreader.woff2",
+  weight: "300 500",
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-serif",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
-const montserrat = localFont({
-  src: "../fonts/Montserrat.ttf",
-  weight: "100 900",
+const inter = localFont({
+  src: "../fonts/Inter.woff2",
+  weight: "400 600",
   display: "swap",
-  variable: "--font-montserrat",
-});
-const ptSans = localFont({
-  src: [
-    { path: "../fonts/PTSans-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../fonts/PTSans-Bold.ttf", weight: "700", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-pt-sans",
+  variable: "--font-body",
+  fallback: ["system-ui", "Arial", "sans-serif"],
 });
 export async function generateMetadata(): Promise<Metadata> {
   const cover = await getPrimaryCover();
@@ -67,16 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="pl"
-      className={
-        montserrat.variable +
-        " " +
-        ptSans.variable +
-        " " +
-        spaceGrotesk.variable
-      }
-    >
+    <html lang="pl" className={newsreader.variable + " " + inter.variable}>
       <body>
         <a href="#main-content" className="skip-link">
           Przejdź do treści

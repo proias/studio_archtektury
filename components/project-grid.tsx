@@ -38,7 +38,7 @@ export function ProjectGrid({
         Liczba projektów: {visible.length}
       </p>
       <div className="project-grid" data-count={visible.length}>
-        {visible.map((project, index) => (
+        {visible.map((project) => (
           <Link
             className="project-card"
             href={`/projekty/${project.slug}`}
@@ -55,10 +55,6 @@ export function ProjectGrid({
                   objectFit: project.cover.objectFit,
                 }}
               />
-              <span className="project-curtain" aria-hidden="true" />
-              <span className="project-code" aria-hidden="true">
-                [A-{String(index + 1).padStart(2, "0")}]
-              </span>
             </div>
             <div className="project-caption">
               <h3>{project.title}</h3>
