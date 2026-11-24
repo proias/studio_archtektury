@@ -32,7 +32,7 @@
       "href": "/#portfolio"
     },
     {
-      "label": "O pracowni",
+      "label": "O mnie",
       "href": "/#about"
     },
     {
@@ -47,23 +47,23 @@
   "processSteps": [
     {
       "title": "Konsultacja wstępna",
-      "description": "Rozmawiamy o potrzebach, miejscu i możliwościach inwestycji. Ustalamy zakres współpracy."
+      "description": "Rozmawiamy o Twoich potrzebach, działce i możliwościach. Ustalam z Tobą zakres współpracy."
     },
     {
       "title": "Koncepcja",
-      "description": "Szukamy układu funkcjonalnego i kierunku estetycznego. Omawiamy propozycje i wspólnie je dopracowujemy."
+      "description": "Szukam układu funkcjonalnego i kierunku estetycznego. Omawiam z Tobą propozycje i wspólnie je dopracowujemy."
     },
     {
       "title": "Projekt szczegółowy",
-      "description": "Rozwijamy wybraną koncepcję. Przygotowujemy rysunki i dobór materiałów w uzgodnionym zakresie."
+      "description": "Rozwijam wybraną koncepcję. Przygotowuję rysunki i dobór materiałów w uzgodnionym zakresie."
     },
     {
       "title": "Nadzór autorski",
-      "description": "Jeśli obejmuje go współpraca, konsultujemy rozwiązania z wykonawcami i sprawdzamy zgodność prac z projektem."
+      "description": "Jeśli obejmuje go współpraca, konsultuję rozwiązania z wykonawcami i sprawdzam zgodność prac z projektem."
     },
     {
       "title": "Finalizacja",
-      "description": "Podsumowujemy uzgodniony zakres prac i przekazujemy opracowane materiały. Omawiamy dalsze kroki."
+      "description": "Podsumowuję uzgodniony zakres prac i przekazuję opracowane materiały. Omawiamy dalsze kroki."
     }
   ]
 }

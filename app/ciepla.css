@@ -126,7 +126,7 @@ h3 {
 .site-header.nav--scrolled,
 .site-header.nav--dark {
   height: 80px;
-  background: rgba(246, 242, 235, 0.94);
+  background: var(--len);
   backdrop-filter: none;
   border-bottom: 1px solid var(--linia);
 }
@@ -664,6 +664,33 @@ a:hover .w-frame img {
   .w-steps {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+}
+@media (max-width: 899px) {
+  .project-layout {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+  .project-details {
+    display: contents;
+  }
+  .project-details > p,
+  .project-details > dl {
+    margin-block: 16px 24px;
+  }
+  .project-details > * {
+    order: 2;
+  }
+  .project-details > .eyebrow,
+  .project-details > h1 {
+    order: 0;
+  }
+  .project-details > h1 {
+    margin-bottom: 8px;
+  }
+  .project-layout > :not(.project-details) {
+    order: 1;
+    margin-bottom: 16px;
   }
 }
 @media (max-width: 767px) {
