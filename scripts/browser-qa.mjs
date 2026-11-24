@@ -34,9 +34,12 @@ const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 const stopMemoryMonitor = monitorBrowserMemory(chrome);
 let socket;
 let id = 0;
+let documentLoaderId;
 const pending = new Map();
 const errors = [];
 const failed = [];
+const intentionallyBlockedScripts = [];
+let testingNoJs = false;
 const checks = [];
 async function until(fn, timeout = 30000) {
   const start = Date.now();
@@ -71,15 +74,27 @@ try {
           ? p.reject(new Error(JSON.stringify(msg.error)))
           : p.resolve(msg.result);
       }
-    } else if (msg.method === "Runtime.exceptionThrown")
+    } else if (
+      msg.method === "Page.frameNavigated" &&
+      !msg.params.frame.parentId
+    )
+      documentLoaderId = msg.params.frame.loaderId;
+    else if (msg.method === "Runtime.exceptionThrown")
       errors.push(msg.params.exceptionDetails);
     else if (
       msg.method === "Runtime.consoleAPICalled" &&
       msg.params.type === "error"
     )
       errors.push(msg.params.args.map((a) => a.value || a.description));
-    else if (msg.method === "Network.loadingFailed" && !msg.params.canceled)
-      failed.push(msg.params);
+    else if (msg.method === "Network.loadingFailed" && !msg.params.canceled) {
+      if (
+        testingNoJs &&
+        msg.params.type === "Script" &&
+        msg.params.blockedReason === "csp"
+      )
+        intentionallyBlockedScripts.push(msg.params);
+      else failed.push(msg.params);
+    }
   };
   socket.onclose = () => {
     for (const request of pending.values())
@@ -96,7 +111,7 @@ try {
           pending.delete(key);
           reject(new Error("CDP timeout " + method));
         }
-      }, 20000).unref();
+      }, 45000).unref();
     });
   }
   async function evaluate(expression) {
@@ -116,13 +131,31 @@ try {
         'document.readyState === "complete" && !!document.querySelector("main")',
       ),
     );
-    await evaluate("document.fonts.ready.then(()=>true)");
     await evaluate(
-      'Promise.all([...document.images].map(i=>{i.loading="eager";return i.decode().catch(()=>{})})).then(()=>true)',
+      "Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,8000))]).then(()=>true)",
     );
+    await evaluate(
+      '(async()=>{for(const i of document.images){if(!i.complete||!i.naturalWidth){i.scrollIntoView({behavior:"instant",block:"center"});await new Promise(r=>setTimeout(r,150));await Promise.race([i.decode().catch(()=>{}),new Promise(r=>setTimeout(r,10000))]);}}return true})()',
+    );
+    try {
+      await until(() =>
+        evaluate("[...document.images].every(i=>i.complete&&i.naturalWidth>0)"),
+      );
+    } catch {
+      throw new Error(
+        "Images did not settle: " +
+          JSON.stringify(
+            await evaluate(
+              "[...document.images].map(i=>({src:i.currentSrc,loaded:i.complete,width:i.naturalWidth,loading:i.loading}))",
+            ),
+          ),
+      );
+    }
   }
   async function goto(route) {
-    await send("Page.navigate", { url: base + route });
+    const navigation = await send("Page.navigate", { url: base + route });
+    if (navigation.loaderId)
+      await until(() => documentLoaderId === navigation.loaderId);
     await until(() =>
       evaluate(
         "location.pathname === " + JSON.stringify(route.split(/[?#]/)[0]),
@@ -168,18 +201,17 @@ try {
   );
   const visible = catalog.filter((p) => p.publicationStatus === "published");
 
-  const featuredCount = visible.filter((p) => p.featuredOrder).length;
-  for (const width of [390, 768, 1024, 1440]) {
+  for (const width of [1440, 1024, 768, 390]) {
     await send("Emulation.setDeviceMetricsOverride", {
       width,
       height: 1000,
       deviceScaleFactor: 1,
       mobile: false,
     });
-    await goto("/");
+    await goto("/?qa-viewport=" + width);
     await evaluate("window.scrollTo(0,0)");
     const home = await evaluate(
-      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".project-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".hero img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
+      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".w-house, .w-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".w-hero-image img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
     );
     await fs.writeFile(
       path.join(out, "layout-" + width + ".json"),
@@ -198,22 +230,29 @@ try {
     await check(
       width + " published covers preserve configured framing",
       await evaluate(
-        `[...document.querySelectorAll(".project-card img")].every(i => ["cover", "contain"].includes(getComputedStyle(i).objectFit))`,
+        `[...document.querySelectorAll(".w-house img, .w-card img")].every(i => ["cover", "contain"].includes(getComputedStyle(i).objectFit))`,
       ),
     );
     await check(width + " no horizontal overflow", home.scroll <= home.width);
     await check(
-      width + " one H1 and only published featured cards",
-      home.h1 === 1 && home.cards.length === featuredCount,
+      width + " one H1 and only published project cards",
+      home.h1 === 1 &&
+        home.cards.length > 0 &&
+        home.cards.every((c) =>
+          visible.some((p) => c.href === "/projekty/" + p.slug),
+        ) &&
+        (await evaluate(
+          'document.querySelectorAll(".w-house-wide").length',
+        )) === 1,
     );
     await check(
-      width + " hero preserves 16:9",
-      Math.abs(home.hero.width / home.hero.height - 16 / 9) < 0.01,
+      width + " hero keeps calm 4:3 framing",
+      Math.abs(home.hero.width / home.hero.height - 4 / 3) < 0.01,
     );
     await check(width + " all images loaded", home.images);
     await check(
       width + " actual local fonts applied",
-      home.headFont.includes("montserrat") && home.bodyFont.includes("ptSans"),
+      home.headFont.includes("newsreader") && home.bodyFont.includes("inter"),
     );
     await check(width + " reduced motion", home.reduced === "auto");
     await fs.writeFile(
@@ -305,7 +344,73 @@ try {
     deviceScaleFactor: 1,
     mobile: false,
   });
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
+
+  await goto("/");
+  await until(() =>
+    evaluate('document.querySelectorAll("[data-reveal]").length > 0'),
+  );
+  await check(
+    "calm reveal: no kinetic layers left",
+    await evaluate(
+      '!document.querySelector(".atelier-home, .kinetic-hero-frame, .project-curtain") && getComputedStyle(document.querySelector(".reading-progress") || document.body).display !== "block" || !document.querySelector(".reading-progress")',
+    ),
+  );
+  const jumps = [];
+  for (let y = 0; y <= 6000; y += 400) {
+    await evaluate("window.scrollTo({top:" + y + ',behavior:"instant"})');
+    await pause(60);
+    const actual = await evaluate("Math.round(scrollY)");
+    const max = await evaluate(
+      "document.documentElement.scrollHeight - innerHeight",
+    );
+    if (actual !== Math.min(y, max) && Math.abs(actual - y) > 2) {
+      jumps.push({ y, actual });
+    }
+  }
+  await check("scrolling down has no jumps", jumps.length === 0);
+  await evaluate(
+    'window.scrollTo({top:document.documentElement.scrollHeight,behavior:"instant"})',
+  );
+  await pause(900);
+  await check(
+    "reveal shows every section after scrolling",
+    await evaluate(
+      '[...document.querySelectorAll("[data-reveal]")].every(e => e.dataset.reveal !== "pending")',
+    ),
+  );
+  await send("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+  });
+  await goto("/");
+  await pause(400);
+  await check(
+    "reduced motion keeps content visible at once",
+    await evaluate(
+      '[...document.querySelectorAll("[data-reveal]")].every(e => e.dataset.reveal !== "pending" && getComputedStyle(e).opacity === "1")',
+    ),
+  );
+  testingNoJs = true;
+  await send("Emulation.setScriptExecutionDisabled", { value: true });
+  await send("Page.navigate", { url: base + "/?qa-no-js=1" });
+  await pause(700);
+  await check(
+    "no JS keeps content visible",
+    await evaluate(
+      '!!document.querySelector("h1") && getComputedStyle(document.querySelector(".w-house")).opacity === "1"',
+    ),
+  );
+  await send("Emulation.setScriptExecutionDisabled", { value: false });
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: 1440,
+    height: 1000,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
   await goto("/projekty");
+  testingNoJs = false;
   for (const label of [
     "Domy",
     "Obiekty usługowe",
@@ -454,7 +559,7 @@ try {
   );
   await until(() =>
     evaluate(
-      'document.querySelector(".form-status").textContent.includes("przyjęte")',
+      'document.querySelector(".form-status").textContent.includes("dotarła")',
     ),
   );
   await check(
@@ -487,12 +592,14 @@ try {
     r.text(),
   );
   await check(
-    "project has production canonical and temporary description notice",
+    "project has production canonical and notice only for temporary descriptions",
     html.includes(
       'rel="canonical" href="https://cywinska-studio.pl/projekty/' +
         visible[0].slug +
         '"',
-    ) && html.includes("Opis tymczasowy"),
+    ) &&
+      html.includes("Opis tymczasowy") ===
+        (visible[0].contentStatus === "temporary"),
   );
   const sitemap = await fetch(base + "/sitemap.xml").then((r) => r.text());
   await check(

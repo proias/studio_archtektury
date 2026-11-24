@@ -1,24 +1,24 @@
 {
   "intro": {
-    "eyebrow": "Paulina Cywińska · Studio Architektury",
-    "headingFirst": "Architektura",
-    "headingSecond": "dopasowana do życia.",
-    "description": "Projekty domów, wnętrz i przestrzeni usługowych. Indywidualne podejście do miejsca, funkcji i potrzeb inwestora.",
-    "projectsLink": "Zobacz projekty"
+    "eyebrow": "Paulina Cywińska · architektka, Łódź",
+    "headingFirst": "Dom, w którym",
+    "headingSecond": "dobrze się mieszka.",
+    "description": "Projektuję domy jednorodzinne w Łodzi, Zgierzu i okolicach. Prowadzę Cię od pierwszej rozmowy na działce po pozwolenie na budowę.",
+    "projectsLink": "Zobacz domy"
   },
   "portfolio": {
-    "eyebrow": "Portfolio",
-    "heading": "Wybrane projekty",
+    "eyebrow": "Projekty",
+    "heading": "Wybrane domy",
     "allProjectsLink": "Wszystkie projekty"
   },
   "about": {
-    "eyebrow": "O pracowni",
+    "eyebrow": "O mnie",
     "heading": "Paulina Cywińska",
     "lead": "Uważność na miejsce.\nPrzestrzeń dla Ciebie."
   },
   "process": {
     "eyebrow": "Współpraca",
-    "heading": "Od rozmowy\ndo przestrzeni.",
+    "heading": "Od rozmowy\ndo pozwolenia.",
     "description": "Przejrzysty proces i wspólne decyzje.\nZakres dopasowany do Twojego projektu."
   },
   "reviews": {
@@ -27,25 +27,25 @@
   },
   "contact": {
     "eyebrow": "Kontakt",
-    "heading": "Porozmawiajmy\no Twoim projekcie.",
-    "description": "Opowiedz o planowanej inwestycji, jej lokalizacji i zakresie. To dobry punkt wyjścia do pierwszej rozmowy.",
+    "heading": "Opowiedz mi\no swojej działce.",
+    "description": "Gdzie jest działka, co chcesz zbudować i na jakim etapie jesteś. To wystarczy na początek rozmowy.",
     "mapsLink": "Wyznacz trasę",
     "serviceArea": "Obszar współpracy",
-    "formHeading": "Napisz o swoim pomyśle",
-    "formDescription": "Wypełnij formularz, aby przesłać zapytanie do pracowni. Możesz również napisać e-mail lub zadzwonić.",
+    "formHeading": "Opisz swój pomysł",
+    "formDescription": "Odpowiem e-mailem lub telefonicznie. Możesz też od razu zadzwonić.",
     "submitLabel": "Wyślij wiadomość"
   },
   "footer": {
-    "tagline": "Domy. Wnętrza. Przestrzenie usługowe.",
+    "tagline": "Domy, przebudowy i wnętrza. Łódź i okolice.",
     "contactLink": "Porozmawiajmy",
     "copyrightName": "Paulina Cywińska",
-    "privacyLink": "Prywatność"
+    "privacyLink": "RODO i prywatność"
   },
   "catalog": {
     "eyebrow": "Portfolio",
     "heading": "Projekty",
     "description": "Architektura i wnętrza. Różne potrzeby, spójne podejście do przestrzeni.",
-    "seoDescription": "Projekty domów, obiektów usługowych i wnętrz — portfolio Pauliny Cywińskiej."
+    "seoDescription": "Portfolio Pauliny Cywińskiej, architektki w Łodzi: projekty domów, wnętrz, przebudów i przestrzeni usługowych."
   },
   "navigation": {
     "homeLabel": "Paulina Cywińska — strona główna",

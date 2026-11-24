@@ -37,9 +37,7 @@ export function ContactSection() {
       if (process.env.NEXT_PUBLIC_CONTACT_ENABLED !== "true")
         throw new Error("Formularz wymaga wdrożenia Netlify.");
       await sendContact(result.data, String(data["bot-field"] || ""));
-      setStatus(
-        "Dziękujemy. Zgłoszenie zostało przyjęte przez formularz pracowni.",
-      );
+      setStatus("Dziękuję, wiadomość dotarła. Odezwę się wkrótce.");
       form.reset();
     } catch {
       setFailed(true);
@@ -62,7 +60,11 @@ export function ContactSection() {
     "aria-describedby": errors[name] ? name + "-error" : undefined,
   });
   return (
-    <section id="kontakt" className="section dark-section contact-section">
+    <section
+      id="kontakt"
+      className="section dark-section contact-section"
+      data-section="06 / Kontakt"
+    >
       <div className="container contact-columns">
         <div>
           <p className="eyebrow">{pageCopy.contact.eyebrow}</p>
@@ -178,15 +180,14 @@ export function ContactSection() {
                 rows={4}
                 minLength={20}
                 maxLength={5000}
-                placeholder="Lokalizacja, potrzeby, planowany zakres…"
+                placeholder="Gdzie jest działka i co chcesz zbudować?"
                 {...a11y("message")}
               />
               {fieldError("message")}
             </div>
             <p className="form-note">
-              * Pola wymagane. Wysłane dane przetwarza pracownia za
-              pośrednictwem Netlify Forms.{" "}
-              <a href="/prywatnosc">Informacje o prywatności</a>.
+              * Pola wymagane. Dane z formularza przetwarzam za pośrednictwem
+              Netlify Forms. <a href="/prywatnosc">Informacje o prywatności</a>.
             </p>
             <button className="contact-submit" disabled={busy} type="submit">
               {busy ? "Wysyłanie…" : pageCopy.contact.submitLabel}

@@ -7,6 +7,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     "/",
     "/projekty",
+    "/prywatnosc",
+    "/regulamin",
     ...(await getProjectSlugs()).map((slug) => `/projekty/${slug}`),
   ].map((pathname) => ({ url: canonicalUrl(pathname) }));
 }

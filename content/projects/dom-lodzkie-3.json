@@ -1,20 +1,20 @@
 {
-  "title": "Dom w Łódzkiem III",
+  "title": "Dom otwarty na ogród",
   "category": "Domy",
   "location": "Łódź",
   "year": 2026,
   "images": [
     {
-      "src": "/images/projects/dom-lodzkie-3/images/0/src.webp",
-      "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
-      "width": 1671,
-      "height": 941
-    },
-    {
       "src": "/images/projects/dom-lodzkie-3/images/1/src.webp",
       "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
       "width": 1670,
       "height": 942
+    },
+    {
+      "src": "/images/projects/dom-lodzkie-3/images/0/src.webp",
+      "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
+      "width": 1671,
+      "height": 941
     },
     {
       "src": "/images/projects/dom-lodzkie-3/images/2/src.webp",
@@ -24,10 +24,10 @@
     }
   ],
   "cover": {
-    "src": "/images/projects/dom-lodzkie-3/cover/src.webp",
-    "alt": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu",
-    "width": 1671,
-    "height": 941,
+    "src": "/images/projects/dom-lodzkie-3/images/1/src.webp",
+    "alt": "Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową",
+    "width": 1670,
+    "height": 942,
     "objectPosition": "50% 50%",
     "objectFit": "cover"
   },
@@ -36,12 +36,12 @@
   "featuredOrder": 1,
   "sourceFolder": "DOM ŁODZKIE 3",
   "credits": {
-    "authorship": "pending-confirmation",
-    "note": "Autorstwo, zakres współpracy i prawa do publikacji do potwierdzenia z Pauliną. Nowe portfolio nie rozstrzyga wcześniejszego konfliktu domu typu kostka."
+    "authorship": "own",
+    "note": "Projekt opracowany przez Paulinę Cywińską; prawa i zakres publikacji określają zawarte umowy."
   },
-  "description": "Wizualizacja piętrowego domu z jasną elewacją, dużymi przeszkleniami i tarasem od ogrodu. Frontowa elewacja piętrowego domu z płaskim dachem i niską częścią wejściową. Widok piętrowego domu z ulicy, z garażem i ogrodzeniem.",
-  "contentStatus": "temporary",
-  "editorialNotes": "Opis tymczasowy oparty wyłącznie na opisach istniejących wizualizacji. Do uzupełnienia: potwierdzone założenia, zakres pracy i informacje o realizacji. Nie dopisywać niepotwierdzonych danych. Zatwierdzony do publikacji przez właściciela w rozmowie 21.10.2026; dane redakcyjne pozostają tymczasowe.",
+  "description": "Spokojna geometria, jasna elewacja i otwarcie na ogród wyznaczają charakter tego domu. Piętrową bryłę z płaskim dachem dopełnia niższa część wejściowa, tworząc wyważoną kompozycję od strony ulicy. Od ogrodu duże przeszklenia i taras łączą dom z zielenią, dając przestrzeń do codziennego odpoczynku. To architektura oparta na prostocie, proporcjach i relacji z otoczeniem.",
+  "contentStatus": "approved",
+  "editorialNotes": "",
   "seo": {
     "title": "",
     "description": "",

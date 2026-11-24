@@ -5,9 +5,18 @@ import { canonicalUrl } from "@/lib/deployment";
 import { projectCard } from "@/lib/projects";
 import { getAllProjects, selectPortfolioProjects } from "@/lib/cms/reader";
 export const metadata: Metadata = {
-  title: pageCopy.catalog.heading,
+  title: "Projekty architektury i wnętrz w Łodzi",
   description: pageCopy.catalog.seoDescription,
   alternates: { canonical: canonicalUrl("/projekty") },
+  openGraph: {
+    title: "Projekty architektury i wnętrz w Łodzi",
+    description: pageCopy.catalog.seoDescription,
+    url: canonicalUrl("/projekty"),
+  },
+  twitter: {
+    title: "Projekty architektury i wnętrz w Łodzi",
+    description: pageCopy.catalog.seoDescription,
+  },
 };
 export default async function ProjectsPage() {
   const portfolioProjects = selectPortfolioProjects(await getAllProjects());

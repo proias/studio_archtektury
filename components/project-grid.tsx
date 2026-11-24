@@ -37,7 +37,7 @@ export function ProjectGrid({
       <p className="sr-only" role="status">
         Liczba projektów: {visible.length}
       </p>
-      <div className="project-grid">
+      <div className="project-grid" data-count={visible.length}>
         {visible.map((project) => (
           <Link
             className="project-card"

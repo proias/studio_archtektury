@@ -1,0 +1,22 @@
+{
+  "width": 390,
+  "scroll": 375,
+  "h1": 1,
+  "cards": [
+    {
+      "href": "/projekty/dom-kostka-przebudowa",
+      "src": "/_next/image?url=%2Fimages%2Fprojects%2Fdom-kostka-przebudowa%2Fcover%2Fsrc.webp&w=3840&q=75"
+    }
+  ],
+  "hero": {
+    "width": 335,
+    "height": 251,
+    "naturalWidth": 339,
+    "naturalHeight": 191,
+    "objectFit": "cover"
+  },
+  "headFont": "spaceGrotesk, \"spaceGrotesk Fallback\", montserrat, \"montserrat Fallback\", Arial, sans-serif",
+  "bodyFont": "ptSans, \"ptSans Fallback\", Arial, sans-serif",
+  "images": true,
+  "reduced": "auto"
+}

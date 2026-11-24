@@ -39,9 +39,9 @@ Plan i warunki odbioru: [PLAN-CMS-REDAKCJA.md](docs/PLAN-CMS-REDAKCJA.md).
 - **Teksty strony głównej i katalogu**: nagłówki, wprowadzenia, podpisy sekcji, teksty przycisków, menu i stopki. Identyfikatory kotwic oraz techniczne adresy nawigacji pozostają w kodzie. Enter w polach wielowierszowych może oznaczać podział wiersza na stronie.
 - **Logo i zdjęcie główne**: edytuj napisy logo lub wgraj plik PNG/WebP z przezroczystością. Znak jest wspólny dla nagłówka i stopki. Usuń plik, aby wrócić do napisów. Niezależne hero ma opis, kadrowanie i pozycję; brak uploadu oznacza okładkę pierwszego opublikowanego wyróżnionego projektu.
 - **Projekty**: wszystkie 12 wpisów pozostaje w CMS. Publicznie dostępne są wyłącznie `published`; `draft` i `pending-confirmation` nie trafiają do katalogu, wyróżnień, nawigacji, sitemap ani publicznych detali. Detal szkicu zwraca 404 po deployu.
-- **Status opisu**: `temporary` pokazuje publiczny komunikat „Opis tymczasowy — w przygotowaniu redakcyjnym”. Notatki redakcyjne są niepubliczne. Pierwszy projekt `dom-lodzkie-3` jest opublikowany na polecenie właściciela, pozostałe zachowują statusy. Propozycje opisów powstały na podstawie istniejących opisów wizualizacji; nie dopisano niepotwierdzonych faktów.
+- **Status opisu**: `temporary` pokazuje publiczny komunikat „Opis tymczasowy — w przygotowaniu redakcyjnym”. Notatki redakcyjne są niepubliczne. Wszystkie 12 projektów ma status `published`, a opisy i ich publikacja zostały potwierdzone przez właścicielkę 28.10.2026.
 - **SEO projektu**: opcjonalny tytuł, opis i obraz udostępniania; puste pola korzystają z tytułu, opisu i okładki projektu.
-- **Pracownia, kontakt i SEO**: dane kontaktowe, globalne metadane, akapity o pracowni, obszar działania, nawigacja i etapy współpracy.
+- **Pracownia, kontakt i SEO**: dane kontaktowe, globalne metadane, akapity o pracowni, obszar działania, nawigacja i etapy współpracy. Przy zmianie adresu zsynchronizuj również pola strukturalnego adresu pocztowego, używane w danych SEO.
 - **Przekierowania starych adresów**: przed zmianą sluga zapisz dotychczasowy adres i nowy cel. Cele muszą być opublikowanymi stronami. Build odrzuca błędne reguły; nie ma automatycznego odzyskiwania wcześniejszego sluga. Szczegóły: [audyt adresów](docs/REDIRECT-AUDIT.md).
 
 Zapis GitHub tworzy zmianę na wybranej gałęzi. Strona publiczna prezentuje treść ostatniego poprawnego wdrożenia Netlify; nowe adresy generuje build. Na `main` zapis może uruchamiać automatyczny release.
@@ -78,7 +78,7 @@ Formularz wysyła URL-encoded POST do `/__forms.html` przez Netlify Forms. Staty
 
 Canonical i mapa używają `https://cywinska-studio.pl`. `/sitemap.xml` wymienia stronę główną, katalog i opublikowane projekty; deploy previews emitują pustą mapę. Nie podajemy fikcyjnej daty aktualizacji przy każdym buildzie.
 
-Indeksowanie pozostaje wyłączone. Dopiero jawne `SITE_INDEXING_ENABLED=true` razem z kontekstem Netlify `production` zmienia reguły robots oraz nagłówki. Samo ustawienie flagi na preview nie odblokowuje indeksowania. Panel, API i definicja formularza pozostają noindex. Włączenie indeksowania jest osobnym krokiem po zatwierdzeniu treści.
+Na produkcji Netlify zmienna `SITE_INDEXING_ENABLED=true` jest ustawiana wyłącznie w kontekście `production`. Po wdrożeniu strona główna, katalog i wszystkie opublikowane projekty mogą być indeksowane. Deploy preview i środowisko lokalne pozostają `noindex`; panel, API oraz definicja formularza zawsze pozostają wyłączone z indeksowania. Po wdrożeniu sprawdź w źródle strony tytuły i opisy, dane strukturalne `ProfessionalService` oraz adres `/robots.txt` i `/sitemap.xml`; następnie zgłoś mapę w Google Search Console.
 
 ## Weryfikacja i dane
 

@@ -99,6 +99,18 @@ test("CMS zachowuje wpisy i obrazy, a publiczny odczyt odpowiada statusom publik
   assert.equal(await cms.getProjectBySlug("missing-project"), null);
 });
 
+test("opublikowane portfolio odzwierciedla potwierdzone autorstwo i prawa umowne", async () => {
+  const projects = await cms.getAllProjects();
+  assert.equal(projects.length, 12);
+  for (const project of projects) {
+    assert.equal(project.credits.authorship, "own");
+    assert.match(
+      project.credits.note,
+      /prawa i zakres publikacji określają zawarte umowy/,
+    );
+  }
+});
+
 test("zmiana statusu steruje całym odczytem publicznym, a upload i zastąpienie pliku odświeżają wymiary", async () => {
   const slug = "cms-reader-test";
   const entryPath = path.resolve("content/projects", slug + ".json");

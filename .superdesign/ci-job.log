@@ -1,0 +1,692 @@
+2026-10-26T13:52:41.1452804Z Current runner version: '2.338.0'
+2026-10-26T13:52:41.1490368Z ##[group]Runner Image Provisioner
+2026-10-26T13:52:41.1491891Z Hosted Compute Agent
+2026-10-26T13:52:41.1492918Z Version: 20261021.618
+2026-10-26T13:52:41.1494083Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-26T13:52:41.1495426Z Build Date: 2026-10-21T00:45:21Z
+2026-10-26T13:52:41.1496595Z Worker ID: {ac8849d0-b083-476d-8031-d2db776dbb43}
+2026-10-26T13:52:41.1497902Z Region: eastus
+2026-10-26T13:52:41.1498838Z Cloud: Azure
+2026-10-26T13:52:41.1500110Z ##[endgroup]
+2026-10-26T13:52:41.1502781Z ##[group]Operating System
+2026-10-26T13:52:41.1503823Z Ubuntu
+2026-10-26T13:52:41.1504738Z 24.04.5
+2026-10-26T13:52:41.1505571Z LTS
+2026-10-26T13:52:41.1506411Z ##[endgroup]
+2026-10-26T13:52:41.1507518Z ##[group]Runner Image
+2026-10-26T13:52:41.1508476Z Image: ubuntu-24.04
+2026-10-26T13:52:41.1509833Z Version: 20261012.334.1
+2026-10-26T13:52:41.1511953Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-26T13:52:41.1514819Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-26T13:52:41.1516582Z ##[endgroup]
+2026-10-26T13:52:41.1518407Z ##[group]GITHUB_TOKEN Permissions
+2026-10-26T13:52:41.1521612Z Contents: read
+2026-10-26T13:52:41.1522603Z Metadata: read
+2026-10-26T13:52:41.1523519Z ##[endgroup]
+2026-10-26T13:52:41.1527158Z Secret source: Actions
+2026-10-26T13:52:41.1528659Z Cache mode: write
+2026-10-26T13:52:41.1530456Z Prepare workflow directory
+2026-10-26T13:52:41.2104012Z Prepare all required actions
+2026-10-26T13:52:41.2176589Z Getting action download info
+2026-10-26T13:52:41.4162557Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-26T13:52:41.5341986Z Download action repository 'actions/setup-node@v7' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+2026-10-26T13:52:41.8462273Z Complete job name: cms
+2026-10-26T13:52:41.9396783Z ##[group]Run actions/checkout@v7
+2026-10-26T13:52:41.9397718Z with:
+2026-10-26T13:52:41.9398178Z   persist-credentials: false
+2026-10-26T13:52:41.9398733Z   repository: proias/studio_archtektury
+2026-10-26T13:52:41.9403392Z   token: ***
+2026-10-26T13:52:41.9403841Z   ssh-strict: true
+2026-10-26T13:52:41.9404280Z   ssh-user: git
+2026-10-26T13:52:41.9404700Z   clean: true
+2026-10-26T13:52:41.9405189Z   sparse-checkout-cone-mode: true
+2026-10-26T13:52:41.9405718Z   fetch-depth: 1
+2026-10-26T13:52:41.9406175Z   fetch-tags: false
+2026-10-26T13:52:41.9406636Z   show-progress: true
+2026-10-26T13:52:41.9407091Z   lfs: false
+2026-10-26T13:52:41.9407527Z   submodules: false
+2026-10-26T13:52:41.9407977Z   set-safe-directory: true
+2026-10-26T13:52:41.9408520Z   allow-unsafe-pr-checkout: false
+2026-10-26T13:52:41.9409938Z env:
+2026-10-26T13:52:41.9410442Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:52:41.9411054Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:52:41.9411661Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:52:41.9412249Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:52:41.9412728Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:52:41.9413211Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:52:41.9413772Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:52:41.9414270Z ##[endgroup]
+2026-10-26T13:52:42.0535933Z Syncing repository: proias/studio_archtektury
+2026-10-26T13:52:42.0538823Z ##[group]Getting Git version info
+2026-10-26T13:52:42.0540337Z Working directory is '/home/runner/work/studio_archtektury/studio_archtektury'
+2026-10-26T13:52:42.0542245Z [command]/usr/bin/git version
+2026-10-26T13:52:42.0595982Z git version 2.55.0
+2026-10-26T13:52:42.0636439Z ##[endgroup]
+2026-10-26T13:52:42.0645603Z Temporarily overriding HOME='/home/runner/work/_temp/2933aacb-b3fa-42eb-987e-b5fd98e7eba4' before making global git config changes
+2026-10-26T13:52:42.0647239Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T13:52:42.0653031Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:52:42.0716231Z Deleting the contents of '/home/runner/work/studio_archtektury/studio_archtektury'
+2026-10-26T13:52:42.0721108Z ##[group]Determining repository object format
+2026-10-26T13:52:42.0723093Z ##[endgroup]
+2026-10-26T13:52:42.0724302Z ##[group]Initializing the repository
+2026-10-26T13:52:42.0729764Z [command]/usr/bin/git init /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:52:42.0826618Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-26T13:52:42.0830444Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-26T13:52:42.0833516Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-26T13:52:42.0835701Z hint: call:
+2026-10-26T13:52:42.0836479Z hint:
+2026-10-26T13:52:42.0837539Z hint: 	git config --global init.defaultBranch <name>
+2026-10-26T13:52:42.0838739Z hint:
+2026-10-26T13:52:42.0840509Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-26T13:52:42.0842845Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-26T13:52:42.0844021Z hint:
+2026-10-26T13:52:42.0844738Z hint: 	git branch -m <name>
+2026-10-26T13:52:42.0845467Z hint:
+2026-10-26T13:52:42.0846378Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-26T13:52:42.0847936Z Initialized empty Git repository in /home/runner/work/studio_archtektury/studio_archtektury/.git/
+2026-10-26T13:52:42.0851061Z [command]/usr/bin/git remote add origin https://github.com/proias/studio_archtektury
+2026-10-26T13:52:42.0949832Z ##[endgroup]
+2026-10-26T13:52:42.0951658Z ##[group]Disabling automatic garbage collection
+2026-10-26T13:52:42.0953088Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-26T13:52:42.0997967Z ##[endgroup]
+2026-10-26T13:52:42.1000267Z ##[group]Setting up auth
+2026-10-26T13:52:42.1010854Z Removing SSH command configuration
+2026-10-26T13:52:42.1013074Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T13:52:42.1069554Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T13:52:42.1451276Z Removing HTTP extra header
+2026-10-26T13:52:42.1458364Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T13:52:42.1504428Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T13:52:42.1772566Z Removing includeIf entries pointing to credentials config files
+2026-10-26T13:52:42.1778930Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T13:52:42.1820384Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T13:52:42.2082041Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-26T13:52:42.2125797Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git.path /home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:42.2165849Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:42.2207326Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:42.2243526Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:42.2286226Z ##[endgroup]
+2026-10-26T13:52:42.2295847Z ##[group]Fetching the repository
+2026-10-26T13:52:42.2298096Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +68663194ad521fda71564e902e0fee091d822a76:refs/remotes/pull/5/merge
+2026-10-26T13:52:43.3438373Z From https://github.com/proias/studio_archtektury
+2026-10-26T13:52:43.3442344Z  * [new ref]         68663194ad521fda71564e902e0fee091d822a76 -> pull/5/merge
+2026-10-26T13:52:43.3451647Z ##[endgroup]
+2026-10-26T13:52:43.3454892Z ##[group]Determining the checkout info
+2026-10-26T13:52:43.3457558Z ##[endgroup]
+2026-10-26T13:52:43.3464057Z [command]/usr/bin/git sparse-checkout disable
+2026-10-26T13:52:43.3530782Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-26T13:52:43.3581118Z ##[group]Checking out the ref
+2026-10-26T13:52:43.3583865Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/5/merge
+2026-10-26T13:52:43.5036226Z Note: switching to 'refs/remotes/pull/5/merge'.
+2026-10-26T13:52:43.5049882Z 
+2026-10-26T13:52:43.5061333Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-26T13:52:43.5064294Z changes and commit them, and you can discard any commits you make in this
+2026-10-26T13:52:43.5067022Z state without impacting any branches by switching back to a branch.
+2026-10-26T13:52:43.5068635Z 
+2026-10-26T13:52:43.5069983Z If you want to create a new branch to retain commits you create, you may
+2026-10-26T13:52:43.5072859Z do so (now or later) by using -c with the switch command. Example:
+2026-10-26T13:52:43.5074323Z 
+2026-10-26T13:52:43.5074942Z   git switch -c <new-branch-name>
+2026-10-26T13:52:43.5075936Z 
+2026-10-26T13:52:43.5076612Z Or undo this operation with:
+2026-10-26T13:52:43.5077594Z 
+2026-10-26T13:52:43.5078575Z   git switch -
+2026-10-26T13:52:43.5079807Z 
+2026-10-26T13:52:43.5081307Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-26T13:52:43.5083163Z 
+2026-10-26T13:52:43.5085100Z HEAD is now at 6866319 Merge 08d813fdb048d78a7168ff41418b934b3e008763 into b53def76c74507c0a1eb233f6a542dcfb10f2562
+2026-10-26T13:52:43.5091805Z ##[endgroup]
+2026-10-26T13:52:43.5110928Z [command]/usr/bin/git log -1 --format=%H
+2026-10-26T13:52:43.5143463Z 68663194ad521fda71564e902e0fee091d822a76
+2026-10-26T13:52:43.5154412Z ##[group]Removing auth
+2026-10-26T13:52:43.5156223Z Removing SSH command configuration
+2026-10-26T13:52:43.5158774Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T13:52:43.5202266Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T13:52:43.5504967Z Removing HTTP extra header
+2026-10-26T13:52:43.5511645Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T13:52:43.5552725Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T13:52:43.5801936Z Removing includeIf entries pointing to credentials config files
+2026-10-26T13:52:43.5807152Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T13:52:43.5839388Z includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git.path
+2026-10-26T13:52:43.5844666Z includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git/worktrees/*.path
+2026-10-26T13:52:43.5848844Z includeif.gitdir:/github/workspace/.git.path
+2026-10-26T13:52:43.5851940Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-26T13:52:43.5859955Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git.path
+2026-10-26T13:52:43.5877540Z /home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:43.5904427Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-3ec1068d\-2dd1\-4499\-858b\-cfea07f56a4f\.config
+2026-10-26T13:52:43.5954649Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git/worktrees/*.path
+2026-10-26T13:52:43.5984204Z /home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:43.5995708Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/studio_archtektury/studio_archtektury/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-3ec1068d\-2dd1\-4499\-858b\-cfea07f56a4f\.config
+2026-10-26T13:52:43.6041551Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-26T13:52:43.6068190Z /github/runner_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:43.6080198Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-3ec1068d\-2dd1\-4499\-858b\-cfea07f56a4f\.config
+2026-10-26T13:52:43.6126608Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-26T13:52:43.6224604Z /github/runner_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config
+2026-10-26T13:52:43.6234688Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-3ec1068d\-2dd1\-4499\-858b\-cfea07f56a4f\.config
+2026-10-26T13:52:43.6244766Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T13:52:43.6496637Z Removing credentials config '/home/runner/work/_temp/git-credentials-3ec1068d-2dd1-4499-858b-cfea07f56a4f.config'
+2026-10-26T13:52:43.6506696Z ##[endgroup]
+2026-10-26T13:52:43.6897698Z ##[group]Run actions/setup-node@v7
+2026-10-26T13:52:43.6898895Z with:
+2026-10-26T13:52:43.6900053Z   node-version: 22
+2026-10-26T13:52:43.6900999Z   package-manager-cache: false
+2026-10-26T13:52:43.6902055Z   check-latest: false
+2026-10-26T13:52:43.6912632Z   token: ***
+2026-10-26T13:52:43.6913485Z env:
+2026-10-26T13:52:43.6914323Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:52:43.6915489Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:52:43.6916536Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:52:43.6917862Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:52:43.6918746Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:52:43.6919852Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:52:43.6920965Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:52:43.6921926Z ##[endgroup]
+2026-10-26T13:52:43.8605591Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-26T13:52:43.9458429Z ##[group]Environment details
+2026-10-26T13:52:44.2955192Z node: v22.23.3
+2026-10-26T13:52:44.2956662Z npm: 10.9.9
+2026-10-26T13:52:44.2957262Z yarn: 1.22.22
+2026-10-26T13:52:44.2958861Z ##[endgroup]
+2026-10-26T13:52:44.3142610Z ##[group]Run corepack enable
+2026-10-26T13:52:44.3143342Z [36;1mcorepack enable[0m
+2026-10-26T13:52:44.3143969Z [36;1mcorepack prepare pnpm@10.14.0 --activate[0m
+2026-10-26T13:52:44.3404009Z shell: /usr/bin/bash -e {0}
+2026-10-26T13:52:44.3404916Z env:
+2026-10-26T13:52:44.3405673Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:52:44.3406623Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:52:44.3407498Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:52:44.3408408Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:52:44.3409512Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:52:44.3410328Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:52:44.3411408Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:52:44.3412220Z ##[endgroup]
+2026-10-26T13:52:44.5446182Z Preparing pnpm@10.14.0 for immediate activation...
+2026-10-26T13:52:46.0223495Z ##[group]Run pnpm install --frozen-lockfile
+2026-10-26T13:52:46.0224038Z [36;1mpnpm install --frozen-lockfile[0m
+2026-10-26T13:52:46.0293691Z shell: /usr/bin/bash -e {0}
+2026-10-26T13:52:46.0294114Z env:
+2026-10-26T13:52:46.0294491Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:52:46.0294979Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:52:46.0295420Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:52:46.0295867Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:52:46.0296215Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:52:46.0296590Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:52:46.0297059Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:52:46.0297480Z ##[endgroup]
+2026-10-26T13:52:46.5691374Z Lockfile is up to date, resolution step is skipped
+2026-10-26T13:52:46.6270932Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-10-26T13:52:46.7441950Z Packages: +660
+2026-10-26T13:52:46.7442897Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-10-26T13:52:47.6371835Z Progress: resolved 660, reused 0, downloaded 39, added 11
+2026-10-26T13:52:48.6358716Z Progress: resolved 660, reused 0, downloaded 52, added 16
+2026-10-26T13:52:49.6401234Z Progress: resolved 660, reused 0, downloaded 62, added 20
+2026-10-26T13:52:50.6590775Z Progress: resolved 660, reused 0, downloaded 150, added 51
+2026-10-26T13:52:51.6560930Z Progress: resolved 660, reused 0, downloaded 310, added 177
+2026-10-26T13:52:52.6571635Z Progress: resolved 660, reused 0, downloaded 342, added 187
+2026-10-26T13:52:53.6558153Z Progress: resolved 660, reused 0, downloaded 492, added 268
+2026-10-26T13:52:54.6564293Z Progress: resolved 660, reused 0, downloaded 611, added 323
+2026-10-26T13:52:55.1520648Z Progress: resolved 660, reused 0, downloaded 660, added 660, done
+2026-10-26T13:52:55.4568283Z 
+2026-10-26T13:52:55.4568962Z dependencies:
+2026-10-26T13:52:55.4569938Z + @emotion/is-prop-valid 1.3.1
+2026-10-26T13:52:55.4571055Z + @hookform/resolvers 3.10.0
+2026-10-26T13:52:55.4571778Z + @keystatic/core 0.6.9
+2026-10-26T13:52:55.4572461Z + @keystatic/next 5.0.5
+2026-10-26T13:52:55.4573194Z + @radix-ui/react-accordion 1.2.2
+2026-10-26T13:52:55.4574028Z + @radix-ui/react-alert-dialog 1.1.4
+2026-10-26T13:52:55.4577502Z + @radix-ui/react-aspect-ratio 1.1.1
+2026-10-26T13:52:55.4578049Z + @radix-ui/react-avatar 1.1.2
+2026-10-26T13:52:55.4578550Z + @radix-ui/react-checkbox 1.1.3
+2026-10-26T13:52:55.4579376Z + @radix-ui/react-collapsible 1.1.2
+2026-10-26T13:52:55.4580322Z + @radix-ui/react-context-menu 2.2.4
+2026-10-26T13:52:55.4581080Z + @radix-ui/react-dialog 1.1.4
+2026-10-26T13:52:55.4581627Z + @radix-ui/react-dropdown-menu 2.1.4
+2026-10-26T13:52:55.4582367Z + @radix-ui/react-hover-card 1.1.4
+2026-10-26T13:52:55.4582916Z + @radix-ui/react-label 2.1.1
+2026-10-26T13:52:55.4583383Z + @radix-ui/react-menubar 1.1.4
+2026-10-26T13:52:55.4583829Z + @radix-ui/react-navigation-menu 1.2.3
+2026-10-26T13:52:55.4584290Z + @radix-ui/react-popover 1.1.4
+2026-10-26T13:52:55.4584741Z + @radix-ui/react-progress 1.1.1
+2026-10-26T13:52:55.4585180Z + @radix-ui/react-radio-group 1.2.2
+2026-10-26T13:52:55.4585620Z + @radix-ui/react-scroll-area 1.2.2
+2026-10-26T13:52:55.4586049Z + @radix-ui/react-select 2.1.4
+2026-10-26T13:52:55.4586468Z + @radix-ui/react-separator 1.1.1
+2026-10-26T13:52:55.4586929Z + @radix-ui/react-slider 1.2.2
+2026-10-26T13:52:55.4587518Z + @radix-ui/react-slot 1.1.1
+2026-10-26T13:52:55.4588165Z + @radix-ui/react-switch 1.1.2
+2026-10-26T13:52:55.4588796Z + @radix-ui/react-tabs 1.1.2
+2026-10-26T13:52:55.4590268Z + @radix-ui/react-toast 1.2.4
+2026-10-26T13:52:55.4590811Z + @radix-ui/react-toggle 1.1.1
+2026-10-26T13:52:55.4591396Z + @radix-ui/react-toggle-group 1.1.1
+2026-10-26T13:52:55.4591995Z + @radix-ui/react-tooltip 1.1.6
+2026-10-26T13:52:55.4592463Z + animejs 4.5.0
+2026-10-26T13:52:55.4592865Z + autoprefixer 10.4.21
+2026-10-26T13:52:55.4593408Z + class-variance-authority 0.7.1
+2026-10-26T13:52:55.4593870Z + clsx 2.1.1
+2026-10-26T13:52:55.4594601Z + cmdk 1.0.4
+2026-10-26T13:52:55.4595227Z + date-fns 4.1.0
+2026-10-26T13:52:55.4595723Z + embla-carousel-react 8.5.1
+2026-10-26T13:52:55.4596271Z + framer-motion 12.23.12
+2026-10-26T13:52:55.4596730Z + geist 1.4.2
+2026-10-26T13:52:55.4597163Z + input-otp 1.4.1
+2026-10-26T13:52:55.4597620Z + lucide-react 0.454.0
+2026-10-26T13:52:55.4598043Z + next 15.5.28
+2026-10-26T13:52:55.4598474Z + next-themes 0.4.6
+2026-10-26T13:52:55.4598898Z + react 18.3.1
+2026-10-26T13:52:55.4599604Z + react-day-picker 9.8.0
+2026-10-26T13:52:55.4600116Z + react-dom 18.3.1
+2026-10-26T13:52:55.4600558Z + react-hook-form 7.62.0
+2026-10-26T13:52:55.4601101Z + react-resizable-panels 2.1.9
+2026-10-26T13:52:55.4601604Z + recharts 2.15.4
+2026-10-26T13:52:55.4601983Z + sharp 0.35.5
+2026-10-26T13:52:55.4602359Z + sonner 1.7.4
+2026-10-26T13:52:55.4602779Z + tailwind-merge 2.6.0
+2026-10-26T13:52:55.4603255Z + tailwindcss-animate 1.0.7
+2026-10-26T13:52:55.4603669Z + vaul 0.9.9
+2026-10-26T13:52:55.4604015Z + zod 3.25.67
+2026-10-26T13:52:55.4604230Z 
+2026-10-26T13:52:55.4604416Z devDependencies:
+2026-10-26T13:52:55.4604849Z + @tailwindcss/postcss 4.1.12
+2026-10-26T13:52:55.4605315Z + @types/node 22.17.2
+2026-10-26T13:52:55.4605731Z + @types/react 19.1.10
+2026-10-26T13:52:55.4606159Z + @types/react-dom 19.1.7
+2026-10-26T13:52:55.4606544Z + eslint 8.57.1
+2026-10-26T13:52:55.4606966Z + eslint-config-next 15.5.28
+2026-10-26T13:52:55.4607341Z + postcss 8.5.6
+2026-10-26T13:52:55.4607578Z + prettier 3.6.2
+2026-10-26T13:52:55.4607873Z + tailwindcss 4.1.12
+2026-10-26T13:52:55.4608117Z + tw-animate-css 1.3.3
+2026-10-26T13:52:55.4608360Z + typescript 5.9.2
+2026-10-26T13:52:55.4608498Z 
+2026-10-26T13:52:55.4609461Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-10-26T13:52:55.4610094Z │                                                                              │
+2026-10-26T13:52:55.4610712Z │   Ignored build scripts: @tailwindcss/oxide, unrs-resolver.                  │
+2026-10-26T13:52:55.4611397Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-10-26T13:52:55.4612062Z │   to run scripts.                                                            │
+2026-10-26T13:52:55.4612589Z │                                                                              │
+2026-10-26T13:52:55.4613161Z ╰──────────────────────────────────────────────────────────────────────────────╯
+2026-10-26T13:52:55.4613428Z 
+2026-10-26T13:52:55.4969454Z Done in 9.3s using pnpm v10.14.0
+2026-10-26T13:52:55.5521471Z ##[group]Run pnpm exec tsc --noEmit
+2026-10-26T13:52:55.5521880Z [36;1mpnpm exec tsc --noEmit[0m
+2026-10-26T13:52:55.5522177Z [36;1mpnpm lint[0m
+2026-10-26T13:52:55.5522446Z [36;1mpnpm format:check[0m
+2026-10-26T13:52:55.5522720Z [36;1mpnpm test[0m
+2026-10-26T13:52:55.5522984Z [36;1mnode scripts/cms-api-qa.cjs[0m
+2026-10-26T13:52:55.5589388Z shell: /usr/bin/bash -e {0}
+2026-10-26T13:52:55.5589752Z env:
+2026-10-26T13:52:55.5590066Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:52:55.5590534Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:52:55.5590918Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:52:55.5591346Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:52:55.5591703Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:52:55.5592086Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:52:55.5592545Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:52:55.5592938Z ##[endgroup]
+2026-10-26T13:53:02.4212689Z 
+2026-10-26T13:53:05.6851018Z > my-v0-project@0.1.0 lint /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:53:05.6853011Z > eslint app components lib hooks keystatic.config.ts --ext .ts,.tsx --max-warnings 0
+2026-10-26T13:53:05.6854095Z 
+2026-10-26T13:53:05.6854111Z 
+2026-10-26T13:53:05.6855332Z > my-v0-project@0.1.0 format:check /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:53:05.6856771Z > pnpm run format
+2026-10-26T13:53:05.6857172Z 
+2026-10-26T13:53:06.0268449Z 
+2026-10-26T13:53:06.0270587Z > my-v0-project@0.1.0 format /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:53:06.0273884Z > prettier --check app lib content components/site-*.tsx components/project-*.tsx components/contact-section.tsx tests scripts next.config.mjs keystatic.config.ts CMS_README.md
+2026-10-26T13:53:06.0275864Z 
+2026-10-26T13:53:06.1493991Z Checking formatting...
+2026-10-26T13:53:07.5944858Z All matched files use Prettier code style!
+2026-10-26T13:53:07.9771515Z 
+2026-10-26T13:53:07.9772584Z > my-v0-project@0.1.0 test /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:53:07.9773639Z > node --test --test-concurrency=1 tests/*.test.cjs
+2026-10-26T13:53:07.9774058Z 
+2026-10-26T13:53:08.0584167Z TAP version 13
+2026-10-26T13:53:08.6719626Z # Subtest: CMS: osobne zdjęcie główne, rzeczywiste wymiary i powrót do okładki projektu
+2026-10-26T13:53:08.6725046Z ok 1 - CMS: osobne zdjęcie główne, rzeczywiste wymiary i powrót do okładki projektu
+2026-10-26T13:53:08.6726498Z   ---
+2026-10-26T13:53:08.6727360Z   duration_ms: 124.036051
+2026-10-26T13:53:08.6728243Z   type: 'test'
+2026-10-26T13:53:08.6728929Z   ...
+2026-10-26T13:53:09.0554423Z # Subtest: review validates branch and destination before any external request
+2026-10-26T13:53:09.0556378Z ok 2 - review validates branch and destination before any external request
+2026-10-26T13:53:09.0558268Z   ---
+2026-10-26T13:53:09.0558828Z   duration_ms: 1.609374
+2026-10-26T13:53:09.0559695Z   type: 'test'
+2026-10-26T13:53:09.0560210Z   ...
+2026-10-26T13:53:09.0561356Z # Subtest: review distinguishes missing PR, current build, and ready preview
+2026-10-26T13:53:09.0565438Z ok 3 - review distinguishes missing PR, current build, and ready preview
+2026-10-26T13:53:09.0569594Z   ---
+2026-10-26T13:53:09.0570003Z   duration_ms: 40.566206
+2026-10-26T13:53:09.0570456Z   type: 'test'
+2026-10-26T13:53:09.0570836Z   ...
+2026-10-26T13:53:09.0571876Z # Subtest: review never advertises failed, stale or untrusted deploy as ready
+2026-10-26T13:53:09.0573094Z ok 4 - review never advertises failed, stale or untrusted deploy as ready
+2026-10-26T13:53:09.0580362Z   ---
+2026-10-26T13:53:09.0580993Z   duration_ms: 3.211594
+2026-10-26T13:53:09.0581611Z   type: 'test'
+2026-10-26T13:53:09.0582233Z   ...
+2026-10-26T13:53:09.0582794Z # Subtest: review checks the current branch even when PR metadata lags behind Save
+2026-10-26T13:53:09.0583439Z ok 5 - review checks the current branch even when PR metadata lags behind Save
+2026-10-26T13:53:09.0583843Z   ---
+2026-10-26T13:53:09.0584048Z   duration_ms: 0.568258
+2026-10-26T13:53:09.0584722Z   type: 'test'
+2026-10-26T13:53:09.0585081Z   ...
+2026-10-26T13:53:09.0585682Z # Subtest: review handles closed PR and rate limiting without retry loop
+2026-10-26T13:53:09.0586535Z ok 6 - review handles closed PR and rate limiting without retry loop
+2026-10-26T13:53:09.0587107Z   ---
+2026-10-26T13:53:09.0587430Z   duration_ms: 0.940336
+2026-10-26T13:53:09.0617214Z   type: 'test'
+2026-10-26T13:53:09.0640657Z   ...
+2026-10-26T13:53:09.1498045Z # Subtest: CMS workflow creates one PR, requests owner review and never approves or merges
+2026-10-26T13:53:09.1500225Z ok 7 - CMS workflow creates one PR, requests owner review and never approves or merges
+2026-10-26T13:53:09.1501148Z   ---
+2026-10-26T13:53:09.1501578Z   duration_ms: 3.178091
+2026-10-26T13:53:09.1502021Z   type: 'test'
+2026-10-26T13:53:09.1502415Z   ...
+2026-10-26T13:53:09.1508400Z # Subtest: trusted boundary permits content and raster images, rejects code and renamed code
+2026-10-26T13:53:09.1510447Z ok 8 - trusted boundary permits content and raster images, rejects code and renamed code
+2026-10-26T13:53:09.1511544Z   ---
+2026-10-26T13:53:09.1512103Z   duration_ms: 4.804487
+2026-10-26T13:53:09.1512638Z   type: 'test'
+2026-10-26T13:53:09.1513143Z   ...
+2026-10-26T13:53:09.1514522Z # Subtest: trusted boundary also runs after bot-created PR and reports the exact head commit
+2026-10-26T13:53:09.1516135Z ok 9 - trusted boundary also runs after bot-created PR and reports the exact head commit
+2026-10-26T13:53:09.1517052Z   ---
+2026-10-26T13:53:09.1520603Z   duration_ms: 2.82606
+2026-10-26T13:53:09.1521462Z   type: 'test'
+2026-10-26T13:53:09.1521766Z   ...
+2026-10-26T13:53:09.5339744Z # Subtest: formularz akceptuje poprawne dane i odrzuca puste, nieprawidłowe i zbyt długie
+2026-10-26T13:53:09.5341563Z ok 10 - formularz akceptuje poprawne dane i odrzuca puste, nieprawidłowe i zbyt długie
+2026-10-26T13:53:09.5350428Z   ---
+2026-10-26T13:53:09.5351089Z   duration_ms: 4.129809
+2026-10-26T13:53:09.5351897Z   type: 'test'
+2026-10-26T13:53:09.5352482Z   ...
+2026-10-26T13:53:09.5353613Z # Subtest: Netlify payload zachowuje polskie znaki, znaki specjalne, identyfikator i honeypot
+2026-10-26T13:53:09.5355109Z ok 11 - Netlify payload zachowuje polskie znaki, znaki specjalne, identyfikator i honeypot
+2026-10-26T13:53:09.5356185Z   ---
+2026-10-26T13:53:09.5356734Z   duration_ms: 0.345589
+2026-10-26T13:53:09.5357340Z   type: 'test'
+2026-10-26T13:53:09.5357904Z   ...
+2026-10-26T13:53:09.5359579Z # Subtest: wysyłka wymaga potwierdzenia Netlify i propaguje błędy HTTP oraz sieci
+2026-10-26T13:53:09.5361364Z ok 12 - wysyłka wymaga potwierdzenia Netlify i propaguje błędy HTTP oraz sieci
+2026-10-26T13:53:09.5362469Z   ---
+2026-10-26T13:53:09.5363091Z   duration_ms: 42.950345
+2026-10-26T13:53:09.5386452Z   type: 'test'
+2026-10-26T13:53:09.5388470Z   ...
+2026-10-26T13:53:09.8554634Z # Subtest: adres udostępniania używa adresu podglądu Netlify bez ścieżki
+2026-10-26T13:53:09.8557007Z ok 13 - adres udostępniania używa adresu podglądu Netlify bez ścieżki
+2026-10-26T13:53:09.8558150Z   ---
+2026-10-26T13:53:09.8558743Z   duration_ms: 1.184275
+2026-10-26T13:53:09.8559661Z   type: 'test'
+2026-10-26T13:53:09.8560150Z   ...
+2026-10-26T13:53:09.8570690Z # Subtest: build Netlify uruchamia Next i przekazuje kod zakończenia dla każdego kontekstu
+2026-10-26T13:53:09.8572551Z ok 14 - build Netlify uruchamia Next i przekazuje kod zakończenia dla każdego kontekstu
+2026-10-26T13:53:09.8573528Z   ---
+2026-10-26T13:53:09.8573953Z   duration_ms: 4.578672
+2026-10-26T13:53:09.8574451Z   type: 'test'
+2026-10-26T13:53:09.8574890Z   ...
+2026-10-26T13:53:09.8576493Z # Subtest: definicja Netlify Forms zawiera wszystkie pola i pułapkę na spam
+2026-10-26T13:53:09.8577860Z ok 15 - definicja Netlify Forms zawiera wszystkie pola i pułapkę na spam
+2026-10-26T13:53:09.8578640Z   ---
+2026-10-26T13:53:09.8579325Z   duration_ms: 0.366358
+2026-10-26T13:53:09.8579774Z   type: 'test'
+2026-10-26T13:53:09.8580146Z   ...
+2026-10-26T13:53:10.3700567Z # Subtest: migracja historyczna odtwarza archiwum bez zależności od późniejszych edycji CMS
+2026-10-26T13:53:10.3702705Z ok 16 - migracja historyczna odtwarza archiwum bez zależności od późniejszych edycji CMS
+2026-10-26T13:53:10.3703447Z   ---
+2026-10-26T13:53:10.3703767Z   duration_ms: 4.846676
+2026-10-26T13:53:10.3704144Z   type: 'test'
+2026-10-26T13:53:10.3704464Z   ...
+2026-10-26T13:53:10.4571485Z # Subtest: CMS zachowuje wpisy i obrazy, a publiczny odczyt odpowiada statusom publikacji
+2026-10-26T13:53:10.4573306Z ok 17 - CMS zachowuje wpisy i obrazy, a publiczny odczyt odpowiada statusom publikacji
+2026-10-26T13:53:10.4574241Z   ---
+2026-10-26T13:53:10.4574710Z   duration_ms: 95.067083
+2026-10-26T13:53:10.4575126Z   type: 'test'
+2026-10-26T13:53:10.4575444Z   ...
+2026-10-26T13:53:10.4847689Z # Subtest: zmiana statusu steruje całym odczytem publicznym, a upload i zastąpienie pliku odświeżają wymiary
+2026-10-26T13:53:10.4850641Z ok 18 - zmiana statusu steruje całym odczytem publicznym, a upload i zastąpienie pliku odświeżają wymiary
+2026-10-26T13:53:10.4851865Z   ---
+2026-10-26T13:53:10.4852599Z   duration_ms: 29.898595
+2026-10-26T13:53:10.4853270Z   type: 'test'
+2026-10-26T13:53:10.4853946Z   ...
+2026-10-26T13:53:11.0136747Z # Subtest: canonical jest produkcyjny, a indeksowanie wymaga jawnej zgody i kontekstu produkcji
+2026-10-26T13:53:11.0138477Z ok 19 - canonical jest produkcyjny, a indeksowanie wymaga jawnej zgody i kontekstu produkcji
+2026-10-26T13:53:11.0139766Z   ---
+2026-10-26T13:53:11.0140408Z   duration_ms: 1.621196
+2026-10-26T13:53:11.0140848Z   type: 'test'
+2026-10-26T13:53:11.0141255Z   ...
+2026-10-26T13:53:11.0450899Z # Subtest: sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje własnej mapy
+2026-10-26T13:53:11.0453144Z ok 20 - sitemap zawiera tylko docelowe publiczne adresy; podgląd nie emituje własnej mapy
+2026-10-26T13:53:11.0454232Z   ---
+2026-10-26T13:53:11.0454671Z   duration_ms: 33.532751
+2026-10-26T13:53:11.0455167Z   type: 'test'
+2026-10-26T13:53:11.0455631Z   ...
+2026-10-26T13:53:11.0457012Z # Subtest: przekierowania odrzucają pętle, łańcuchy, aktywne źródła, szkice i zewnętrzne cele
+2026-10-26T13:53:11.0458918Z ok 21 - przekierowania odrzucają pętle, łańcuchy, aktywne źródła, szkice i zewnętrzne cele
+2026-10-26T13:53:11.0459933Z   ---
+2026-10-26T13:53:11.0460241Z   duration_ms: 1.429986
+2026-10-26T13:53:11.0460582Z   type: 'test'
+2026-10-26T13:53:11.0460902Z   ...
+2026-10-26T13:53:11.0561761Z # Subtest: nowe singletony są czytelne dla Keystatic i zachowują teksty startowe
+2026-10-26T13:53:11.0571019Z ok 22 - nowe singletony są czytelne dla Keystatic i zachowują teksty startowe
+2026-10-26T13:53:11.0571957Z   ---
+2026-10-26T13:53:11.0572487Z   duration_ms: 8.348515
+2026-10-26T13:53:11.0572901Z   type: 'test'
+2026-10-26T13:53:11.0573248Z   ...
+2026-10-26T13:53:11.0720666Z 1..22
+2026-10-26T13:53:11.0721913Z # tests 22
+2026-10-26T13:53:11.0722697Z # suites 0
+2026-10-26T13:53:11.0723507Z # pass 22
+2026-10-26T13:53:11.0724235Z # fail 0
+2026-10-26T13:53:11.0724955Z # cancelled 0
+2026-10-26T13:53:11.0725744Z # skipped 0
+2026-10-26T13:53:11.0726424Z # todo 0
+2026-10-26T13:53:11.0727218Z # duration_ms 3032.001844
+2026-10-26T13:53:11.6567660Z OK local API requires no-cors header
+2026-10-26T13:53:11.7422594Z OK CMS tree lists site and projects
+2026-10-26T13:53:11.7451251Z OK CMS rejects paths outside allowed directories
+2026-10-26T13:53:11.8221295Z OK CMS writes singleton
+2026-10-26T13:53:11.8249551Z OK Reader sees saved content
+2026-10-26T13:53:11.8264927Z OK CMS reads saved blob
+2026-10-26T13:53:11.8947330Z OK CMS restores exact original bytes
+2026-10-26T13:53:11.8951071Z OK production refuses unauthenticated local reads
+2026-10-26T13:53:11.8955804Z OK production refuses unauthenticated local writes
+2026-10-26T13:53:11.9191741Z ##[group]Run node node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port 3001 > "$RUNNER_TEMP/cms-dev.log" 2>&1 &
+2026-10-26T13:53:11.9192778Z [36;1mnode node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port 3001 > "$RUNNER_TEMP/cms-dev.log" 2>&1 &[0m
+2026-10-26T13:53:11.9193416Z [36;1mCMS_PID=$![0m
+2026-10-26T13:53:11.9193835Z [36;1mtrap 'kill "$CMS_PID" 2>/dev/null || true; cat "$RUNNER_TEMP/cms-dev.log"' EXIT[0m
+2026-10-26T13:53:11.9195295Z [36;1mnode -e 'async function wait(){for(let i=0;i<90;i++){try{if((await fetch("http://127.0.0.1:3001/",{signal:AbortSignal.timeout(15000)})).ok)return}catch{}await new Promise(r=>setTimeout(r,1000))}throw new Error("CMS server did not start")}wait().catch(e=>{console.error(e);process.exitCode=1})'[0m
+2026-10-26T13:53:11.9196650Z [36;1mnode scripts/cms-browser-qa.mjs[0m
+2026-10-26T13:53:11.9263657Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-26T13:53:11.9264124Z env:
+2026-10-26T13:53:11.9264442Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:53:11.9264833Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:53:11.9265187Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:53:11.9265554Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:53:11.9265836Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:53:11.9266139Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:53:11.9266496Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:53:11.9266817Z ##[endgroup]
+2026-10-26T13:53:40.5142869Z OK public layout has header and font
+2026-10-26T13:53:42.5025657Z OK CMS excludes public header and footer
+2026-10-26T13:53:42.5040861Z OK CMS excludes public CSS tokens
+2026-10-26T13:53:46.6496503Z OK CMS lists all 12 migrated projects
+2026-10-26T13:53:49.2536360Z OK project editor loads title and existing images
+2026-10-26T13:53:49.2537248Z OK CMS loads existing image assets
+2026-10-26T13:53:51.5153177Z OK CMS exposes logo text and upload editor
+2026-10-26T13:53:51.5159589Z OK CMS exposes studio illustration and framing controls
+2026-10-26T13:53:53.9307667Z OK uploaded logo renders in header and footer
+2026-10-26T13:53:53.9315886Z OK studio illustration renders with selected framing
+2026-10-26T13:53:53.9323528Z OK hero continues to use the published portfolio cover
+2026-10-26T13:53:56.0942286Z OK uploaded logo and studio illustration fit viewport 1440
+2026-10-26T13:53:56.4573551Z OK uploaded logo and studio illustration fit viewport 390
+2026-10-26T13:54:00.5397216Z OK CMS saves singleton to JSON
+2026-10-26T13:54:04.9004289Z OK saved CMS content reaches public page
+2026-10-26T13:54:04.9009229Z OK public layout restored after CMS
+2026-10-26T13:54:04.9010029Z OK CMS has no runtime exceptions
+2026-10-26T13:54:05.5719602Z    ▲ Next.js 15.5.28
+2026-10-26T13:54:05.5720522Z    - Local:        http://127.0.0.1:3001
+2026-10-26T13:54:05.5721310Z    - Network:      http://127.0.0.1:3001
+2026-10-26T13:54:05.5723071Z    - Experiments (use with caution):
+2026-10-26T13:54:05.5740356Z      · cpus: 2
+2026-10-26T13:54:05.5741196Z      ✓ globalNotFound
+2026-10-26T13:54:05.5741888Z      ✓ webpackMemoryOptimizations
+2026-10-26T13:54:05.5742246Z 
+2026-10-26T13:54:05.5742465Z  ✓ Starting...
+2026-10-26T13:54:05.5742910Z  ✓ Ready in 1458ms
+2026-10-26T13:54:05.5743370Z  ○ Compiling / ...
+2026-10-26T13:54:05.5743881Z  ✓ Compiled / in 6.8s (1071 modules)
+2026-10-26T13:54:05.5744424Z  GET / 200 in 7799ms
+2026-10-26T13:54:05.5744823Z  GET / 200 in 282ms
+2026-10-26T13:54:05.5745408Z  ○ Compiling /keystatic/[[...params]] ...
+2026-10-26T13:54:05.5746245Z  ✓ Compiled /keystatic/[[...params]] in 7s (2448 modules)
+2026-10-26T13:54:05.5746937Z  GET /keystatic 200 in 7844ms
+2026-10-26T13:54:05.5747406Z  GET / 200 in 498ms
+2026-10-26T13:54:05.5747802Z  GET /keystatic 200 in 111ms
+2026-10-26T13:54:05.5748478Z  ○ Compiling /api/keystatic/[...params] ...
+2026-10-26T13:54:05.5749646Z  ✓ Compiled /api/keystatic/[...params] in 1165ms (2447 modules)
+2026-10-26T13:54:05.5750448Z  GET /api/keystatic/tree 200 in 1723ms
+2026-10-26T13:54:05.5751458Z  GET /keystatic/collection/projects 200 in 1490ms
+2026-10-26T13:54:05.5752166Z  GET /api/keystatic/tree 200 in 410ms
+2026-10-26T13:54:05.5753370Z  GET /api/keystatic/blob/21b1ca8fc39b2d61666d6ae30c11c46f5070f2c3/content/projects/agroturystyka-lodzkie.json 200 in 27ms
+2026-10-26T13:54:05.5754805Z  GET /api/keystatic/blob/0c46aaa901198d5666ff2eac9665767347f3c24a/content/projects/dom-lodzkie-2.json 200 in 63ms
+2026-10-26T13:54:05.5756068Z  GET /api/keystatic/blob/89a0fbd4a97ef9c5ca09d5df3ad93b636a04919b/content/projects/dom-lodzkie-3.json 200 in 66ms
+2026-10-26T13:54:05.5757240Z  GET /api/keystatic/blob/c0ef71f0102d5cd31ca92c12549fb6563b72b8c1/content/projects/dom-lodzkie.json 200 in 70ms
+2026-10-26T13:54:05.5758378Z  GET /api/keystatic/blob/60aa500be7f5a05b89a6dbd72cd21b62ef985678/content/projects/dom-lowicz.json 200 in 73ms
+2026-10-26T13:54:05.5759962Z  GET /api/keystatic/blob/7e3b4a58253c93583aa69803af4f04ef8d050267/content/projects/dom-kostka-przebudowa.json 200 in 78ms
+2026-10-26T13:54:05.5762668Z  GET /api/keystatic/blob/41737674c664b9a432ba18fe796d6272398d4a86/content/projects/dom-mazowieckie.json 200 in 60ms
+2026-10-26T13:54:05.5765135Z  GET /api/keystatic/blob/2f47ec0a63e8d2046d6079966221d7c8672fdb8f/content/projects/kuchnia-1.json 200 in 51ms
+2026-10-26T13:54:05.5766787Z  GET /api/keystatic/blob/4af5f51e9631abbe1b6066d5c4d32ea43c9f7d07/content/projects/lazienka.json 200 in 54ms
+2026-10-26T13:54:05.5768372Z  GET /api/keystatic/blob/b0db56e4071997895b8cc1fd81ced892424da86c/content/projects/przebudowa-budynku.json 200 in 55ms
+2026-10-26T13:54:05.5771442Z  GET /api/keystatic/blob/cbcb68f9df78a627addd7514f235659777bffbd2/content/projects/przestrzen-publiczna.json 200 in 56ms
+2026-10-26T13:54:05.5773027Z  GET /api/keystatic/blob/349eb8274dde01a5d46a0f9ee60fb9bc429b5d49/content/projects/salon.json 200 in 57ms
+2026-10-26T13:54:05.5774009Z  GET /keystatic/collection/projects/item/dom-lodzkie-3 200 in 123ms
+2026-10-26T13:54:05.5774458Z  GET /api/keystatic/tree 200 in 590ms
+2026-10-26T13:54:05.5777205Z  GET /api/keystatic/blob/89a0fbd4a97ef9c5ca09d5df3ad93b636a04919b/content/projects/dom-lodzkie-3.json 200 in 23ms
+2026-10-26T13:54:05.5778828Z  GET /api/keystatic/blob/943b69c694fa59c1d025fa27fb9a59ce033729f8/public/images/projects/dom-lodzkie-3/cover/src.webp 200 in 42ms
+2026-10-26T13:54:05.5780675Z  GET /api/keystatic/blob/b1d89e0db1001bb19ae6ae4da3866057120d3659/public/images/projects/dom-lodzkie-3/images/1/src.webp 200 in 44ms
+2026-10-26T13:54:05.5782211Z  GET /api/keystatic/blob/809f70d28d2403f9e83fe3d14b7a2fa531d77004/public/images/projects/dom-lodzkie-3/images/2/src.webp 200 in 46ms
+2026-10-26T13:54:05.5783018Z  GET /keystatic/singleton/appearance 200 in 88ms
+2026-10-26T13:54:05.5783508Z  GET /api/keystatic/tree 200 in 621ms
+2026-10-26T13:54:05.5784080Z  GET /api/keystatic/blob/96ed1b4c5c92f7ed315d099217bb905a3086ca9f/content/appearance.json 200 in 18ms
+2026-10-26T13:54:05.5784970Z  GET /api/keystatic/blob/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391/public/images/site/.gitkeep 200 in 28ms
+2026-10-26T13:54:05.5785903Z  GET /api/keystatic/blob/099c6f33d2efc475a535899123e94bfe7bb603ae/public/images/site/hero/src.png 200 in 34ms
+2026-10-26T13:54:05.5786619Z  ✓ Compiled in 825ms (2461 modules)
+2026-10-26T13:54:05.5786988Z  GET /keystatic/singleton/appearance 200 in 440ms
+2026-10-26T13:54:05.5787329Z  GET / 200 in 1748ms
+2026-10-26T13:54:05.5787621Z  GET /keystatic/singleton/site 200 in 477ms
+2026-10-26T13:54:05.5788018Z  ✓ Compiled in 1588ms (2461 modules)
+2026-10-26T13:54:05.5788344Z  GET /api/keystatic/tree 200 in 605ms
+2026-10-26T13:54:05.5788920Z  GET /api/keystatic/blob/0bad55db89b6a378ba95f72b9fdc402863b89dfb/content/site.json 200 in 34ms
+2026-10-26T13:54:05.5789979Z  POST /api/keystatic/update 200 in 539ms
+2026-10-26T13:54:05.5790554Z  ✓ Compiled in 2.8s (2461 modules)
+2026-10-26T13:54:05.5790897Z  GET /keystatic/singleton/site 200 in 376ms
+2026-10-26T13:54:05.5791212Z  GET / 200 in 2502ms
+2026-10-26T13:54:05.5791520Z  ✓ Compiled in 664ms (2461 modules)
+2026-10-26T13:54:05.5840237Z ##[group]Run node <<'NODE'
+2026-10-26T13:54:05.5840717Z [36;1mnode <<'NODE'[0m
+2026-10-26T13:54:05.5841124Z [36;1mconst fs=require('node:fs');[0m
+2026-10-26T13:54:05.5841861Z [36;1mconst event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));[0m
+2026-10-26T13:54:05.5842603Z [36;1m(async()=>{[0m
+2026-10-26T13:54:05.5842972Z [36;1m  for(let i=0;i<30;i++) {[0m
+2026-10-26T13:54:05.5844577Z [36;1m    const r=await fetch('https://api.github.com/repos/'+process.env.GITHUB_REPOSITORY+'/commits/'+event.pull_request.head.sha+'/status',{headers:{Authorization:'Bearer '+process.env.GH_TOKEN,Accept:'application/vnd.github+json'}});[0m
+2026-10-26T13:54:05.5846450Z [36;1m    if(!r.ok) throw Error('Cannot read deploy state: '+r.status);[0m
+2026-10-26T13:54:05.5847086Z [36;1m    const result=await r.json();[0m
+2026-10-26T13:54:05.5847866Z [36;1m    const status=result.statuses.find(s=>s.context==='netlify/cywinska-studio/deploy-preview');[0m
+2026-10-26T13:54:05.5848759Z [36;1m    if(status?.state==='success') return;[0m
+2026-10-26T13:54:05.5849738Z [36;1m    if(status && ['failure','error'].includes(status.state)) throw Error('Netlify preview failed');[0m
+2026-10-26T13:54:05.5850572Z [36;1m    await new Promise(r=>setTimeout(r,10000));[0m
+2026-10-26T13:54:05.5851042Z [36;1m  }[0m
+2026-10-26T13:54:05.5851530Z [36;1m  throw Error('Netlify preview was not ready within five minutes');[0m
+2026-10-26T13:54:05.5852331Z [36;1m})().catch(e=>{console.error(e.message);process.exitCode=1});[0m
+2026-10-26T13:54:05.5852923Z [36;1mNODE[0m
+2026-10-26T13:54:05.5926712Z shell: /usr/bin/bash -e {0}
+2026-10-26T13:54:05.5927048Z env:
+2026-10-26T13:54:05.5927333Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:54:05.5927753Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:54:05.5928109Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:54:05.5928480Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:54:05.5928769Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:54:05.5929326Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:54:05.5929895Z   QA_URL: http://127.0.0.1:3001
+2026-10-26T13:54:05.5933724Z   GH_TOKEN: ***
+2026-10-26T13:54:05.5933998Z ##[endgroup]
+2026-10-26T13:54:06.1550184Z ##[group]Run node scripts/browser-qa.mjs
+2026-10-26T13:54:06.1550602Z [36;1mnode scripts/browser-qa.mjs[0m
+2026-10-26T13:54:06.1613842Z shell: /usr/bin/bash -e {0}
+2026-10-26T13:54:06.1614188Z env:
+2026-10-26T13:54:06.1614495Z   NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND: local
+2026-10-26T13:54:06.1614926Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-26T13:54:06.1615309Z   NODE_OPTIONS: --max-old-space-size=1536
+2026-10-26T13:54:06.1615708Z   RAYON_NUM_THREADS: 1
+2026-10-26T13:54:06.1616017Z   UV_THREADPOOL_SIZE: 2
+2026-10-26T13:54:06.1616354Z   CHROME_PATH: /usr/bin/google-chrome
+2026-10-26T13:54:06.1616898Z   QA_URL: https://deploy-preview-5--cywinska-studio.netlify.app
+2026-10-26T13:54:06.1617452Z   QA_OUT: docs/qa-release/hosted-ci
+2026-10-26T13:54:06.1617842Z   QA_REVIEW_BRANCH: cms/qa-no-pr
+2026-10-26T13:54:06.1618211Z ##[endgroup]
+2026-10-26T13:54:08.9719814Z OK 1440 published covers preserve configured framing
+2026-10-26T13:54:08.9720548Z OK 1440 no horizontal overflow
+2026-10-26T13:54:08.9733813Z OK 1440 one H1 and only published featured cards
+2026-10-26T13:54:08.9734336Z OK 1440 hero uses responsive editorial framing
+2026-10-26T13:54:08.9735116Z OK 1440 all images loaded
+2026-10-26T13:54:08.9735897Z OK 1440 actual local fonts applied
+2026-10-26T13:54:08.9736582Z OK 1440 reduced motion
+2026-10-26T13:54:11.1745334Z OK 1024 published covers preserve configured framing
+2026-10-26T13:54:11.1746072Z OK 1024 no horizontal overflow
+2026-10-26T13:54:11.1753351Z OK 1024 one H1 and only published featured cards
+2026-10-26T13:54:11.1754036Z OK 1024 hero uses responsive editorial framing
+2026-10-26T13:54:11.1754574Z OK 1024 all images loaded
+2026-10-26T13:54:11.1755100Z OK 1024 actual local fonts applied
+2026-10-26T13:54:11.1757566Z OK 1024 reduced motion
+2026-10-26T13:54:12.3505607Z OK 768 published covers preserve configured framing
+2026-10-26T13:54:12.3506387Z OK 768 no horizontal overflow
+2026-10-26T13:54:12.3511113Z OK 768 one H1 and only published featured cards
+2026-10-26T13:54:12.3511887Z OK 768 hero uses responsive editorial framing
+2026-10-26T13:54:12.3512535Z OK 768 all images loaded
+2026-10-26T13:54:12.3513106Z OK 768 actual local fonts applied
+2026-10-26T13:54:12.3513648Z OK 768 reduced motion
+2026-10-26T13:54:13.1740854Z OK 390 published covers preserve configured framing
+2026-10-26T13:54:13.1741695Z OK 390 no horizontal overflow
+2026-10-26T13:54:13.1746501Z OK 390 one H1 and only published featured cards
+2026-10-26T13:54:13.1747495Z OK 390 hero uses responsive editorial framing
+2026-10-26T13:54:13.1748222Z OK 390 all images loaded
+2026-10-26T13:54:13.1748916Z OK 390 actual local fonts applied
+2026-10-26T13:54:13.1749744Z OK 390 reduced motion
+2026-10-26T13:54:13.7998725Z OK mobile menu keyboard focus remains inside dialog
+2026-10-26T13:54:13.8004394Z OK mobile menu opens with dialog
+2026-10-26T13:54:13.8172368Z OK Escape closes and returns focus
+2026-10-26T13:54:13.8555331Z OK menu link closes and anchor visible
+2026-10-26T13:54:14.3297045Z OK hero scroll distance is one third shorter
+2026-10-26T13:54:14.3303198Z OK contact CTA uses the requested label
+2026-10-26T13:54:16.1802031Z OK scroll changes hero into a smaller project frame
+2026-10-26T13:54:16.1802800Z OK project information is revealed by scroll
+2026-10-26T13:54:16.1806103Z OK reverse scroll restores the opening frame
+2026-10-26T13:54:16.1806657Z OK finished image and project copy do not overlap
+2026-10-26T13:54:16.2837275Z OK title stays clear of image at progress 0.4
+2026-10-26T13:54:16.3873176Z OK title stays clear of image at progress 0.5
+2026-10-26T13:54:16.4895471Z OK title stays clear of image at progress 0.65
+2026-10-26T13:54:16.5922169Z OK title stays clear of image at progress 0.75
+2026-10-26T13:54:16.6944812Z OK title stays clear of image at progress 0.65
+2026-10-26T13:54:16.7967379Z OK title stays clear of image at progress 0.4
+2026-10-26T13:54:17.1134733Z OK portfolio CTA lands on the revealed project
+2026-10-26T13:54:17.2675252Z Error: {"exceptionId":1,"text":"Uncaught","lineNumber":0,"columnNumber":45,"scriptId":"125","exception":{"type":"object","subtype":"error","className":"SyntaxError","description":"SyntaxError: Private field '#portfolio' must be declared in an enclosing class","objectId":"7439123205010724995.6.2"}}
+2026-10-26T13:54:17.2691383Z     at evaluate (file:///home/runner/work/studio_archtektury/studio_archtektury/scripts/browser-qa.mjs:125:13)
+2026-10-26T13:54:17.2693174Z     at async file:///home/runner/work/studio_archtektury/studio_archtektury/scripts/browser-qa.mjs:435:3
+2026-10-26T13:54:17.5134240Z ##[error]Process completed with exit code 1.
+2026-10-26T13:54:17.5309954Z Post job cleanup.
+2026-10-26T13:54:17.6206639Z [command]/usr/bin/git version
+2026-10-26T13:54:17.6252157Z git version 2.55.0
+2026-10-26T13:54:17.6291742Z Temporarily overriding HOME='/home/runner/work/_temp/bb7efec9-794e-414a-b93a-5a391efcd215' before making global git config changes
+2026-10-26T13:54:17.6293733Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-26T13:54:17.6298546Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studio_archtektury/studio_archtektury
+2026-10-26T13:54:17.6334865Z Removing SSH command configuration
+2026-10-26T13:54:17.6342588Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-26T13:54:17.6382024Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-26T13:54:17.6637478Z Removing HTTP extra header
+2026-10-26T13:54:17.6645605Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-26T13:54:17.6703701Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-26T13:54:17.6958114Z Removing includeIf entries pointing to credentials config files
+2026-10-26T13:54:17.6964977Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-26T13:54:17.7019531Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-26T13:54:17.7444102Z Cleaning up orphan processes

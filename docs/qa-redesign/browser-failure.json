@@ -1,0 +1,21 @@
+{
+  "message": "Images did not settle: [{\"src\":\"http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2Fdom-lodzkie-3%2Fcover%2Fsrc.webp&w=1920&q=75\",\"loaded\":true,\"width\":668,\"loading\":\"auto\"},{\"src\":\"http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2Fdom-lodzkie-3%2Fimages%2F1%2Fsrc.webp&w=1080&q=75\",\"loaded\":true,\"width\":768,\"loading\":\"lazy\"},{\"src\":\"http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2Fdom-kostka-przebudowa%2Fcover%2Fsrc.webp&w=640&q=75\",\"loaded\":true,\"width\":337,\"loading\":\"lazy\"},{\"src\":\"\",\"loaded\":false,\"width\":0,\"loading\":\"lazy\"}]",
+  "checks": [
+    "1440 published covers preserve configured framing",
+    "1440 no horizontal overflow",
+    "1440 one H1 and only published featured cards",
+    "1440 hero uses responsive editorial framing",
+    "1440 all images loaded",
+    "1440 actual local fonts applied",
+    "1440 reduced motion",
+    "1024 published covers preserve configured framing",
+    "1024 no horizontal overflow",
+    "1024 one H1 and only published featured cards",
+    "1024 hero uses responsive editorial framing",
+    "1024 all images loaded",
+    "1024 actual local fonts applied",
+    "1024 reduced motion"
+  ],
+  "errors": [],
+  "failed": []
+}

@@ -1,0 +1,45 @@
+## app/(site)/page.tsx
+- app/(site)/page.tsx
+  - components/project-grid.tsx
+    - lib/projects.ts
+  - components/contact-section.tsx
+    - lib/site-content.ts
+      - content\site.json
+    - lib/contact-validation.ts
+    - lib/contact-form.ts
+      - lib\contact-validation.ts
+    - lib/page-content.ts
+      - content\pages.json
+    - components\text-lines.tsx
+  - lib/cms/reader.ts
+    - keystatic.config.ts
+      - lib\projects.ts
+  - components/text-lines.tsx
+  - lib/deployment.ts
+
+## app/(site)/projekty/page.tsx
+- app/(site)/projekty/page.tsx
+  - components/project-grid.tsx
+    - lib/projects.ts
+  - lib/page-content.ts
+    - content\pages.json
+  - lib/deployment.ts
+  - lib/cms/reader.ts
+    - keystatic.config.ts
+      - lib\projects.ts
+
+## app/(site)/projekty/[slug]/page.tsx
+- app/(site)/projekty/[slug]/page.tsx
+  - components/project-gallery.tsx
+    - lib/projects.ts
+  - lib/cms/reader.ts
+    - keystatic.config.ts
+      - lib\projects.ts
+  - lib/deployment.ts
+  - lib/indexing-policy.mjs
+
+## app/(site)/prywatnosc/page.tsx
+- app/(site)/prywatnosc/page.tsx
+  - lib/site-content.ts
+    - content\site.json
+  - lib/deployment.ts
