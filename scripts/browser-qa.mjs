@@ -211,7 +211,7 @@ try {
     await goto("/?qa-viewport=" + width);
     await evaluate("window.scrollTo(0,0)");
     const home = await evaluate(
-      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".project-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".w-hero-image img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
+      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".w-house, .w-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".w-hero-image img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
     );
     await fs.writeFile(
       path.join(out, "layout-" + width + ".json"),
@@ -230,23 +230,24 @@ try {
     await check(
       width + " published covers preserve configured framing",
       await evaluate(
-        `[...document.querySelectorAll(".project-card img")].every(i => ["cover", "contain"].includes(getComputedStyle(i).objectFit))`,
+        `[...document.querySelectorAll(".w-house img, .w-card img")].every(i => ["cover", "contain"].includes(getComputedStyle(i).objectFit))`,
       ),
     );
     await check(width + " no horizontal overflow", home.scroll <= home.width);
     await check(
-      width + " one H1 and only published featured cards",
+      width + " one H1 and only published project cards",
       home.h1 === 1 &&
-        home.cards.length === visible.length - 1 &&
+        home.cards.length > 0 &&
+        home.cards.every((c) =>
+          visible.some((p) => c.href === "/projekty/" + p.slug),
+        ) &&
         (await evaluate(
-          'document.querySelectorAll(".featured-project").length',
+          'document.querySelectorAll(".w-house-wide").length',
         )) === 1,
     );
     await check(
-      width + " hero uses responsive editorial framing",
-      Math.abs(
-        home.hero.width / home.hero.height - (width < 768 ? 4 / 3 : 16 / 10),
-      ) < 0.01,
+      width + " hero keeps calm 4:3 framing",
+      Math.abs(home.hero.width / home.hero.height - 4 / 3) < 0.01,
     );
     await check(width + " all images loaded", home.images);
     await check(
@@ -347,175 +348,48 @@ try {
     features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
   });
 
-  await goto("/?qa-motion=desktop");
+  await goto("/");
   await until(() =>
-    evaluate(
-      'document.querySelector(".atelier-home")?.dataset.kinetic === "desktop"',
-    ),
-  );
-  await evaluate('scrollTo({top:0,behavior:"instant"})');
-  await pause(200);
-  const openingWidth = await evaluate(
-    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
-  );
-  await evaluate('scrollTo({top:800,behavior:"instant"})');
-  await pause(200);
-  const expandedWidth = await evaluate(
-    'document.querySelector(".kinetic-hero-frame").getBoundingClientRect().width',
+    evaluate('document.querySelectorAll("[data-reveal]").length > 0'),
   );
   await check(
-    "hero expands four percent across 800px",
-    Math.abs(expandedWidth / openingWidth - 1.04) < 0.005,
-  );
-  await check(
-    "header frosts after scrolling",
+    "calm reveal: no kinetic layers left",
     await evaluate(
-      'document.querySelector(".site-header").classList.contains("nav--scrolled")',
+      '!document.querySelector(".atelier-home, .kinetic-hero-frame, .project-curtain") && getComputedStyle(document.querySelector(".reading-progress") || document.body).display !== "block" || !document.querySelector(".reading-progress")',
     ),
   );
-  for (const [name, selector] of [
-    ["hero", ".kinetic-hero"],
-    ["manifest", "#manifest"],
-    ["portfolio", "#portfolio"],
-    ["process", ".atelier-process"],
-    ["contact", ".contact-section"],
-  ]) {
-    await evaluate(
-      "document.querySelector(" +
-        JSON.stringify(selector) +
-        ').scrollIntoView({behavior:"instant"})',
+  const jumps = [];
+  for (let y = 0; y <= 6000; y += 400) {
+    await evaluate("window.scrollTo({top:" + y + ',behavior:"instant"})');
+    await pause(60);
+    const actual = await evaluate("Math.round(scrollY)");
+    const max = await evaluate(
+      "document.documentElement.scrollHeight - innerHeight",
     );
-    await pause(1400);
-    const shot = await send("Page.captureScreenshot", { format: "png" });
-    await fs.writeFile(
-      path.join(out, "kinetic-" + name + ".png"),
-      Buffer.from(shot.data, "base64"),
-    );
-    await check(
-      name + " has no horizontal overflow",
-      await evaluate("document.documentElement.scrollWidth<=innerWidth"),
-    );
-    if (name === "manifest") {
-      await evaluate(
-        'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
-      );
-      await pause(200);
-      await check(
-        "manifest counters finish",
-        await evaluate(
-          'Array.from(document.querySelectorAll("[data-count-to]")).map(x=>x.textContent).join("/")==="10+/100%"',
-        ),
-      );
-      await check(
-        "header switches to dark",
-        await evaluate(
-          'document.querySelector(".site-header").classList.contains("nav--dark")',
-        ),
-      );
+    if (actual !== Math.min(y, max) && Math.abs(actual - y) > 2) {
+      jumps.push({ y, actual });
     }
   }
+  await check("scrolling down has no jumps", jumps.length === 0);
+  await evaluate(
+    'window.scrollTo({top:document.documentElement.scrollHeight,behavior:"instant"})',
+  );
+  await pause(900);
   await check(
-    "one process phase is active",
+    "reveal shows every section after scrolling",
     await evaluate(
-      'document.querySelectorAll(".atelier-process-list > li[data-active=true]").length===1',
+      '[...document.querySelectorAll("[data-reveal]")].every(e => e.dataset.reveal !== "pending")',
     ),
   );
-
-  // Serialize selectors as JS literals: nested attribute quotes previously broke CI.
-  const portfolioNavSelector = '.desktop-nav a[href="/#portfolio"]';
-  await evaluate('scrollTo({top:0,behavior:"instant"})');
-  await evaluate(
-    "document.querySelector(" +
-      JSON.stringify(portfolioNavSelector) +
-      ").click()",
-  );
-  await until(() =>
-    evaluate('document.activeElement.id==="portfolio-heading"'),
-  );
-  await check(
-    "desktop navigation reaches portfolio without selector syntax errors",
-    await evaluate('document.activeElement.id==="portfolio-heading"'),
-  );
-  const featuredTop = await evaluate(
-    'document.querySelector(".kinetic-featured").getBoundingClientRect().top+scrollY',
-  );
-  const pinned = [];
-  for (const offset of [160, 280]) {
-    await evaluate(
-      "scrollTo({top:" + (featuredTop + offset) + ',behavior:"instant"})',
-    );
-    await pause(150);
-    pinned.push(
-      await evaluate(
-        'document.querySelector(".featured-project-image").getBoundingClientRect().top',
-      ),
-    );
-  }
-  await check(
-    "featured image remains sticky while text scrolls",
-    Math.abs(pinned[0] - pinned[1]) < 2 && Math.abs(pinned[0] - 108) < 2,
-  );
-  await goto("/?qa-counter-interruption=1");
-  await evaluate(
-    'scrollTo({top:document.querySelector("#manifest").getBoundingClientRect().top+scrollY+20,behavior:"instant"})',
-  );
-  await pause(100);
   await send("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "reduce" }],
   });
-  await until(() =>
-    evaluate(
-      'document.querySelector(".atelier-home").dataset.kinetic==="static"',
-    ),
-  );
+  await goto("/");
+  await pause(400);
   await check(
-    "interrupted counters restore final values",
+    "reduced motion keeps content visible at once",
     await evaluate(
-      'Array.from(document.querySelectorAll("[data-count-to]")).every(el=>el.textContent===el.dataset.countTo+el.dataset.countSuffix)',
-    ),
-  );
-  await send("Emulation.setEmulatedMedia", {
-    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
-  });
-  await send("Emulation.setDeviceMetricsOverride", {
-    width: 390,
-    height: 844,
-    deviceScaleFactor: 1,
-    mobile: true,
-  });
-  await goto("/?qa-motion=mobile");
-  await until(() =>
-    evaluate(
-      'document.querySelector(".atelier-home")?.dataset.kinetic==="mobile"',
-    ),
-  );
-  await check(
-    "mobile uses normal flow",
-    await evaluate(
-      'getComputedStyle(document.querySelector(".featured-project-image")).position!=="sticky" && document.documentElement.scrollWidth<=innerWidth',
-    ),
-  );
-  await evaluate('scrollTo({top:0,behavior:"instant"})');
-  await pause(800);
-  {
-    const shot = await send("Page.captureScreenshot", { format: "png" });
-    await fs.writeFile(
-      path.join(out, "kinetic-mobile.png"),
-      Buffer.from(shot.data, "base64"),
-    );
-  }
-  await send("Emulation.setEmulatedMedia", {
-    features: [{ name: "prefers-reduced-motion", value: "reduce" }],
-  });
-  await until(() =>
-    evaluate(
-      'document.querySelector(".atelier-home")?.dataset.kinetic==="static"',
-    ),
-  );
-  await check(
-    "live reduced motion restores static images",
-    await evaluate(
-      'getComputedStyle(document.querySelector(".kinetic-hero-frame")).transform==="none"',
+      '[...document.querySelectorAll("[data-reveal]")].every(e => e.dataset.reveal !== "pending" && getComputedStyle(e).opacity === "1")',
     ),
   );
   testingNoJs = true;
@@ -525,7 +399,7 @@ try {
   await check(
     "no JS keeps content visible",
     await evaluate(
-      '!!document.querySelector("h1") && !document.querySelector(".atelier-home").dataset.kinetic && getComputedStyle(document.querySelector(".featured-project-copy")).opacity==="1"',
+      '!!document.querySelector("h1") && getComputedStyle(document.querySelector(".w-house")).opacity === "1"',
     ),
   );
   await send("Emulation.setScriptExecutionDisabled", { value: false });
@@ -685,7 +559,7 @@ try {
   );
   await until(() =>
     evaluate(
-      'document.querySelector(".form-status").textContent.includes("przyjęte")',
+      'document.querySelector(".form-status").textContent.includes("dotarła")',
     ),
   );
   await check(
@@ -718,12 +592,14 @@ try {
     r.text(),
   );
   await check(
-    "project has production canonical and temporary description notice",
+    "project has production canonical and notice only for temporary descriptions",
     html.includes(
       'rel="canonical" href="https://cywinska-studio.pl/projekty/' +
         visible[0].slug +
         '"',
-    ) && html.includes("Opis tymczasowy"),
+    ) &&
+      html.includes("Opis tymczasowy") ===
+        (visible[0].contentStatus === "temporary"),
   );
   const sitemap = await fetch(base + "/sitemap.xml").then((r) => r.text());
   await check(
