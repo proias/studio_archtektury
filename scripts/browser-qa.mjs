@@ -211,7 +211,7 @@ try {
     await goto("/?qa-viewport=" + width);
     await evaluate("window.scrollTo(0,0)");
     const home = await evaluate(
-      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".project-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".hero img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
+      '({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll("h1").length,cards:[...document.querySelectorAll(".project-card")].map(a=>({href:a.getAttribute("href"),src:a.querySelector("img").getAttribute("src")})),hero:(()=>{const i=document.querySelector(".w-hero-image img");return {width:i.clientWidth,height:i.clientHeight,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,objectFit:getComputedStyle(i).objectFit}})(),headFont:getComputedStyle(document.querySelector("h1")).fontFamily,bodyFont:getComputedStyle(document.body).fontFamily,images:[...document.images].every(i=>i.complete&&i.naturalWidth>0),reduced:getComputedStyle(document.documentElement).scrollBehavior})',
     );
     await fs.writeFile(
       path.join(out, "layout-" + width + ".json"),
@@ -251,8 +251,7 @@ try {
     await check(width + " all images loaded", home.images);
     await check(
       width + " actual local fonts applied",
-      home.headFont.includes("spaceGrotesk") &&
-        home.bodyFont.includes("ptSans"),
+      home.headFont.includes("newsreader") && home.bodyFont.includes("inter"),
     );
     await check(width + " reduced motion", home.reduced === "auto");
     await fs.writeFile(

@@ -177,11 +177,11 @@ try {
     deviceScaleFactor: 1,
     mobile: false,
   });
-  await goto("/", "Architektura");
+  await goto("/", "Opisz swoją działkę");
   check(
     "public layout has header and font",
     await evaluate(
-      '!!document.querySelector(".site-header") && getComputedStyle(document.body).fontFamily.includes("ptSans")',
+      '!!document.querySelector(".site-header") && getComputedStyle(document.body).fontFamily.includes("inter")',
     ),
   );
   await goto("/keystatic", "Projekty");
@@ -195,12 +195,21 @@ try {
       '!getComputedStyle(document.documentElement).getPropertyValue("--dark-background").trim()',
     ),
   );
-  await goto("/keystatic/collection/projects", "Dom w Łódzkiem III");
-  const titles = JSON.parse(
-    await fs.readFile("docs/archive/cms-before-migration.json", "utf8"),
-  ).projects.map((p) => p.title);
+  const titles = await Promise.all(
+    (await fs.readdir("content/projects"))
+      .filter((file) => file.endsWith(".json"))
+      .map(
+        async (file) =>
+          JSON.parse(await fs.readFile(`content/projects/${file}`, "utf8"))
+            .title,
+      ),
+  );
+  const editedTitle = JSON.parse(
+    await fs.readFile("content/projects/dom-lodzkie-3.json", "utf8"),
+  ).title;
+  await goto("/keystatic/collection/projects", editedTitle);
   check(
-    "CMS lists all 12 migrated projects",
+    "CMS lists all current projects",
     await evaluate(
       `${JSON.stringify(titles)}.every(title => document.body.innerText.includes(title))`,
     ),
@@ -209,7 +218,7 @@ try {
   check(
     "project editor loads title and existing images",
     await evaluate(
-      '[...document.querySelectorAll("input")].some(i => i.value === "Dom w Łódzkiem III") && !document.body.innerText.includes("Unable to load")',
+      `[...document.querySelectorAll("input")].some(i => i.value === ${JSON.stringify(editedTitle)}) && !document.body.innerText.includes("Unable to load")`,
     ),
   );
   await until(() => imageResponses.length >= 3);
@@ -221,7 +230,7 @@ try {
   check(
     "CMS exposes logo text and upload editor",
     await evaluate(
-      'document.body.innerText.includes("Plik logo") && [...document.querySelectorAll("input")].some(i => i.value === "PAULINA CYWIŃSKA")',
+      'document.body.innerText.includes("Plik logo") && [...document.querySelectorAll("input")].some(i => i.value === "Paulina Cywińska")',
     ),
   );
   check(
@@ -252,10 +261,13 @@ try {
   };
   appearanceEdited = true;
   await fs.writeFile("content/appearance.json", JSON.stringify(appearance));
-  await goto("/", "Architektura");
+  await goto("/", "Opisz swoją działkę");
+  await evaluate(
+    'document.querySelector(".w-about-image").scrollIntoView({ block: "center" })',
+  );
   await until(() =>
     evaluate(
-      '[...document.querySelectorAll(".wordmark-logo")].length === 2 && [...document.querySelectorAll(".site-header .wordmark-logo, .studio-drawing img")].every(i => i.complete && i.naturalWidth > 0) && document.querySelector(".studio-drawing img").alt === "Zdjęcie testowe CMS"',
+      '[...document.querySelectorAll(".wordmark-logo")].length === 2 && [...document.querySelectorAll(".site-header .wordmark-logo, .w-about-image img")].every(i => i.complete && i.naturalWidth > 0) && document.querySelector(".w-about-image img").alt === "Zdjęcie testowe CMS"',
     ),
   );
   check(
@@ -267,13 +279,13 @@ try {
   check(
     "studio illustration renders with selected framing",
     await evaluate(
-      'getComputedStyle(document.querySelector(".studio-drawing img")).objectFit === "cover" && getComputedStyle(document.querySelector(".studio-drawing img")).objectPosition === "50% 0%"',
+      'getComputedStyle(document.querySelector(".w-about-image img")).objectFit === "cover" && getComputedStyle(document.querySelector(".w-about-image img")).objectPosition === "50% 0%"',
     ),
   );
   check(
     "hero continues to use the published portfolio cover",
     await evaluate(
-      'document.querySelector(".hero img").alt !== "Zdjęcie testowe CMS" && document.querySelector(".hero img").src.includes("images%2Fprojects")',
+      'document.querySelector(".w-hero-image img").alt !== "Zdjęcie testowe CMS" && document.querySelector(".w-hero-image img").src.includes("images%2Fprojects")',
     ),
   );
   await evaluate('document.querySelector(".site-footer").scrollIntoView()');
@@ -351,7 +363,7 @@ try {
       '[...document.querySelectorAll("button")].some(b => b.textContent.trim() === "Reset" && b.disabled)',
     ),
   );
-  await goto("/", "Architektura");
+  await goto("/", "Opisz swoją działkę");
   await until(() => evaluate(`document.title === ${JSON.stringify(title)}`));
   check("saved CMS content reaches public page", true);
   check(
